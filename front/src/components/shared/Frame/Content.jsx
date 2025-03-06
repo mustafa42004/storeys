@@ -9,10 +9,10 @@ const Content = ({ title, paragraphs, highlight, smallTitle, buttons, signature 
               smallTitle && <h6 className="font-sm text-left fs-20 light ">{smallTitle}</h6>
             }
 
-            <h4 className="font-lg mb-3 light lh-40 fs-36 text-left">{title}</h4>
+            <h4 className="font-lg mb-3 lh-40 fs-36 text-left">{title}</h4>
 
             {paragraphs?.map((paragraph, index) => (
-                <p key={index} className="font-sm text-left light">{paragraph}</p>
+                <p key={index} className="font-sm text-left">{paragraph}</p>
             ))}
 
 
