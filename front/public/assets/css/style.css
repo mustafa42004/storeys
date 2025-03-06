@@ -177,10 +177,11 @@
             font-size: 70px !important;
             line-height: 70px !important;
         }
-        
+        .row-gap-40 {
+            row-gap: 40px;
+        }
         .header {
-            opacity: 0.8;
-            background: #FFF;
+            background: #FFFc;
             width: 100%;
             position: fixed;
             top: 0;
