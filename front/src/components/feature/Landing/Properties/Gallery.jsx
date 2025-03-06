@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 const Gallery = () => {
     const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -21,7 +21,7 @@ const Gallery = () => {
             ]
         },
         {
-            image: "/assets/img/gallery-1.svg",
+            image: "/assets/img/gallery-2.svg",
             price: "2,500,000 AED",
             description: "Premium Penthouse Suite",
             names: "Dubai Marina, JBR",
@@ -32,7 +32,7 @@ const Gallery = () => {
             ]
         },
         {
-            image: "/assets/img/gallery-1.svg",
+            image: "/assets/img/gallery-3.svg",
             price: "3,200,000 AED",
             description: "Beachfront Villa",
             names: "Palm Jumeirah, Dubai",
@@ -43,7 +43,7 @@ const Gallery = () => {
             ]
         },
         {
-            image: "/assets/img/gallery-1.svg",
+            image: "/assets/img/gallery-4.svg",
             price: "1,800,000 AED",
             description: "Modern Downtown Apartment",
             names: "Downtown Dubai, Burj Area",
@@ -57,6 +57,7 @@ const Gallery = () => {
 
     return (
         <div className="gallery">
+        {/* <div className="main-image"> */}
             {galleryItems.map((item, index) => (
                 <div 
                     key={index}
@@ -73,7 +74,7 @@ const Gallery = () => {
                         <p className="font-lg text-left font-sans light fs-18">{item.description}</p>
                         <div className="flex-cs justify-between w-100">
                             <p className="font-lg text-left font-sans light fs-18">{item.names}</p>
-                            <div className="grid-cs gtc-3 data">
+                            <div className="grid-cs gtc-4 data">
                                 {item.data.map((dataItem, dataIndex) => (
                                     <div key={dataIndex} className={dataIndex !== 2 ? "divider" : ""}>
                                         <p className="font-lg font-sans light fs-18">{dataItem.name}</p>
@@ -85,6 +86,25 @@ const Gallery = () => {
                     </div>
                 </div>
             ))}
+             
+        
+        
+        
+            {/* <div className="side-images">
+    {galleryItems.slice(1).map((item, index) => (
+        <div 
+            key={index + 1}
+            onMouseEnter={() => showContent(index + 1, true)} 
+            onMouseLeave={() => showContent(index + 1, false)} 
+            className="item small"
+        >
+            <img src={item.image} alt={`Property - ${item.description || "Image"}`} />
+            <button className="round-btn" aria-label="View details">
+                <i className="fa-regular fa-arrow-up-right"></i>
+            </button>
+        </div>
+    ))}
+</div> */}
         </div>
     );
 };
@@ -94,3 +114,6 @@ Gallery.propTypes = {
 };
 
 export default Gallery;
+
+
+

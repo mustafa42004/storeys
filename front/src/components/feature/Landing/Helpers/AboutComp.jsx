@@ -11,11 +11,11 @@ const AboutComp = () => {
             <div className="team">
                 <div className="images">
                     <img className="img-1" src="/assets/img/team-1.svg" alt="" />
-                    <img className="ml--12" src="/assets/img/team-1.svg" alt="" />
-                    <img className="ml--12" src="/assets/img/team-1.svg" alt="" />
-                    <img className="ml--12" src="/assets/img/team-1.svg" alt="" />
-                    <img className="ml--12" src="/assets/img/team-1.svg" alt="" />
-                    <img className="ml--12" src="/assets/img/team-1.svg" alt="" />
+                    <img className="ml--12" src="/assets/img/team-2.svg" alt="" />
+                    <img className="ml--12" src="/assets/img/team-3.svg" alt="" />
+                    <img className="ml--12" src="/assets/img/team-4.svg" alt="" />
+                    <img className="ml--12" src="/assets/img/team-5.svg" alt="" />
+                    <img className="ml--12" src="/assets/img/team-6.svg" alt="" />
                 </div>
                 <h4 className="font-sm text-left">Meet our <br /> professional team</h4>
             </div>

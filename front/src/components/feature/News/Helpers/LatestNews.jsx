@@ -24,13 +24,13 @@ const LatestNews = () => {
 
   return (
     <>
-        <section className="dubai-news pt-cs">
+        <section className="dubai-news pt-cs ">
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
                         <Heading title={"Latest News"} className={"fs-50"}/>
 
-                        <div className="grid-cs gap-30 mt-5 align-items-center">
+                        <div className="grid-cs gap-30 mt-5 align-items-center bg-info">
                             {topNews.length > 0 && (
                                 <div className="cs-model-card">
                                     <div className="banner lg">
@@ -56,6 +56,7 @@ const LatestNews = () => {
                                 ))}
                             </div>
                         </div>
+
 
                         <div className="grid-cs gtc-3 gap-20 mt-5">
                             {remainingNews.map(news => (

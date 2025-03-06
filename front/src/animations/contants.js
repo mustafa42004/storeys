@@ -1,6 +1,6 @@
-export const SLIDER_ITEMS = Array.from({ length: 7 }, (_, index) => ({
+export const SLIDER_ITEMS = Array.from({ length: 14 }, (_, index) => ({
     id: index + 1,
-    imgSrc: "/assets/img/dev-1.svg"
+    imgSrc: `/assets/img/dev-${index + 1}.png`,
 }));
 
 export const ANIMATION_CONFIG = {

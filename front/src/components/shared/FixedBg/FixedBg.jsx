@@ -1,4 +1,4 @@
-import Heading from "../Headings/Heading"
+// import Heading from "../Headings/Heading"
 const FixedBg = ({ height, Component, className }) => {
 
 

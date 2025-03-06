@@ -12,17 +12,17 @@ const PopularAreas = () => {
         {
             title: "Downtown Dubai",
             description: "Modern urban district featuring iconic landmarks and luxury residential towers.",
-            image: "/assets/img/area-1.svg"
+            image: "/assets/img/area-2.svg"
         },
         {
             title: "Palm Jumeirah",
             description: "Man-made island paradise with luxury resorts and exclusive waterfront properties.",
-            image: "/assets/img/area-1.svg"
+            image: "/assets/img/area-3.svg"
         },
         {
             title: "Dubai Marina",
             description: "Stunning waterfront community with high-rise apartments and yacht-lined marina.",
-            image: "/assets/img/area-1.svg"
+            image: "/assets/img/area-4.svg"
         }
     ]
 
