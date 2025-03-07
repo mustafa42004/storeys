@@ -59,10 +59,9 @@ const AboutUs = () => {
 
         <WhoWeAre />
 
-        <TwoSidedSection header={"Leadership & Expertise"} description={"Behind Storeys Real Estate is a team of industry veterans and market specialists who bring years of experience, deep local knowledge, and a forward-thinking approach to real estate. Our leadership is committed to staying ahead of market trends, utilizing cutting-edge technology and data-driven insights to empower our clients."} image={"/assets/img/custom-banner.svg"} />
-
-        {/* <Awards awards={aboutAwards} /> */}
         <TwoSidedSection image={"/assets/img/vision-values.svg"} height={isMobile ? 600: 'auto'} Component={<VisionComp />} />
+
+        <TwoSidedSection header={"Leadership & Expertise"} description={"Behind Storeys Real Estate is a team of industry veterans and market specialists who bring years of experience, deep local knowledge, and a forward-thinking approach to real estate. Our leadership is committed to staying ahead of market trends, utilizing cutting-edge technology and data-driven insights to empower our clients."} image={"/assets/img/custom-banner.svg"} />
 
         <ChooseUs data={data} header={"Why Choose Us"} />
 

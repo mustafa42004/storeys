@@ -581,7 +581,7 @@
             .gallery {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
-                gap: 25px;
+                gap: 20px;
                 .item {
                     transition: all 0.3s ease;
                     position: relative;
@@ -593,6 +593,7 @@
                     }
                     img {
                         width: 100%;
+                        /* height: auto; */
                         height: 100%;
                         object-fit: cover;
                         border-radius: 15px;
@@ -600,8 +601,10 @@
                     .round-btn {
                         position: absolute;
                         transition: all 0.3s ease;
-                        top: 40px;
-                        right: 40px;
+                        top: 20px;
+                        right: 20px;
+                        /* top: 40px;
+                        right: 40px; */
                         background: #FFF;
                         border-radius: 50%;
                         padding: 10px;
@@ -614,6 +617,7 @@
                         font-size: 22px;
                         align-items: center;
                         justify-content: center;
+        
                     }
                     .content {
                         position: absolute;
@@ -741,6 +745,7 @@
                 justify-content: center;
                 flex-direction: column;
                 gap: 25px;
+                color: white;
             }
             .image {
                 width: 100%;
@@ -755,7 +760,6 @@
                 }
             }
         }
-        
         .fw-600 {
             font-weight: 600 !important;
         }
@@ -1192,8 +1196,8 @@
             .layout {
                 display: grid;
                 padding-top: 60px;
-                grid-template-columns: 1fr 1fr 1fr 1fr;
-                gap: 30px;
+                grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+                gap: 10px;
                 align-items: center;
                 justify-content: center;
                 .card {

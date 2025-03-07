@@ -5,23 +5,23 @@ const PopularAreas = () => {
 
     const cards = [
         {
-            title: "Popular Areas",
+            title: "Palm Jumeirah",
             description: "Ideal island backed with beautiful beaches overlooking stunning views of Skyline.",
             image: "/assets/img/area-1.svg"
         },
         {
-            title: "Downtown Dubai",
-            description: "Modern urban district featuring iconic landmarks and luxury residential towers.",
+            title: "Dubai Marina",
+            description: "The city’s hub, Dubai Marina is a meticulously planned community of Dubai.",
             image: "/assets/img/area-2.svg"
         },
         {
-            title: "Palm Jumeirah",
-            description: "Man-made island paradise with luxury resorts and exclusive waterfront properties.",
+            title: "Dubai Hills Estates",
+            description: "A lush 2700 acers suburban lifestyle with lush greenery. & cutting-edge features.",
             image: "/assets/img/area-3.svg"
         },
         {
-            title: "Dubai Marina",
-            description: "Stunning waterfront community with high-rise apartments and yacht-lined marina.",
+            title: "Town Square",
+            description: "Town square is divided into 13 sub-projects spread among 1.6 million square feet of land.",
             image: "/assets/img/area-4.svg"
         }
     ]

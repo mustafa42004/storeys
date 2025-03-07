@@ -30,7 +30,7 @@ useEffect(() => {
   return (
     <> 
         <div className="content gap-30">
-            <h4 className={ `${isMobile ? "fs-50" : "auto"}`}> Our Vision & Values</h4>
+            <h4 className={ `${isMobile ? "fs-50" : "fs-60"}`}> Our Vision & Values</h4>
 
             <p className="font-sm medium fs-22 text-left">Our vision is to elevate real estate experiences by combining market expertise with a personalized approach. We believe in</p>
 

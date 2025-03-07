@@ -30,7 +30,7 @@ const LatestNews = () => {
                     <div className="col-md-12">
                         <Heading title={"Latest News"} className={"fs-50"}/>
 
-                        <div className="grid-cs gap-30 mt-5 align-items-center bg-info">
+                        <div className="grid-cs gap-30 mt-5 align-items-center">
                             {topNews.length > 0 && (
                                 <div className="cs-model-card">
                                     <div className="banner lg">

@@ -22,6 +22,7 @@ const Cards = ({id, index}) => {
                     <p className="font-sm fs-16 text-left">Find your dream home or the perfect investment property with our exclusive listings and market expertise. We guide you through the entire process, from property selection to negotiation and final handover, ensuring a smooth and hassle-free purchase.</p>
                 </div>
             </NavLink>
+            
     )
 }
 

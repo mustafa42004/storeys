@@ -28,10 +28,11 @@ const ChooseUs = ({ header, description, data }) => {
                                     return (
                                         <div className={`item ${getIndex ? '' : 'revert'} ${!isLastItem ? 'right' : ''}`}>
                                             <div className={`content ${getIndex ? 'bottom' : ''}`}>
-                                                <h2 className="font-lg font-sans fs-70 bold">{index + 1}</h2>
+                                            <p className="font-sm medium text-left fs-22">{value.header && value.header} <span className="fw-600">{value.description}</span></p>
+                                            
                                             </div>
                                             <div className={`content ${getIndex ? '' : 'bottom'}`}>
-                                                <p className="font-sm medium text-left fs-22">{value.header && value.header} <span className="fw-600">{value.description}</span></p>
+                                            {/* <h2 className="font-lg font-sans fs-70 bold">{index + 1}</h2> */}
                                             </div>
                                         </div>
                                     )

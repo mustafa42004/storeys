@@ -15,7 +15,7 @@ const Properties = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
-                        <Heading title="Featured Properties" className={ `${isMobile ? "fs-42 w-80" : "w-60"}`} description='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim ve' descriptionClassName='medium' />
+                        <Heading title="Featured Properties" className={ `${isMobile ? "fs-42 w-80" : "w-60"}`} description=' Explore our handpicked selection of exceptional properties, each designed to inspire and elevate your lifestyle' descriptionClassName='medium fs-22' />
 
                         <div className="mt-5">
                             <Gallery />
