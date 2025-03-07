@@ -46,14 +46,6 @@ const ServicesCards = () => {
                                     />
                                 ))
                             }
-
-
-{/* 
-                            {
-                                footerLinks[1]?.links?.map((value, index) => (
-                                    <Cards key={index} id={value.link} index={index} />
-                                ))
-                            } */}
                         </div>
                     </div>
                 </div>
