@@ -10,25 +10,25 @@ const Testimonial = () => {
     const testimonials = [
         {
             image: "/assets/img/our-team-1.svg",
-            name: "Talan Culhane",
-            designation: "Sales Manager"
+            name: "Mohamed Ibrahim",
+            designation: "Founder & CEO"
         },
         // Add more testimonials for testing
         {
-            image: "/assets/img/our-team-1.svg",
-            name: "John Doe",
-            designation: "Sales Manager"
+            image: "/assets/img/our-team-2.svg",
+            name: "Vinayak K",
+            designation: "Co-Founder"
         },
         {
-            image: "/assets/img/our-team-1.svg",
-            name: "Talan Culhane",
-            designation: "Sales Manager"
+            image: "/assets/img/our-team-3.svg",
+            name: "Mohamed Sheleek",
+            designation: "Co-Founder"
         },
         // Add more testimonials for testing
         {
-            image: "/assets/img/our-team-1.svg",
-            name: "John Doe",
-            designation: "Sales Manager"
+            image: "/assets/img/our-team-4.svg",
+            name: "Arun K",
+            designation: "Co-Founder"
         }
     ];
 
