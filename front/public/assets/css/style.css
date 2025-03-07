@@ -1626,66 +1626,7 @@
                 }
             }
         }
-        
-        /* .communities {
-        
-            .layout {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                grid-template-rows: auto;
-                gap: 20px;
-        
-                .community-card {
-                    display: flex;
-                    align-items: center;
-                    justify-content: flex-end;
-                    flex-direction: column;
-                    padding: 20px;
-                    margin-bottom: 10px;
-                    width: 100%;
-                    min-height: 440px;
-                    border-radius: 15px;
-                    cursor: pointer;
-                    transition: all 0.3s ease-in-out;
-                    box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.3);
-        
-                    &:hover {
-                        transform: scale(1.05);
-                        box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.4);
-                    }
-        
-                    .content {
-                        display: flex;
-                        align-items: start;
-                        justify-content: center;
-                        flex-direction: column;
-                        gap: 5px;
-                        padding: 15px;
-                        color: white;
-                        position: absolute;
-                        bottom: 0;
-                        left: 0;
-                        width: 100%;
-                        background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-                        border-radius: 15px;
-        
-                        h4 {
-                            font-size: 18px;
-                            font-weight: bold;
-                        }
-        
-                        p {
-                            font-size: 14px;
-                            opacity: 0.9;
-                        }
-                    }
-                }
-            }
-        } */
-
-
-
-
+    
         .grid-layout {
             display: grid;
             grid-template-columns: repeat(3, 1fr);

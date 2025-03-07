@@ -7,7 +7,7 @@ const PopularAreas = () => {
         {
             title: "Palm Jumeirah",
             description: "Ideal island backed with beautiful beaches overlooking stunning views of Skyline.",
-            image: "/assets/img/area-1.svg"
+            image: "/front/public/assets/img/area-1.svg"
         },
         {
             title: "Dubai Marina",
