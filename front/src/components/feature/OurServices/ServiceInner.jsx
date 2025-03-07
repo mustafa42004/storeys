@@ -3,7 +3,6 @@ import Banner from "../../shared/Banner/Banner"
 import Header from "../../shared/Header/Header"
 import Footer from "../../shared/Footer/Footer"
 import { useState } from "react";
-import Frame from "../../shared/Frame/Frame";
 import ImageAbsolute from "../../shared/ImageAbsolute/ImageAbsolute";
 import ChooseUs from "../../shared/ChooseUs/ChooseUs";
 import TwoSidedSection from "../../shared/TwoSided/TwoSidedSection";
@@ -26,8 +25,12 @@ const ServiceInner = () => {
     <> 
         <Header height={setHeaderHeight}/>
         <Banner title={holidayHome?.bannerTitle} bg={bg} width={width} height={height} marginTop={headerHeight}/>
-        <Frame frame={frameData} />
-        <ChooseUs data={boxData?.data} header={boxData?.header} description={boxData?.description} />
+        <TwoSidedSection 
+                header={frameData?.title} 
+                description={frameData?.paragraphs?.join(" ")} 
+                image={frameData?.image} 
+        />
+        <ChooseUs data={boxData?.data} header={boxData?.header} description={boxData?.description}showNumber={true} />
         <ImageAbsolute header={imagedData?.header} width={imagedData?.width} data={imagedData?.data} />
         <TwoSidedSection image={"/assets/img/service-point-img.svg"}  Component={<PointComp data={pointData?.data} />} />
         <FixedBg height={380} Component={<FixedBgComp title={fixedBgData.title} description={fixedBgData.description} buttonText={fixedBgData.buttonText} />} />

@@ -2,7 +2,7 @@ import { useState } from "react"
 import Heading from "../Headings/Heading"
 import { useEffect } from "react"
 
-const ChooseUs = ({ header, description, data }) => {
+const ChooseUs = ({ header, description, data, showNumber }) => {
 
     const [isMob, setIsMob] = useState(false)
 
@@ -28,15 +28,24 @@ const ChooseUs = ({ header, description, data }) => {
                                     return (
                                         <div className={`item ${getIndex ? '' : 'revert'} ${!isLastItem ? 'right' : ''}`}>
                                             <div className={`content ${getIndex ? 'bottom' : ''}`}>
-                                            <p className="font-sm medium text-left fs-22">{value.header && value.header} <span className="fw-600">{value.description}</span></p>
-                                            
+                                                <p className="font-sm medium text-left fs-22">{value.header && value.header} <span className="fw-600">{value.description}</span></p>
                                             </div>
+
                                             <div className={`content ${getIndex ? '' : 'bottom'}`}>
-                                            {/* <h2 className="font-lg font-sans fs-70 bold">{index + 1}</h2> */}
+                                                {showNumber && (<h2 className="font-lg font-sans fs-70 bold">{index + 1}</h2>)}
                                             </div>
+
+                                            {/* {showNumber && (
+                                                <div className={`content ${getIndex ? "" : "bottom"}`}>
+                                                    <h2 className="font-lg font-sans fs-70 bold">
+                                                        {index + 1}
+                                                    </h2>
+                                                </div>
+                                            )} */}
                                         </div>
                                     )
-                                }) : data?.map((value, index) => {
+                                }) 
+                                : data?.map((value, index) => {
                                     let getIndex = index % 2 === 0 
                                     let isLastItem = index === data.length - 1;
                                     return (

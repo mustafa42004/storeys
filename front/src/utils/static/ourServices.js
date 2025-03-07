@@ -1,11 +1,11 @@
 export const holidayHome = {
-    bannerTitle: "Holiday Home",
+    bannerTitle: "Holiday Home",  
     frameData: {
         title: "Holiday Home Management – Maximize Your Property’s Potential",
         paragraphs: [
             "At Storeys Real Estate, we offer a premium Holiday Home Management service designed to transform your property into a high-yielding short-term rental. Whether you're a homeowner looking to generate passive income or an investor seeking higher returns than traditional rentals, our end-to-end management solutions ensure a seamless and profitable experience."
         ],
-        image: "/assets/img/inner-service-frame.svg"
+        image: "/assets/img/inner-service-img.svg"
     },
     boxData: {
         header: "Why Choose Us",
