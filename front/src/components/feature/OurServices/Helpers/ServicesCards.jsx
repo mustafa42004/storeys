@@ -4,7 +4,7 @@ import { startCardAnimation } from "../../../../animations/animation";
 import { footerLinks} from "../../../../utils/static/footerData"
 
 
-const Cards = ({id, index}) => {
+const Cards = ({id, name, desc, img, index}) => {
 
     const cardRef = useRef(null);
 
@@ -15,11 +15,11 @@ const Cards = ({id, index}) => {
     return (
             <NavLink to={`${id}`} className="cs-model-card mb-2 text-decoration-none" ref={cardRef}>
                 <div className="banner">
-                    <img src="/assets/img/new-banner-sm.svg" alt="services-banner" />
+                    <img src={img}  alt={name}/>
                 </div>
                 <div className="content">
-                    <h4 className="font-sm font-atyp medium text-left">Buy Property</h4>
-                    <p className="font-sm fs-16 text-left">Find your dream home or the perfect investment property with our exclusive listings and market expertise. We guide you through the entire process, from property selection to negotiation and final handover, ensuring a smooth and hassle-free purchase.</p>
+                    <h4 className="font-sm font-atyp medium text-left">{name}</h4>
+                    <p className="font-sm fs-16 text-left">{desc}</p>
                 </div>
             </NavLink>
             
@@ -35,10 +35,25 @@ const ServicesCards = () => {
                     <div className="col-md-12">
                         <div className="grid-cs gap-20 gtc-3">
                             {
+                                footerLinks[1]?.links?.map(({ id, name, desc, link, img }, index) => (
+                                    <Cards 
+                                    key={id} 
+                                    id={link} 
+                                    name={name} 
+                                    desc={desc} 
+                                    img={img} 
+                                    index={index} 
+                                    />
+                                ))
+                            }
+
+
+{/* 
+                            {
                                 footerLinks[1]?.links?.map((value, index) => (
                                     <Cards key={index} id={value.link} index={index} />
                                 ))
-                            }
+                            } */}
                         </div>
                     </div>
                 </div>
