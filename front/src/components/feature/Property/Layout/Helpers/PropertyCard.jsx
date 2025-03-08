@@ -3,9 +3,11 @@ import Center from "./Center"
 import Pill from "./Pill"
 import { useEffect, useRef } from "react";
 import { startCardAnimation } from "../../../../../animations/animation";
+import { propertyData } from '../../../../../utils/static/propertyData'
 
 
 const PropertyCard = ({index}) => {
+    const { image, location, price, agentName, agentImage } = propertyData;
 
     const cardRef = useRef(null);
 
@@ -17,22 +19,22 @@ const PropertyCard = ({index}) => {
     <>
         <NavLink to="/property/1" className="card" ref={cardRef}>
             <div className="banner">
-                <img src="/assets/img/property-card-banner-1.svg" alt="" />
+                <img src={image} alt="" />
                 <Pill title="For Sale" />
             </div>
             <div className="content">
                 <div className="top">
-                    <h4 className="font-sm text-left dark bold">Dubai, Jumeirah Village Circle</h4>
-                    <h4 className="font-sm text-left font-atyp justify-self-end dark bold">700,000AED</h4>
+                    <h4 className="font-sm text-left dark bold">{location}</h4>
+                    <h4 className="font-sm text-left font-atyp justify-self-end dark bold">{price}</h4>
                 </div>
                 
                 <Center />
 
                 <div className="bottom">
                     <div className="profile">
-                        <img src="/assets/img/property-profile.svg" alt="" />
+                        <img src={agentImage} alt="" />
                     </div>
-                    <h4 className="font-sm text-left fs-20 dark bold">Talan Culhane</h4>
+                    <h4 className="font-sm text-left fs-20 dark bold">{agentName}</h4>
                     <div className="buttons">
                         <button><img src="/assets/img/message.svg" alt="" /></button>
                         <button><img src="/assets/img/call.svg" alt="" /></button>

@@ -10,6 +10,7 @@ import Careers from "../../components/feature/Careers/Careers";
 import News from "../../components/feature/News/News";
 import OurServices from "../../components/feature/OurServices/OurServices";
 import ServiceInner from "../../components/feature/OurServices/ServiceInner";
+import NewsInner from "../../components/feature/News/NewsInner";
 
 const rootRoutes = [
     {
@@ -51,6 +52,10 @@ const rootRoutes = [
     {
         path: "/news",
         element: <News />
+    },
+    {
+        path: "/news/:id",
+        element: <NewsInner />
     },
     {
         path: "/services",

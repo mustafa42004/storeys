@@ -62,6 +62,12 @@ export const homeBanner = {
     width: 100,
     height: 280
   }
+  export const newsInnerBanner = {
+    // title: "Dubai News",
+    bg: "/assets/img/newsInner-Banner.svg",
+    width: 100,
+    height: 280
+  }
 
   export const ourServicesBanner = {
     title: "Our Services",

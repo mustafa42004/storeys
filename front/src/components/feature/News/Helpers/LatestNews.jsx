@@ -1,5 +1,5 @@
 import Heading from "../../../shared/Headings/Heading"
-
+import { NavLink } from "react-router-dom";
 // Sample data structure for news items
 const newsItems = [
     { id: 1, title: "When is the Best Time to Renovate After Purchasing a Property in Dubai", date: "2026-10-01", imgSrc: "/assets/img/news-banner-lg.svg", description: "Dubai's climate and cultural calendar play a major role. Summer months bring extreme heat, making renovations involving outdoor work especially challenging due to reduced outdoor work hours.. 1" },
@@ -29,45 +29,48 @@ const LatestNews = () => {
 
                         <div className="grid-cs gap-30 mt-5 align-items-center">
                             {topNews.length > 0 && (
-                                <div className="cs-model-card">
-                                    <div className="banner lg">
-                                        <img src={topNews[0].imgSrc} alt="news-banner" />
-                                    </div>
-                                    <div className="content">
-                                        <h4 className="font-sm font-atyp medium text-left">{topNews[0].title}</h4>
-                                        <p className="font-sm text-left">{topNews[0].description}</p>
-                                    </div>
+                            <NavLink to={`/news/${topNews[0].id}`} className="cs-model-card">
+                                <div className="banner lg">
+                                <img src={topNews[0].imgSrc} alt="news-banner" />
                                 </div>
-                            )}
+                                <div className="content">
+                                <h4 className="font-sm font-atyp medium text-left">{topNews[0].title}</h4>
+                                <p className="font-sm text-left">{topNews[0].description}</p>
+                                </div>
+                            </NavLink>
+                        )}
+                
+
+
+    
                             <div className="grid-cs gtc-1 gap-30">
                                 {topNews.slice(1, 3).map(news => (
-                                    <div key={news.id} className="cs-model-card revert">
-                                        <div className="banner lg">
-                                            <img src={news.imgSrc} alt="news-banner" />
-                                        </div>
-                                        <div className="content">
-                                            <h4 className="font-sm font-atyp medium text-left">{news.title}</h4>
-                                            <p className="font-sm text-left">{news.description}</p>
-                                        </div>
-                                    </div>
-                                ))}
+                                <NavLink key={news.id} to={`/news/${news.id}`} className="cs-model-card revert">
+                                    <div className="banner lg">
+                                        <img src={news.imgSrc} alt="news-banner" />
+                             </div>
+                             <div className="content">
+                               <h4 className="font-sm font-atyp medium text-left">{news.title}</h4>
+                               <p className="font-sm text-left">{news.description}</p>
+                             </div>
+                           </NavLink>
+                         ))}
                             </div>
                         </div>
 
-
                         <div className="grid-cs gtc-3 gap-20 mt-5">
-                            {remainingNews.map(news => (
-                                <div key={news.id} className="cs-model-card">
-                                    <div className="banner">
-                                        <img src={news.imgSrc} alt="news-banner" />
-                                    </div>
-                                    <div className="content">
-                                        <h4 className="font-sm font-atyp medium text-left">{news.title}</h4>
-                                        <p className="font-sm fs-16 text-left">{news.description}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+          {remainingNews.map(news => (
+            <NavLink key={news.id} to={`/news/${news.id}`} className="cs-model-card">
+              <div className="banner">
+                <img src={news.imgSrc} alt="news-banner" />
+              </div>
+              <div className="content">
+                <h4 className="font-sm font-atyp medium text-left">{news.title}</h4>
+                <p className="font-sm fs-16 text-left">{news.description}</p>
+              </div>
+            </NavLink>
+          ))}
+        </div>
                     </div>
                 </div>
             </div>
