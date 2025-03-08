@@ -8,6 +8,7 @@ import { propertyData } from '../../../../../utils/static/propertyData'
 
 const PropertyCard = ({index}) => {
     const { image, location, price, agentName, agentImage } = propertyData;
+    console.log("Image Found" , image)
 
     const cardRef = useRef(null);
 

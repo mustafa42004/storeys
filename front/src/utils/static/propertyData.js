@@ -4,7 +4,7 @@ export const propertyData = [
         cards: [
             {
                 id: 1,
-                image: "../../../public/assets/img/property-card-banner-1.svg", // Fixed path
+                image: "/assets/img/property-card-banner-1.svg", // Fixed path
                 location: "Dubai, Jumeirah Village Circle",
                 price: "700,000 AED",
                 status: "For Sale",
@@ -13,7 +13,7 @@ export const propertyData = [
             },
             {
                 id: 2,
-                image: "../../../public/assets/img/property-card-banner-1.svg",
+                image: "/assets/img/property-card-banner-1.svg",
                 location: "Dubai Marina, Waterfront",
                 price: "1,200,000 AED",
                 status: "For Rent",

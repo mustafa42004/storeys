@@ -1,37 +1,45 @@
 import { useParams } from "react-router-dom";
-import { dubaiHillsEstate } from "../../../utils/static/news_communitiesInnerData";// Import the data
+import { news_communitiesInnerData } from "../../../utils/static/news_communitiesInnerData";// Import the data
 import Header from "../../shared/Header/Header";
 import Banner from "../../shared/Banner/Banner";
-import { useState } from "react";
+import { useState , useEffect } from "react";
 import { newsInnerBanner } from "../../../utils/static/bannerData";
+import Footer from "../../shared/Footer/Footer"
 
 const NewsInner = () => {
-    const { newsId} = useParams(); 
+    const { id } = useParams(); 
     
     const [headerHeight, setHeaderHeight] = useState(0)// Capture newsId but don't use it
     const { bg, width, height } = newsInnerBanner
+    const [isMobile , setIsMobile] = useState(false)
+
+    useEffect(()=>{
+        window.innerWidth > 767 ? setIsMobile(true) : setIsMobile(false)
+    },[])
+
+    
 
     // Destructure parts from dubaiHillsEstate
     const { 
-        // bannerTitle, 
+        bannerTitle, 
         Paragraph_1Data, 
         Paragraph_2Data, 
         imagedData, 
         amenitiesData,
-        Paragraph_3Data,
-    } = dubaiHillsEstate;
+        investmentData,
+        estateInfo,
+    } = news_communitiesInnerData;
 
     return (
-        <div className="max-w-4xl mx-auto p-6">
+        <div className="max-w-4xl mx-auto">
 
-            <Header height={setHeaderHeight}/>
-            <Banner title={dubaiHillsEstate?.bannerTitle} bg={bg} width={width} height={height} marginTop={headerHeight}/>
+            <Header height={setHeaderHeight} className={ `${isMobile ? "fs-26 mx-5 " : "fs-30"}`}/>
+            <Banner title={bannerTitle} bg={bg} width={width} height={isMobile ? 500 : 500} marginTop={headerHeight}/>
 
             {/* Section 1 */}
             <section className="mb-8">
-                <h2 className="text-2xl font-semibold">{Paragraph_1Data.title}</h2>
+                <h2 className="text-2xl font-semibold mt-5">{Paragraph_1Data.title}</h2>
                 <p className="text-gray-600">{Paragraph_1Data.paragraphs}</p>
-                {/* <img src={Paragraph_1Data.image} alt="Dubai Hills Estate" className="mt-4 w-full" /> */}
             </section>
 
             {/* Section 2 */}
@@ -50,14 +58,14 @@ const NewsInner = () => {
 
             {/* Properties Section */}
             <section className="mb-5 mt-5">
-            <img src={imagedData.image} alt="Dubai Hills Estate" className="mt-4 w-full" />
-            <h2 className="text-2xl font-semibold">{imagedData.header}</h2>
+            <img src={imagedData.image} alt="Dubai Hills Estate" className={ `${isMobile ? "mt-4 w-75" : "fs-30 mt-4 w-full"}`}/>
+            <h2 className="text-2xl font-bold mt-3">{imagedData.header}</h2>
             <p className="text-gray-600">{imagedData.description}</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
 
             {imagedData?.data?.map(({ category, items }, index) => (
                 <div key={index} className="mt-6">
-                    <h3 className="text-xl font-bold">{category}</h3>
+                    <h3 className="fs-26 font-semibold">{category}</h3>
                     <ul className="list-disc pl-5 mt-2">
                         {items.map(({ header, description }, subIndex) => (
                             <li key={subIndex} className="mt-2">
@@ -69,15 +77,17 @@ const NewsInner = () => {
             ))}
             </div>
         </section>
+
 {/*----------------------------------------- */}
-<section className="mb-5 mt-5">
+
+        <section className="mb-5 mt-5">
             <h2 className="text-2xl font-semibold">{amenitiesData.title}</h2>
             <p className="text-gray-600">{amenitiesData.description}</p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                 {amenitiesData.amenities.map(({ title, description, list, additional }, index) => (
                     <div key={index} className="mt-6">
-                        <h3 className="fs-20 font-semibold">{title}</h3>
+                        <h3 className="fs-26 font-semibold">{title}</h3>
                         <p className="text-gray-600">{description}</p>
                         
                         {list && (
@@ -93,24 +103,35 @@ const NewsInner = () => {
                 ))}
             </div>
         </section>
+{/*---------------------------------------------------------------------------------*/}
+
+        <section className="mb-10">
+            <img src={investmentData.image} alt="Dubai Hills Estate" className="w-full rounded-lg " />
+
+            <h2 className="text-2xl font-semibold mt-4">{investmentData.title}</h2>
+            <p className="text-gray-600 mt-2">{investmentData.description}</p>
+
+            <ul className="list-disc pl-5 mt-4">
+                {investmentData.highlights.map(({ title, description }, index) => (
+                    <li key={index} className="mt-2">
+                        <strong>{title}</strong> – {description}
+                    </li>
+                ))}
+            </ul>
+        </section>
 
             {/* Final Section */}
-            <section>
-                <h2 className="text-2xl font-semibold">{Paragraph_3Data.header}</h2>
-                <p className="text-gray-600">{Paragraph_3Data.description}</p>
-                {Paragraph_3Data.data.map(({ title, description }, index) => (
-                    <div key={index} className="mt-4">
-                        <h3 className="font-bold">{title}</h3>
-                        <p className="text-gray-600">{description}</p>
-                    </div>
-                ))}
+            <section className="mb-8">
+            <h2 className="text-2xl font-semibold">{estateInfo.title}</h2>
+            <p className="text-gray-600 mt-2">{estateInfo.description}</p>
+
+            <h3 className="fs-22 fw-semibold mt-4">{estateInfo.data.title}</h3>
+            <p className="text-gray-600 mt-1">{estateInfo.data.description}</p>
             </section>
+
+            <Footer/>
         </div>
     );
 };
 
 export default NewsInner;
-
-
-
-  

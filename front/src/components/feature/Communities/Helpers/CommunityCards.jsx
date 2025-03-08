@@ -11,7 +11,7 @@ const Cards = ({name, desc , img ,index}) => {
     }, [index]);
     return (
         <NavLink 
-        to="/communitiesData" 
+        to={`/communitiesData`}
         ref={cardRef} 
         className="community-card text-decoration-none"
         style={{ 

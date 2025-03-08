@@ -29,7 +29,7 @@ const LatestNews = () => {
 
                         <div className="grid-cs gap-30 mt-5 align-items-center">
                             {topNews.length > 0 && (
-                            <NavLink to={`/news/${topNews[0].id}`} className="cs-model-card">
+                            <NavLink to={`/news/${topNews[0].id}`} className="cs-model-card text-decoration-none text-dark">
                                 <div className="banner lg">
                                 <img src={topNews[0].imgSrc} alt="news-banner" />
                                 </div>
@@ -39,38 +39,35 @@ const LatestNews = () => {
                                 </div>
                             </NavLink>
                         )}
-                
-
-
     
                             <div className="grid-cs gtc-1 gap-30">
                                 {topNews.slice(1, 3).map(news => (
-                                <NavLink key={news.id} to={`/news/${news.id}`} className="cs-model-card revert">
+                                <NavLink key={news.id} to={`/news/${news.id}`} className="cs-model-card text-decoration-none text-dark revert">
                                     <div className="banner lg">
                                         <img src={news.imgSrc} alt="news-banner" />
-                             </div>
-                             <div className="content">
-                               <h4 className="font-sm font-atyp medium text-left">{news.title}</h4>
-                               <p className="font-sm text-left">{news.description}</p>
-                             </div>
-                           </NavLink>
-                         ))}
+                            </div>
+                            <div className="content">
+                                <h4 className="font-sm font-atyp medium text-left">{news.title}</h4>
+                                <p className="font-sm text-left">{news.description}</p>
+                            </div>
+                                </NavLink>
+                          ))}
                             </div>
                         </div>
 
                         <div className="grid-cs gtc-3 gap-20 mt-5">
-          {remainingNews.map(news => (
-            <NavLink key={news.id} to={`/news/${news.id}`} className="cs-model-card">
-              <div className="banner">
-                <img src={news.imgSrc} alt="news-banner" />
-              </div>
-              <div className="content">
-                <h4 className="font-sm font-atyp medium text-left">{news.title}</h4>
-                <p className="font-sm fs-16 text-left">{news.description}</p>
-              </div>
-            </NavLink>
-          ))}
-        </div>
+                          {remainingNews.map(news => (
+                          <NavLink key={news.id} to={`/news/${news.id}`} className="cs-model-card text-decoration-none text-dark">
+                            <div className="banner">
+                              <img src={news.imgSrc} alt="news-banner" />
+                            </div>
+                            <div className="content">
+                              <h4 className="font-sm font-atyp medium text-left">{news.title}</h4>
+                              <p className="font-sm fs-16 text-left">{news.description}</p>
+                            </div>
+                          </NavLink>
+                        ))}
+                    </div>
                     </div>
                 </div>
             </div>

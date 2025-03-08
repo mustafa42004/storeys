@@ -1,11 +1,12 @@
-export const dubaiHillsEstate = {
+export const news_communitiesInnerData = 
+{
+    id: "dubai-hills-estate", 
     bannerTitle: "When is the Best Time to Renovate After  Purchasing a Property in Dubai",  
     Paragraph_1Data: {
         title: "Dubai Hills Estate: The Ultimate Destination for Luxury Living and Investment",
         paragraphs: [
             "Dubai Hills Estate is one of the most prestigious and sought-after communities in Dubai. Designed for those who seek a perfect blend of luxury, comfort, and investment potential, this master-planned development offers world-class amenities, stunning landscapes, and a prime location in the heart of the city."
         ],
-        // image: "/front/public/assets/img/newsInner-Banner.svg"
     },
 
     Paragraph_2Data: {
@@ -35,7 +36,7 @@ export const dubaiHillsEstate = {
     imagedData: {
         header: "Properties in Dubai Hills Estate",
         width: 55,
-        image: "/assets/img/newsInnerImg.svg.svg",
+        image: "/assets/img/newsInnerImg.svg",
         description: "Dubai Hills Estate features a diverse range of properties catering to different lifestyles and budgets:",
         data: [
             {
@@ -97,16 +98,35 @@ export const dubaiHillsEstate = {
     ]
 },
 
+investmentData : {
+    image: "/assets/img/newsInnerImg-2.svg", 
+    title: "Investment Potential in Dubai Hills Estate",
+    description: "Dubai Hills Estate has proven to be one of the most profitable investment areas in Dubai, thanks to:",
+    highlights: [
+        {
+            title: "High ROI",
+            description: "Rental yields for villas and apartments are strong, with some properties offering returns of 6–7% per annum."
+        },
+        {
+            title: "Strong Demand",
+            description: "The blend of luxury, greenery, and connectivity makes it a top choice for end-users and investors."
+        },
+        {
+            title: "Upcoming Developments",
+            description: "With new projects and infrastructure enhancements, Dubai Hills Estate continues to appreciate in value."
+        }
+    ]
+},
 
-    Paragraph_3Data: {
-        header: "Is Dubai Hills Estate Right for You?",
-        description: "Whether you’re looking for a dream home or a high-yield investment, Dubai Hills Estate offers a perfect balance of elegance, comfort, and financial potential. With its prime location, outstanding amenities, and world-class residences, this community remains one of the best real estate opportunities in Dubai.",
 
-        data:[
-            {
-                title:"Explore Properties in Dubai Hills Estate Today!",
-                description:"If you're interested in buying, selling, or investing in Dubai Hills Estate, Storeys Real Estate can help you find the perfect property. Contact us today to explore the best deals in this prestigious community."
-            }
-        ]
-    },
-};
+
+estateInfo : {
+    title: "Is Dubai Hills Estate Right for You?",
+    description: "Whether you're looking for a dream home or a high-yield investment, Dubai Hills Estate offers a perfect balance of elegance, comfort, and financial potential. With its prime location, outstanding amenities, and world-class residences, this community remains one of the best real estate opportunities in Dubai.",
+    data: {
+        title: "Explore Properties in Dubai Hills Estate Today!",
+        description: "If you're interested in buying, selling, or investing in Dubai Hills Estate, Storeys Real Estate can help you find the perfect property. Contact us today to explore the best deals in this prestigious community."
+    }
+}
+}
+

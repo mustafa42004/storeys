@@ -2,7 +2,7 @@ import ProfileCard from "./ProfileCard";
 import Content from "./Content";
 import { useEffect, useState } from "react";
 
-const PropertyContent = ({ top }) => {
+const PropertyContent = ({top}) => {
     const [isMobile , setIsMobile] = useState(false)
 
 

@@ -34,7 +34,7 @@ const Layout = () => {
                         <div className="card-layout">
                         {propertyCards.map((property, index) => (
                             <PropertyCard key={property.id} property={property} index={index} />
-                         ))}
+                        ))}
                         </div>
                         <div className="w-100 mt-5 flex-cs">
                             <button className="cs-btn">Explore More <i className="fa-regular fa-arrow-right"></i></button>
