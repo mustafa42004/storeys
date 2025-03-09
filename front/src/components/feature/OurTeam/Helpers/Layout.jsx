@@ -1,47 +1,89 @@
-import React from 'react'
-import Heading from '../../../shared/Headings/Heading'
-import Cards from './Cards'
+import React from "react";
+import Heading from "../../../shared/Headings/Heading";
+import Cards from "./Cards";
 
 const Layout = () => {
-
-    // const array = [1, 2, 3, 4, 5]
+  // const array = [1, 2, 3, 4, 5]
 
   return (
     <>
-    <section className="pt-cs our-team">
+      <section className="pt-cs our-team">
         <div className="container">
-            <div className="row">
-                <div className="col-md-12">
-                    <p className="font-sm mb-4 fs-20 medium">Our Team</p>
-                    <Heading title="You’re in safe hands" className="fs-50" />
-                    <div className="layout">
-                    {
-                        [
-                            { image: "/assets/img/our-team-1.svg", name: "Mohamed Ibrahim", designation: "Founder & CEO" },
-                            { image: "/assets/img/our-team-2.svg", name: "Vinayak K", designation: "Co-Founder" },
-                            { image: "/assets/img/our-team-3.svg", name: "Mohamed Sheleek", designation: "Co-Founder" },
-                            { image: "/assets/img/our-team-4.svg", name: "Arun K", designation: "Co-Founder" },
-                            { image: "/assets/img/our-team-5.svg", name: "Sreelakshmi", designation: "Senior Sales Manager" },
-                            { image: "/assets/img/our-team-6.svg", name: "Amal Mohammed", designation: "Senior Sales Manager" },
-                            { image: "/assets/img/our-team-7.svg", name: "Chandrakanth K A", designation: "Senior Sales Manager" },
-                            { image: "/assets/img/our-team-9.svg", name: "Aswin Venu", designation: "Senior Sales Manager" },
-                            { image: "/assets/img/our-team-8.svg", name: "Shahbaaz Ahamed", designation: "Senior Sales Manager" }
-                    
-                        ].map((value, index) => (
-                            <Cards key={index} image={value.image} name={value.name} designation={value.designation} />
-                        ))
-                    }
-                    </div>
-                </div>
+          <div className="row">
+            <div className="col-md-12">
+              <p className="font-sm mb-4 fs-20 medium">Our Team</p>
+              <Heading title="You're in safe hands" className="fs-50" />
+              <div
+                className="layout"
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+                  gap: "50px",
+                  maxWidth: "100%",
+                  padding: "0 15px",
+                }}
+              >
+                {[
+                  {
+                    image: "/assets/img/our-team-1.svg",
+                    name: "Mohamed Ibrahim",
+                    designation: "Founder & CEO",
+                  },
+                  {
+                    image: "/assets/img/our-team-2.svg",
+                    name: "Vinayak K",
+                    designation: "Co-Founder",
+                  },
+                  {
+                    image: "/assets/img/our-team-3.svg",
+                    name: "Mohamed Sheleek",
+                    designation: "Co-Founder",
+                  },
+                  {
+                    image: "/assets/img/our-team-4.svg",
+                    name: "Arun K",
+                    designation: "Co-Founder",
+                  },
+                  {
+                    image: "/assets/img/our-team-5.svg",
+                    name: "Sreelakshmi",
+                    designation: "Senior Sales Manager",
+                  },
+                  {
+                    image: "/assets/img/our-team-6.svg",
+                    name: "Amal Mohammed",
+                    designation: "Senior Sales Manager",
+                  },
+                  {
+                    image: "/assets/img/our-team-7.svg",
+                    name: "Chandrakanth K A",
+                    designation: "Senior Sales Manager",
+                  },
+                  {
+                    image: "/assets/img/our-team-9.svg",
+                    name: "Aswin Venu",
+                    designation: "Senior Sales Manager",
+                  },
+                  {
+                    image: "/assets/img/our-team-8.svg",
+                    name: "Shahbaaz Ahamed",
+                    designation: "Senior Sales Manager",
+                  },
+                ].map((value, index) => (
+                  <Cards
+                    key={index}
+                    image={value.image}
+                    name={value.name}
+                    designation={value.designation}
+                  />
+                ))}
+              </div>
             </div>
+          </div>
         </div>
-    </section> 
+      </section>
     </>
-  )
-}
+  );
+};
 
-
-
-
-
-export default Layout
+export default Layout;
