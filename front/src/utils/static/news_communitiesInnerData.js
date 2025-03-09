@@ -55,10 +55,10 @@ export const news_communitiesInnerData =
             {
                 category: "Apartments",
                 items: [
-                    { header: "Park Heights & Mulberry", 
+                    { header: "Park Heights & Mulberry –", 
                         description: "Stylish high-rise apartments with lush park views." },
 
-                    { header: "Collective", 
+                    { header: "Collective –", 
                         description: "Trendy co-living spaces ideal for young professionals and investors." }
                 ]
             }

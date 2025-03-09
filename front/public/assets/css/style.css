@@ -1972,3 +1972,38 @@
             }
         }
     }
+
+    .newsInner {
+        padding: 40px 20px 0px 20px;
+
+    }
+    .newsHeading{
+        font-size: 25px;
+    }
+    
+    .section-title {
+        font-size: 1.75rem;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+    
+    .sub-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+    
+    .text-muted {
+        color: #6c757d;
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+    
+    .img-fluid {
+        width: 100%;
+        height: auto;
+    }
+    
+    .list-unstyled {
+        padding-left: 0;
+        /* list-style: none; */
+    }

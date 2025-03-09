@@ -48,7 +48,6 @@
         line-height: 65px !important;
     }
     .font-lg {
-        /* background-color: aquamarine; */
         font-size: 20px !important;
     }
     .properties {
@@ -271,13 +270,11 @@
             display: flex;
             align-items: start;
             justify-content: end;
-            /* gap: 40px; */
             .item {
                 display: flex;
                 align-items: center;
                 flex-direction: column;
                 justify-content: start;
-                /* font-size: 20px; */
             }
             .icons {
                 display: grid;
@@ -307,39 +304,8 @@
         justify-content: center;
         flex-direction: column-reverse;
         gap: 10px;
-        /* .content {
-            display: flex;
-            align-items: start;
-            justify-content: center;
-            flex-direction: column;
-            gap: 20px;
-        } */
         .profile-card-layout {
             position: relative;
-            /* display: flex;
-            justify-content: end;
-            align-items: stretch; */
-            /* background-color: aquamarine; */
-            /* width: 100%; */
-            height: 100%;
-            .profile-card {
-                /* max-width: 470px; */
-                /* max-width: 100%;
-                border-radius: 15px;
-                border: 0.5px solid rgba(0, 0, 0, 0.50);
-                background: #FFF; */
-                .cs-body {
-                    /* display: flex;
-                    padding: 25px 35px;
-                    align-items: start;
-                    justify-content: center;
-                    flex-direction: column;
-                    gap: 30px; */
-                    .profile {
-                        /* width: 100%;
-                        display: flex;
-                        align-items: center;
-                        justify-content: space-between; */
                         img {
                             width: 100px;
                             height: 100px;
@@ -347,38 +313,9 @@
                             margin-top: -70px;
                         }
                     }
-                    /* .contact-btn {
-                        border-radius: 5px;
-                        background: #C5EBFF;
-                        display: flex;
-                        padding: 11px 30px;
-                        justify-content: center;
-                        align-items: center;
-                        gap: 10px;
-                        flex-shrink: 0;
-                        color: #37708E;
-                        font-family: "DM Sans";
-                        font-size: 18px;
-                        font-style: normal;
-                        font-weight: 500;
-                        line-height: normal;
-                        border: none;
-                        cursor: pointer;
-                    } */
                 }
-                /* .cs-footer {
-                    display: flex;
-                    align-items: start;
-                    justify-content: center;
-                    flex-direction: column;
-                    border-top: 0.5px solid rgba(0, 0, 0, 0.50);
-                    padding: 25px 35px;
-                    gap: 10px;
-                } */
             }
-        }
-    }
-}
+
 .property-inner-banner {
     height: 400px;
     grid-template-columns: 1fr 1fr ;
@@ -395,16 +332,8 @@
         }
     }
 }
-
-
-
-
-
-
-
 .choose-us {
     .layout {
-        /* display: grid; */
         grid-template-columns: 1fr 1fr ;
         gap: 0px;
         align-items: stretch;
@@ -504,17 +433,41 @@
         order: 1;
     }
 }
-
-
 .header {
     opacity: 1;
 }
 
+
+
+.News{ 
+.newsInner{
+    padding:40px 20px 0px 20px;
+}
+.banner{
+    padding-inline: 20px;
+}
+.font-header {
+    font-size: 36px !important;
+}
+.section-title {
+    font-size: 1.5rem;
+}
+
+.sub-title {
+    font-size: 1.25rem;
+}
+
+.text-muted {
+    font-size: 0.95rem;
+}       
+        
 }
 
 
 
 
+
+ }
 
 
 /*------------------------------------------------------------------ */
