@@ -1505,13 +1505,15 @@
                             .profile {
                                 width: 100%;
                                 display: flex;
-                                align-items: center;
-                                justify-content: space-between;
+                                flex-direction: column;
+                                justify-content: center;
+                                align-items: flex-start;
                                 img {
                                     width: 100px;
                                     height: 100px;
                                     object-fit: cover;
                                     margin-top: -70px;
+                                    margin-bottom: 10px;
                                 }
                             }
                             .card-btn {
@@ -1551,6 +1553,11 @@
         }
         
         .property-inner-info {
+            .grid-cs{
+                display: grid;
+                grid-template-columns: 1fr !important;
+                gap: 20px;
+            }
             .cs-table {
                 tr {
                     border-bottom: 1px solid #5454544f;
@@ -1592,6 +1599,9 @@
             background: #FFF;
             box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.05);
             padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+           
         }
         
       .communities {

@@ -1,9 +1,11 @@
 
-const Content = () => {
+const Content = ({heading}) => {
   return (
     <>
         <div className="form-content">
-            <h4 className="font-lg light text-left lh-36 fs-36">List Your Property with Storeys Real Estate</h4>
+            <h4 className="font-lg light text-left lh-36 fs-36">
+            {heading || "List Your Property with Storeys Real Estate"}
+            </h4>
             <h6 className="font-sm light text-left lh-24 fs-16 medium">At Storeys, we believe in adding as much value as possible when you agree to list your property for sale exclusively!</h6>
             <div className="grid-cs gap-30 w-80">
                 <div>

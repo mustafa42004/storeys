@@ -34,10 +34,10 @@ const InfoSection = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
-                        <div className="grid-cs  align-items-stretch gap-20 ">
+                        <div className="grid-cs align-items-stretch gap-20 ">
                             <div>
                                 <h4 className="font-lg fs-36 text-left">Property Information</h4>
-                                <div className="grid-cs box-cs align-items-start gap-20 mt-3">
+                                <div className="box-cs align-items-start gap-20 mt-3">
                                     <table className="cs-table">
                                         <tbody>
                                             {propertyInfo.slice(0, 3).map((item, index) => (
@@ -62,7 +62,7 @@ const InfoSection = () => {
                             </div>
                             <div>
                                 <h4 className="font-lg fs-36 text-left">Building Information</h4>
-                                <div className="grid-cs box-cs align-items-start gap-20 mt-3">
+                                <div className=" box-cs align-items-start gap-20 mt-3">
                                     <table className="cs-table">
                                         <tbody>
                                             {buildingInfo.slice(0, 2).map((item, index) => (

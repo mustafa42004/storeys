@@ -66,9 +66,9 @@ const PropertyInner = () => {
         <Header height={setHeaderHeight} />
         <Banner banner={banner} marginTop={headerHeight} />
         <DetailCard />
+        <Amenities />
         <PropertyContent top={headerHeight} />
         <InfoSection />
-        <Amenities />
         <Testimonial />
         <FormSection />
         <Footer />

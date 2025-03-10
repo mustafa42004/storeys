@@ -17,7 +17,7 @@ const Complaint = () => {
         <Header height={setHeaderHeight} />
         <Banner title={complaintBanner.title} bg={complaintBanner.bg} width={complaintBanner.width} height={complaintBanner.height} marginTop={headerHeight} />
         <About Component={AboutComp} />
-        <FormSection />
+        <FormSection heading="Leave A Complaint"/>
         <Footer />
     </>
   )

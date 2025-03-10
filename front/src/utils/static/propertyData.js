@@ -13,7 +13,7 @@ export const propertyData = [
             },
             {
                 id: 2,
-                image: "/assets/img/property-card-banner-1.svg",
+                image: "/assets/img/property-card-banner-2.svg",
                 location: "Dubai Marina, Waterfront",
                 price: "1,200,000 AED",
                 status: "For Rent",
@@ -55,6 +55,7 @@ export const propertyData = [
                 status: "For Rent",
                 agentName: "Sophia Clarke",
                 agentImage: "/assets/img/property-profile.svg"
+               
             }
         ]
     }
