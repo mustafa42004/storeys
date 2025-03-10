@@ -13,58 +13,62 @@ import ServiceInner from "../../components/feature/OurServices/ServiceInner";
 import NewsInner from "../../components/feature/News/NewsInner";
 
 const rootRoutes = [
-    {
-        path: "/",
-        element: <Landing />
-    },
-    {
-        path: "/about",
-        element: <AboutUs />
-    },
-    {
-        path: "/property",
-        element: <PropertyList />
-    },
-    {
-        path: "/team",
-        element: <Team />
-    },
-    {
-        path: "/contact",
-        element: <ContactUs />
-    }, 
-    {
-        path: "/complaint",
-        element: <Complaint />
-    },
-    {
-        path: "/property/:id",
-        element: <PropertyInner />
-    },
-    {
-        path: "/communities",
-        element: <Communities />
-    },
-    {
-        path: "/careers",
-        element: <Careers />
-    },
-    {
-        path: "/news",
-        element: <News />
-    },
-    {
-        path: "/news/:id",
-        element: <NewsInner />
-    },
-    {
-        path: "/services",
-        element: <OurServices />
-    },
-    {
-        path: "/services/:id",
-        element: <ServiceInner />
-    }
-]
+  {
+    path: "/",
+    element: <Landing />,
+  },
+  {
+    path: "/about",
+    element: <AboutUs />,
+  },
+  {
+    path: "/property",
+    element: <PropertyList />,
+  },
+  {
+    path: "/team",
+    element: <Team />,
+  },
+  {
+    path: "/contact",
+    element: <ContactUs />,
+  },
+  {
+    path: "/complaint",
+    element: <Complaint />,
+  },
+  {
+    path: "/property/:id",
+    element: <PropertyInner />,
+  },
+  {
+    path: "/communities",
+    element: <Communities />,
+  },
+  {
+    path: "/communities/:id",
+    element: <NewsInner />,
+  },
+  {
+    path: "/careers",
+    element: <Careers />,
+  },
+  {
+    path: "/news",
+    element: <News />,
+  },
+  {
+    path: "/news/:id",
+    element: <NewsInner />,
+  },
+  {
+    path: "/services",
+    element: <OurServices />,
+  },
+  {
+    path: "/services/:id",
+    element: <ServiceInner />,
+  },
+];
 
 export default rootRoutes;
