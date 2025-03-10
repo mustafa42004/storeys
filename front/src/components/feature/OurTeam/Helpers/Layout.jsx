@@ -12,17 +12,8 @@ const Layout = () => {
           <div className="row">
             <div className="col-md-12">
               <p className="font-sm mb-4 fs-20 medium">Our Team</p>
-              <Heading title="You're in safe hands" className="fs-50" />
-              <div
-                className="layout"
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-                  gap: "50px",
-                  maxWidth: "100%",
-                  padding: "0 15px",
-                }}
-              >
+              <Heading title="You’re in safe hands" className="fs-50" />
+              <div className="layout">
                 {[
                   {
                     image: "/assets/img/our-team-1.svg",
