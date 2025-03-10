@@ -1,14 +1,34 @@
-import React, { useEffect, useRef, useState, useMemo } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from "react";
 
-const Heading = ({title, className, width, description, descriptionClassName}) => {
+const Heading = ({
+  title,
+  className,
+  width,
+  description,
+  descriptionClassName,
+}) => {
   const titleRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
-  const letters = useMemo(() => title?.split('').map(letter => letter === ' ' ? '\u00A0' : letter), [title]); // Preserve spaces
+  const letters = useMemo(() => {
+    // Split into words first, then split each word into letters
+    return title
+      ?.split(" ")
+      .map((word) => ({
+        letters: word.split(""),
+        isSpace: false,
+      }))
+      .reduce((acc, word, i, arr) => {
+        // Add space between words, except for the last word
+        return i === arr.length - 1
+          ? [...acc, word]
+          : [...acc, word, { letters: ["\u00A0"], isSpace: true }];
+      }, []);
+  }, [title]);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
           observer.unobserve(entry.target); // Stop observing after it becomes visible
@@ -29,20 +49,35 @@ const Heading = ({title, className, width, description, descriptionClassName}) =
 
   return (
     <>
-        <div className="headings">
-            <div className="headings" style={{width: `${width}%` || "100%"}}>
-              <h4 className={`font-header ${className}`} ref={titleRef}>
-                {letters?.map((letter, index) => (
-                  <span key={index} className={`letter ${isVisible ? 'animate' : ''}`} style={{animationDelay: `${index * 0.1}s`}}>
+      <div className="headings">
+        <div className="headings" style={{ width: `${width}%` || "100%" }}>
+          <h4 className={`font-header ${className}`} ref={titleRef}>
+            {letters?.map((word, wordIndex) => (
+              <span key={wordIndex} style={{ display: "inline-block" }}>
+                {word.letters.map((letter, letterIndex) => (
+                  <span
+                    key={`${wordIndex}-${letterIndex}`}
+                    className={`letter ${isVisible ? "animate" : ""}`}
+                    style={{
+                      animationDelay: `${
+                        (wordIndex * word.letters.length + letterIndex) * 0.1
+                      }s`,
+                      display: "inline-block",
+                    }}
+                  >
                     {letter}
                   </span>
                 ))}
-              </h4>
-              {description && <p className={`font-sm ${descriptionClassName}`}>{description}</p>}
-            </div>
+              </span>
+            ))}
+          </h4>
+          {description && (
+            <p className={`font-sm ${descriptionClassName}`}>{description}</p>
+          )}
         </div>
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default Heading
+export default Heading;
