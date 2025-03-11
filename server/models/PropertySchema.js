@@ -36,7 +36,7 @@ const propertySchema = new mongoose.Schema(
     buildingInfo: {
       name: { type: String, default: "" },
       floors: { type: Number, default: 0 },
-      sqft: { type: Number, default: 0 },
+      sqft: { type: Number, default: null },
       offices: { type: Number, default: 0 },
     },
   },
