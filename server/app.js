@@ -4,9 +4,18 @@ const path = require("path");
 const cors = require("cors");
 const routes = require("./config/allRoutes");
 const amenityRoutes = require("./routes/amenityRoutes");
+const fs = require("fs");
+
+// Create uploads directory if it doesn't exist
+const uploadDir = path.join(__dirname, "uploads");
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
+
+// Serve static files from the uploads directory with proper URL path
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "uploads")));
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
