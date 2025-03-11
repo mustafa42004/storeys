@@ -12,12 +12,12 @@ const propertySchema = new mongoose.Schema(
     type: { type: String, default: "" },
     amenities: { type: [String], default: [] },
     description: { type: Array, default: [] },
-    bedrooms: { type: Number, default: 0 },
-    bathrooms: { type: Number, default: 0 },
+    bedrooms: { type: Number, default: null }, // Allow null if no value is provided
+    bathrooms: { type: Number, default: null }, // Allow null if no value is provided
     status: { type: String, default: "" },
-    parking: { type: Number, default: 0 },
-    price: { type: Number, default: 0 },
-    sqft: { type: Number, default: 0 },
+    parking: { type: Number, default: null }, // Allow null if no value is provided
+    price: { type: Number, default: null }, // Allow null if no value is provided
+    sqft: { type: Number, default: null }, // Allow null if no value is provided
     createdDate: { type: Date, default: Date.now() },
     updatedDate: { type: Date, default: Date.now() },
     image: [
