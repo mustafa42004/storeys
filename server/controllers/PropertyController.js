@@ -1,11 +1,9 @@
-const route = require("express").Router();
 const propertyModel = require("../models/PropertySchema");
-require("dotenv").config();
-const path = require("path");
-const { v4: uuidv4 } = require("uuid");
-const multerS3 = require("multer-s3");
-const multer = require("multer");
+const ApiError = require("../utils/ApiError");
+const catchAsync = require("../utils/catchAsync");
 const fs = require("fs");
+
+// const multerS3 = require("multer-s3");
 const {
   S3Client,
   PutObjectCommand,
@@ -70,233 +68,157 @@ const {
 //     },
 // });
 
-const uploadDir = "./uploads";
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir);
-}
+module.exports.getAllProperties = catchAsync(async (req, res, next) => {
+  const data = await propertyModel.find();
 
-// Configure multer for local storage
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, uploadDir);
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    const extension = path.extname(file.originalname);
-    const newFilename = `process-${uniqueSuffix}${extension}`;
-    cb(null, newFilename);
-  },
+  res.status(200).json({ success: true, result: data });
 });
 
-const upload = multer({ storage });
+module.exports.getSingleProperty = catchAsync(async (req, res, next) => {
+  const data = await propertyModel.findOne({ _id: req.params.id });
 
-route.get("/", async (req, res) => {
-  try {
-    const data = await propertyModel.find({});
-
-    if (!data) {
-      return res
-        .status(404)
-        .send({ success: false, message: "Property not found" });
-    }
-
-    res.status(200).send({ success: true, result: data });
-  } catch (error) {
-    console.error("Error fetching property data:", error);
-    res.status(500).send({ success: false, message: "Internal server error" });
+  if (!data) {
+    next(new ApiError("Property not found", 404));
   }
+
+  res.status(200).json({ success: true, data });
 });
 
-route.get("/:id", async (req, res) => {
-  try {
-    const data = await propertyModel.findOne({ _id: req.params.id });
-
-    if (!data) {
-      return res
-        .status(404)
-        .send({ success: false, message: "Property not found" });
-    }
-
-    res.status(200).send({ success: true, data });
-  } catch (error) {
-    console.error("Error fetching property data:", error);
-    res.status(500).send({ success: false, message: "Internal server error" });
-  }
-});
-
-route.post(
-  "/",
-  upload.fields([
-    { name: "banner", maxCount: 1 },
-    { name: "image", maxCount: 100 },
-  ]),
-  async (req, res) => {
-    try {
-      const banner = req.files["banner"]
-        ? {
-            s3Url: `/uploads/${req.files["banner"][0].filename}`,
-            s3Key: req.files["banner"][0].filename,
-          }
-        : {};
-
-      const images = req.files["image"]
-        ? req.files["image"].map((file) => ({
-            s3Url: `/uploads/${file.filename}`,
-            s3Key: file.filename,
-          }))
-        : [];
-
-      /// Parse JSON stringified fields
-      const amenities = req.body.amenities
-        ? JSON.parse(req.body.amenities)
-        : [];
-      const propertyInfo = req.body.propertyInfo
-        ? JSON.parse(req.body.propertyInfo)
-        : {};
-      const buildingInfo = req.body.buildingInfo
-        ? JSON.parse(req.body.buildingInfo)
-        : {};
-      const description = req.body.description
-        ? JSON.parse(req.body.description)
-        : [];
-
-      // Ensure other fields are correctly handled
-      const propertyData = {
-        ...req.body,
-        banner,
-        image: images,
-        amenities,
-        propertyInfo,
-        buildingInfo,
-        description,
-      };
-
-      const data = await propertyModel.create(propertyData);
-      res.status(200).send({ success: true, result: data });
-    } catch (error) {
-      console.error("Error creating property data:", error);
-      res
-        .status(500)
-        .send({ success: false, message: "Internal server error" });
-    }
-  }
-);
-
-route.put(
-  "/:id",
-  upload.fields([{ name: "banner", maxCount: 1 }, { name: "image" }]),
-  async (req, res) => {
-    try {
-      // Parse JSON stringified fields
-      const amenities = req.body.amenities
-        ? JSON.parse(req.body.amenities)
-        : [];
-      const propertyInfo = req.body.propertyInfo
-        ? JSON.parse(req.body.propertyInfo)
-        : {};
-      const buildingInfo = req.body.buildingInfo
-        ? JSON.parse(req.body.buildingInfo)
-        : {};
-      const description = req.body.description
-        ? JSON.parse(req.body.description)
-        : [];
-      let newBanner = null;
-
-      // Prepare new banner and images
-      if (req.files["banner"]) {
-        await deleteFromS3(req.body.banner.s3Key);
-        newBanner = req.files["banner"]
-          ? {
-              s3Url: `/uploads/${req.files["banner"][0].filename}`,
-              s3Key: req.files["banner"][0].filename,
-            }
-          : null;
+module.exports.createProperty = catchAsync(async (req, res, next) => {
+  const banner = req.files["banner"]
+    ? {
+        s3Url: `/uploads/${req.files["banner"][0].filename}`,
+        s3Key: req.files["banner"][0].filename,
       }
+    : {};
 
-      const newImages = req.files["image"]
-        ? req.files["image"].map((file) => ({
-            s3Url: `/uploads/${file.filename}`,
-            s3Key: file.filename,
-          }))
-        : [];
+  const images = req.files["image"]
+    ? req.files["image"].map((file) => ({
+        s3Url: `/uploads/${file.filename}`,
+        s3Key: file.filename,
+      }))
+    : [];
 
-      const removedImages = req.body.removedImages
-        ? JSON.parse(req.body.removedImages)
-        : [];
+  /// Parse JSON stringified fields
+  const amenities = req.body.amenities ? JSON.parse(req.body.amenities) : [];
+  const propertyInfo = req.body.propertyInfo
+    ? JSON.parse(req.body.propertyInfo)
+    : {};
+  const buildingInfo = req.body.buildingInfo
+    ? JSON.parse(req.body.buildingInfo)
+    : {};
+  const description = req.body.description
+    ? JSON.parse(req.body.description)
+    : [];
 
-      // Retrieve existing images from the database
-      const existingProperty = await propertyModel.findById(req.params.id);
-      const existingImages = existingProperty.image || [];
+  // Ensure other fields are correctly handled
+  const propertyData = {
+    ...req.body,
+    banner,
+    image: images,
+    amenities,
+    propertyInfo,
+    buildingInfo,
+    description,
+  };
 
-      // Filter out removed images from existing images
-      const filteredImages = existingImages.filter(
-        (img) => !removedImages.includes(img.s3Key)
-      );
-
-      // Directly modify the property object
-      const propertyData = {
-        ...req.body,
-        banner: newBanner || req.body.banner,
-        image: [...filteredImages, ...newImages],
-        amenities,
-        propertyInfo,
-        buildingInfo,
-        description,
-      };
-
-      // Remove images from the filesystem
-      for (const image of removedImages) {
-        fs.unlinkSync(image);
-      }
-
-      // Update the database
-      const updatedProperty = await propertyModel.findByIdAndUpdate(
-        req.params.id,
-        propertyData,
-        { new: true }
-      );
-      res.status(200).send({ success: true, result: updatedProperty });
-    } catch (error) {
-      console.error("Error updating property data:", error);
-      res
-        .status(500)
-        .send({ success: false, message: "Internal server error" });
-    }
-  }
-);
-
-route.delete("/:id", async (req, res) => {
-  try {
-    const property = await propertyModel.findOne({ _id: req.params.id });
-    if (!property) {
-      return res
-        .status(404)
-        .send({ success: false, message: "Property not found" });
-    }
-
-    // Delete banner from S3
-    if (property.banner.s3Key) {
-      // await deleteFromS3(property.banner.s3Key);
-      fs.unlinkSync(property.banner.s3Url);
-    }
-
-    // Delete images from S3
-    property.image.forEach((img) => {
-      if (img.s3Key) {
-        // deleteFromS3(img.s3Key);
-        fs.unlinkSync(img.s3Url);
-      }
-    });
-
-    // await property?.remove();
-    await propertyModel.findByIdAndDelete(req.params.id);
-    res
-      .status(200)
-      .send({ success: true, message: "Property deleted successfully" });
-  } catch (error) {
-    console.error("Error deleting property:", error);
-    res.status(500).send({ success: false, message: "Internal server error" });
-  }
+  const data = await propertyModel.create(propertyData);
+  res.status(200).json({ success: true, result: data });
 });
 
-module.exports = route;
+module.exports.updateProperty = catchAsync(async (req, res, next) => {
+  // Parse JSON stringified fields
+  const amenities = req.body.amenities ? JSON.parse(req.body.amenities) : [];
+  const propertyInfo = req.body.propertyInfo
+    ? JSON.parse(req.body.propertyInfo)
+    : {};
+  const buildingInfo = req.body.buildingInfo
+    ? JSON.parse(req.body.buildingInfo)
+    : {};
+  const description = req.body.description
+    ? JSON.parse(req.body.description)
+    : [];
+  let newBanner = null;
+
+  // Prepare new banner and images
+  if (req.files["banner"]) {
+    await deleteFromS3(req.body.banner.s3Key);
+    newBanner = req.files["banner"]
+      ? {
+          s3Url: `/uploads/${req.files["banner"][0].filename}`,
+          s3Key: req.files["banner"][0].filename,
+        }
+      : null;
+  }
+
+  const newImages = req.files["image"]
+    ? req.files["image"].map((file) => ({
+        s3Url: `/uploads/${file.filename}`,
+        s3Key: file.filename,
+      }))
+    : [];
+
+  const removedImages = req.body.removedImages
+    ? JSON.parse(req.body.removedImages)
+    : [];
+
+  // Retrieve existing images from the database
+  const existingProperty = await propertyModel.findById(req.params.id);
+  const existingImages = existingProperty.image || [];
+
+  // Filter out removed images from existing images
+  const filteredImages = existingImages.filter(
+    (img) => !removedImages.includes(img.s3Key)
+  );
+
+  // Directly modify the property object
+  const propertyData = {
+    ...req.body,
+    banner: newBanner || req.body.banner,
+    image: [...filteredImages, ...newImages],
+    amenities,
+    propertyInfo,
+    buildingInfo,
+    description,
+  };
+
+  // Remove images from the filesystem
+  for (const image of removedImages) {
+    fs.unlinkSync(image);
+  }
+
+  // Update the database
+  const updatedProperty = await propertyModel.findByIdAndUpdate(
+    req.params.id,
+    propertyData,
+    { new: true }
+  );
+  res.status(200).send({ success: true, result: updatedProperty });
+});
+
+module.exports.deleteProperty = catchAsync(async (req, res, next) => {
+  const property = await propertyModel.findOne({ _id: req.params.id });
+  if (!property) {
+    next(new ApiError("Property not found", 404));
+  }
+
+  // Delete banner from S3
+  if (property.banner.s3Key) {
+    // await deleteFromS3(property.banner.s3Key);
+    fs.unlinkSync(property.banner.s3Url);
+  }
+
+  // Delete images from S3
+  property.image.forEach((img) => {
+    if (img.s3Key) {
+      // deleteFromS3(img.s3Key);
+      fs.unlinkSync(img.s3Url);
+    }
+  });
+
+  // await property?.remove();
+  await propertyModel.findByIdAndDelete(req.params.id);
+  res
+    .status(200)
+    .json({ success: true, message: "Property deleted successfully" });
+});
