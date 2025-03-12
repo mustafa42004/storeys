@@ -6,6 +6,8 @@ const routes = require("./config/allRoutes");
 const amenityRoutes = require("./routes/amenityRoutes");
 const fs = require("fs");
 const globalErrorHandler = require("./controllers/errorController");
+const ApiError = require("./utils/ApiError");
+const morgan = require("morgan");
 
 // Create uploads directory if it doesn't exist
 const uploadDir = path.join(__dirname, "uploads");
@@ -21,6 +23,7 @@ app.use(
   })
 );
 
+app.use(morgan("dev"));
 // Serve static files from the uploads directory with proper URL path
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
