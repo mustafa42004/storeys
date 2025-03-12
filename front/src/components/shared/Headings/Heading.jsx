@@ -11,18 +11,33 @@ const Heading = ({
   const [isVisible, setIsVisible] = useState(false);
 
   const letters = useMemo(() => {
-    // Split into words first, then split each word into letters
+    let totalDelay = 0; // Track total delay for sequential animation
     return title
       ?.split(" ")
       .map((word) => ({
         letters: word.split(""),
         isSpace: false,
+        startDelay: totalDelay, // Store starting delay for this word
+        get endDelay() {
+          // Calculate end delay after this word
+          totalDelay += this.letters.length;
+          return totalDelay;
+        },
       }))
       .reduce((acc, word, i, arr) => {
         // Add space between words, except for the last word
         return i === arr.length - 1
           ? [...acc, word]
-          : [...acc, word, { letters: ["\u00A0"], isSpace: true }];
+          : [
+              ...acc,
+              word,
+              {
+                letters: ["\u00A0"],
+                isSpace: true,
+                startDelay: word.endDelay,
+                endDelay: word.endDelay + 1,
+              },
+            ];
       }, []);
   }, [title]);
 
@@ -31,7 +46,7 @@ const Heading = ({
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          observer.unobserve(entry.target); // Stop observing after it becomes visible
+          observer.unobserve(entry.target);
         }
       });
     });
@@ -60,7 +75,7 @@ const Heading = ({
                     className={`letter ${isVisible ? "animate" : ""}`}
                     style={{
                       animationDelay: `${
-                        (wordIndex * word.letters.length + letterIndex) * 0.1
+                        (word.startDelay + letterIndex) * 0.1
                       }s`,
                       display: "inline-block",
                     }}
