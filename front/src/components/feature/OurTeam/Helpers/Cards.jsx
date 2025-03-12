@@ -9,15 +9,33 @@ const Cards = ({ image, name, designation, index }) => {
   }, [index]);
 
   return (
-    <>
-      <div className="card" ref={cardRef}>
-        <img src={image} alt="" />
-        <div className="content">
-          <h4 className="font-sm text-left font-atyp dark medium">{name}</h4>
-          <p className="font-sm text-left">{designation}</p>
-        </div>
+    <div className="card" ref={cardRef}>
+      <img src={image} alt="" />
+      <div className="content" style={{ padding: "15px" }}>
+        <h4
+          className="font-sm text-left font-atyp dark medium"
+          style={{
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            width: "100%",
+          }}
+        >
+          {name}
+        </h4>
+        <p
+          className="font-sm text-left"
+          style={{
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            width: "100%",
+          }}
+        >
+          {designation}
+        </p>
       </div>
-    </>
+    </div>
   );
 };
 
