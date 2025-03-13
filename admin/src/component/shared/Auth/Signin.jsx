@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useFormik } from "formik";
 import { validationSchema } from "../../../schemas/SigninForm";
 import { signin } from "../../../services/AuthService";
@@ -49,7 +49,7 @@ const Signin = () => {
                   <div className="card card-plain mt-8">
                     <div className="card-header pb-0 text-left bg-transparent">
                       <h3 className="font-weight-bolder text-info text-gradient">
-                        Welcome to AppNxt
+                        Welcome to Storeys
                       </h3>
                       <p className="mb-0">
                         Enter your email and password to sign in
@@ -133,7 +133,7 @@ const Signin = () => {
                       className="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6"
                       style={{
                         backgroundImage:
-                          'url("../assets/img/curved-images/curved6.jpg")',
+                          'url("../assets/img/home-decor-3.jpg")',
                       }}
                     />
                   </div>

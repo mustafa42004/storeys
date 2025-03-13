@@ -22,7 +22,7 @@ const Property = () => {
                     to="/create-property"
                     className="btn bg-gradient-info"
                   >
-                    <i class="fa-solid fa-plus" /> &nbsp; Add Property
+                    <i className="fa-solid fa-plus" /> &nbsp; Add Property
                   </NavLink>
                 </div>
               </div>
