@@ -1,6 +1,6 @@
 const catchAsync = require("../utils/catchAsync");
 const User = require("../models/User");
-const ApiError = require("../utils/apiError");
+const ApiError = require("../utils/ApiError");
 const jwt = require("jsonwebtoken");
 
 const signToken = (id) =>

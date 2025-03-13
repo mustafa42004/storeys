@@ -1,5 +1,5 @@
 const User = require("../models/User");
-const ApiError = require("../utils/apiError");
+const ApiError = require("../utils/ApiError");
 const jwt = require("jsonwebtoken");
 const catchAsync = require("../utils/catchAsync");
 
@@ -27,7 +27,7 @@ module.exports.protect = catchAsync(async (req, res, next) => {
 
   // find current user from jwt id
   const currentUser = await User.findById(decoded.id);
-  if (!currentUser || !currentUser.isActive) {
+  if (!currentUser) {
     return next(
       new ApiError(
         "The user belonging to this token does no longer exist.",
