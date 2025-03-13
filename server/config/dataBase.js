@@ -1,10 +1,16 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-mongoose.connect(
-  `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_CLUSTER}/storey`,
-  { autoIndex: true }
-);
+mongoose
+  .connect(
+    process.env.DATABASE_URI.replace(
+      "<password>",
+      process.env.DATABASE_PASSWORD
+    ),
+    { autoIndex: true }
+  )
+  .then(() => console.log("DB Connected Successfully ✅"))
+  .catch((err) => console.log(`DB CONNECTION ERROR💥: ${err.message}`));
 
 mongoose.connection.on("connected", () => {
   console.log("Database connected...");

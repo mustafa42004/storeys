@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const teamController = require("../controllers/teamController");
-const upload = require("../utils/multer");
+const upload = require("../utils/fileUpload");
 const authMiddleware = require("../middlewares/auth.middleware");
 
 router
