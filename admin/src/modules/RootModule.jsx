@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import Sidebar from "../component/shared/Sidebar/Sidebar";
 import Header from "../component/shared/Header/Header";
@@ -11,6 +11,7 @@ import { handleGetProperty } from "../redux/PropertyDataSlice";
 const RootModule = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     if (!localStorage.getItem("ddlj")) {
@@ -37,12 +38,18 @@ const RootModule = () => {
     getProperties();
   }, []);
 
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
     <div className="main-layout">
-      <Sidebar />
-      <main className="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-        <Header />
-        <Outlet />
+      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+      <main className={`main-content ${isSidebarOpen ? "sidebar-open" : ""}`}>
+        <Header toggleSidebar={toggleSidebar} />
+        <div className="container-fluid px-3">
+          <Outlet />
+        </div>
       </main>
     </div>
   );

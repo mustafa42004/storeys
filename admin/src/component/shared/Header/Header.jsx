@@ -2,16 +2,26 @@ import { NavLink } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Header = () => {
+const Header = ({ toggleSidebar }) => {
   return (
     <>
       <nav
-        className="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl"
+        className="navbar navbar-main navbar-expand-lg shadow-none w-100"
         id="navbarBlur"
         data-bs-scroll="true"
       >
-        <div className="container-fluid py-1 px-3">
-          <nav aria-label="breadcrumb">
+        <div className="container-fluid py-1">
+          <button
+            className="navbar-toggler d-lg-none"
+            type="button"
+            onClick={toggleSidebar}
+          >
+            <span className="navbar-toggler-icon">
+              <i className="fas fa-bars"></i>
+            </span>
+          </button>
+
+          <nav aria-label="breadcrumb" className="d-none d-lg-block">
             <ol className="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
               <li className="breadcrumb-item text-sm">
                 <a className="opacity-5 text-dark">Pages</a>
@@ -25,19 +35,16 @@ const Header = () => {
             </ol>
             <h6 className="font-weight-bolder mb-0">Tables</h6>
           </nav>
-          <div
-            className="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4"
-            id="navbar"
-          >
-            <ul className="navbar-nav  justify-content-end">
+
+          <div className="ms-auto d-flex align-items-center">
+            <ul className="navbar-nav justify-content-end">
               <li className="nav-item d-flex align-items-center">
                 <NavLink
                   to="/logout"
-                  href="javascript:;"
                   className="nav-link text-body font-weight-bold px-0"
                 >
                   <i className="fa fa-user me-sm-1" />
-                  <span className="d-sm-inline d-none">LogOut</span>
+                  <span className="d-none d-sm-inline">LogOut</span>
                 </NavLink>
               </li>
             </ul>
