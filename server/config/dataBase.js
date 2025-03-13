@@ -1,16 +1,16 @@
-const mongoose = require("mongoose")
-require('dotenv').config();
+const mongoose = require("mongoose");
+require("dotenv").config();
 
-mongoose.connect(`mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_CLUSTER}/storey`);
+mongoose.connect(
+  `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_CLUSTER}/storey`,
+  { autoIndex: true }
+);
 
-
-mongoose.connection.on("connected", ()=>{
-    console.log("Database connected...")
-})
-mongoose.connection.on("error", (err)=>{
-    console.log(err)
-})
-
-
+mongoose.connection.on("connected", () => {
+  console.log("Database connected...");
+});
+mongoose.connection.on("error", (err) => {
+  console.log(err);
+});
 
 module.exports = mongoose;
