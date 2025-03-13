@@ -2,16 +2,25 @@ const express = require("express");
 const router = express.Router();
 const teamController = require("../controllers/teamController");
 const upload = require("../utils/multer");
+const authMiddleware = require("../middlewares/auth.middleware");
 
 router
   .route("/")
   .get(teamController.getAllTeam)
-  .post(upload.single("profile"), teamController.createTeam);
+  .post(
+    authMiddleware.protect,
+    upload.single("profile"),
+    teamController.createTeam
+  );
 
 router
   .route("/:id")
   .get(teamController.getSingleTeam)
-  .put(upload.single("profile"), teamController.updateTeam)
-  .delete(teamController.deleteTeam);
+  .put(
+    authMiddleware.protect,
+    upload.single("profile"),
+    teamController.updateTeam
+  )
+  .delete(authMiddleware.protect, teamController.deleteTeam);
 
 module.exports = router;

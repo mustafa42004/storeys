@@ -8,12 +8,13 @@ const {
   deleteProperty,
 } = require("../controllers/PropertyController");
 const upload = require("../utils/fileUpload");
-
+const authMiddleware = require("../middlewares/auth.middleware");
 // Create and get all amenities
 router
   .route("/")
   .get(getAllProperties)
   .post(
+    authMiddleware.protect,
     upload.fields([
       { name: "banner", maxCount: 1 },
       { name: "image", maxCount: 100 },
@@ -27,12 +28,13 @@ router
   .route("/:id")
   .get(getSingleProperty)
   .put(
+    authMiddleware.protect,
     upload.fields([
       { name: "banner", maxCount: 1 },
       { name: "image", maxCount: 100 },
     ]),
     updateProperty
   )
-  .delete(deleteProperty);
+  .delete(authMiddleware.protect, deleteProperty);
 
 module.exports = router;
