@@ -1,6 +1,6 @@
-const route = require("express").Router();
 const teamModel = require("../models/TeamSchema");
-require("dotenv").config();
+const factoryController = require("./factoryController");
+const catchAsync = require("../utils/catchAsync");
 const path = require("path");
 const { v4: uuidv4 } = require("uuid");
 const multerS3 = require("multer-s3");
@@ -77,108 +77,74 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-route.get("/", async (req, res) => {
-  const team = await teamModel.find();
-  res.status(200).send({ success: true, result: team });
+module.exports.getAllTeam = factoryController.getAllDocs(teamModel);
+
+module.exports.getSingleTeam = factoryController.getDoc(teamModel);
+
+module.exports.createTeam = catchAsync(async (req, res, next) => {
+  const members = req.body.team;
+  const files = req.files;
+
+  const teamData = members.map((member, index) => {
+    const profile = {
+      s3Url: files[index]?.path,
+      s3Key: files[index]?.originalname,
+    };
+    return { ...member, profile };
+  });
+
+  const newTeam = await teamModel.insertMany(teamData);
+  res.status(200).send({ success: true, result: newTeam });
 });
 
-route.get("/:id", async (req, res) => {
+module.exports.updateTeam = catchAsync(async (req, res, next) => {
+  const file = req.file;
+  const { firstName, lastName, designation, updatedDate } = req.body;
+  const { id } = req.params;
+
+  // Find the existing member
+  const existingMember = await teamModel.findOne({ _id: id });
+
+  let profile = existingMember.profile;
+
+  if (file) {
+    // If a new profile image is provided
+    profile = {
+      s3Url: file.path,
+      s3Key: file.originalname,
+    };
+
+    // Delete the old profile image if it exists
+    if (existingMember.profile.s3Url) {
+      await deleteFromS3(existingMember.profile.s3Key);
+    }
+  }
+
+  // Update the member's data
+  const updatedMember = await teamModel.findByIdAndUpdate(
+    req.params.id,
+    {
+      firstName,
+      lastName,
+      designation,
+      updatedDate,
+      profile,
+    },
+    { new: true }
+  );
+
+  res.status(200).send({ success: true, result: updatedMember });
+});
+
+module.exports.deleteTeam = catchAsync(async (req, res, next) => {
   const team = await teamModel.findById(req.params.id);
   if (!team) {
     return res
       .status(404)
       .send({ success: false, message: "Member not found" });
   }
-  res.status(200).send({ success: true, result: team });
+  fs.unlinkSync(team.profile.s3Url);
+  // await deleteFromS3(team.profile.s3Key)
+  const deletedTeam = await teamModel.findByIdAndDelete(req.params.id);
+  res.status(200).send({ success: true, result: deletedTeam });
 });
-
-route.post("/", upload.any(), async (req, res) => {
-  try {
-    const members = req.body.team;
-    const files = req.files;
-
-    const teamData = members.map((member, index) => {
-      const profile = {
-        s3Url: files[index]?.path,
-        s3Key: files[index]?.originalname,
-      };
-      return { ...member, profile };
-    });
-
-    const newTeam = await teamModel.insertMany(teamData);
-    res.status(200).send({ success: true, result: newTeam });
-  } catch (error) {
-    console.log(error);
-    res
-      .status(500)
-      .send({ success: false, message: "Error creating team", error });
-  }
-});
-
-route.put("/:id", upload.single("profile"), async (req, res) => {
-  try {
-    const file = req.file;
-    const { firstName, lastName, designation, updatedDate } = req.body;
-    const { id } = req.params;
-
-    // Find the existing member
-    const existingMember = await teamModel.findOne({ _id: id });
-
-    let profile = existingMember.profile;
-
-    if (file) {
-      // If a new profile image is provided
-      profile = {
-        s3Url: file.path,
-        s3Key: file.originalname,
-      };
-
-      // Delete the old profile image if it exists
-      if (existingMember.profile.s3Url) {
-        await deleteFromS3(existingMember.profile.s3Key);
-      }
-    }
-
-    // Update the member's data
-    const updatedMember = await teamModel.findByIdAndUpdate(
-      req.params.id,
-      {
-        firstName,
-        lastName,
-        designation,
-        updatedDate,
-        profile,
-      },
-      { new: true }
-    );
-
-    res.status(200).send({ success: true, result: updatedMember });
-  } catch (error) {
-    console.log(error);
-    res
-      .status(500)
-      .send({ success: false, message: "Error updating team", error });
-  }
-});
-
-route.delete("/:id", async (req, res) => {
-  try {
-    const team = await teamModel.findById(req.params.id);
-    if (!team) {
-      return res
-        .status(404)
-        .send({ success: false, message: "Member not found" });
-    }
-    fs.unlinkSync(team.profile.s3Url);
-    // await deleteFromS3(team.profile.s3Key)
-    const deletedTeam = await teamModel.findByIdAndDelete(req.params.id);
-    res.status(200).send({ success: true, result: deletedTeam });
-  } catch (error) {
-    console.log(error);
-    res
-      .status(500)
-      .send({ success: false, message: "Error deleting team", error });
-  }
-});
-
-module.exports = route;

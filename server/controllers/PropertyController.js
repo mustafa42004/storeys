@@ -2,6 +2,7 @@ const propertyModel = require("../models/PropertySchema");
 const ApiError = require("../utils/ApiError");
 const catchAsync = require("../utils/catchAsync");
 const fs = require("fs");
+const factoryController = require("./factoryController");
 
 // const multerS3 = require("multer-s3");
 const {
@@ -68,21 +69,9 @@ const {
 //     },
 // });
 
-module.exports.getAllProperties = catchAsync(async (req, res, next) => {
-  const data = await propertyModel.find();
+module.exports.getAllProperties = factoryController.getAllDocs(propertyModel);
 
-  res.status(200).json({ success: true, result: data });
-});
-
-module.exports.getSingleProperty = catchAsync(async (req, res, next) => {
-  const data = await propertyModel.findOne({ _id: req.params.id });
-
-  if (!data) {
-    next(new ApiError("Property not found", 404));
-  }
-
-  res.status(200).json({ success: true, data });
-});
+module.exports.getSingleProperty = factoryController.getDoc(propertyModel);
 
 module.exports.createProperty = catchAsync(async (req, res, next) => {
   const banner = req.files["banner"]

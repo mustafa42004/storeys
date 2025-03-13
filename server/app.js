@@ -3,7 +3,6 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const cors = require("cors");
-const routes = require("./config/allRoutes");
 const propertyRoutes = require("./routes/propertyRoutes");
 const amenityRoutes = require("./routes/amenityRoutes");
 const fs = require("fs");
@@ -32,7 +31,6 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// app.use(routes);
 const BASE_URL = "/api/v1";
 app.use(`${BASE_URL}/properties`, propertyRoutes);
 app.use(`${BASE_URL}/amenities`, amenityRoutes);

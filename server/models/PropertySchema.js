@@ -1,5 +1,6 @@
-require("../config/dataBase");
+// require("../config/dataBase");
 const mongoose = require("mongoose");
+const mongoosePaginate = require("mongoose-paginate-v2");
 
 const propertySchema = new mongoose.Schema(
   {
@@ -62,7 +63,7 @@ const propertySchema = new mongoose.Schema(
       min: [0, "Property could not have less than 0 parking"],
       default: 0,
     },
-    amenities: { type: [String], default: [] },
+    amenities: { type: [mongoose.Schema.Types.ObjectId], ref: "Amenity" },
     status: {
       type: String,
       required: [true, "Property status is required"],
@@ -112,7 +113,22 @@ const propertySchema = new mongoose.Schema(
       },
     },
   },
-  { collection: "property", timestamps: true }
+  {
+    collection: "property",
+    timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
 );
+
+// using paginate plugin
+propertySchema.plugin(mongoosePaginate);
+
+// pre findOne hook to populate amenities and reviews
+propertySchema.pre("findOne", function (next) {
+  this.populate({ path: "amenities", select: "name" });
+
+  next();
+});
 
 module.exports = mongoose.model("property", propertySchema);
