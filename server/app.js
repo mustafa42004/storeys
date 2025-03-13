@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const connectToDB = require("./config/dataBase");
 const app = express();
 const path = require("path");
 const cors = require("cors");
@@ -10,8 +11,10 @@ const newsRoutes = require("./routes/newsController");
 const teamRoutes = require("./routes/teamRoutes");
 const fs = require("fs");
 const globalErrorHandler = require("./controllers/errorController");
-const ApiError = require("./utils/apiError");
+const ApiError = require("./utils/ApiError");
 const morgan = require("morgan");
+
+connectToDB();
 
 // Create uploads directory if it doesn't exist
 const uploadDir = path.join(__dirname, "uploads");
