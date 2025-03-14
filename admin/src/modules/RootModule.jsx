@@ -42,6 +42,31 @@ const RootModule = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  // Close sidebar when clicking outside on mobile
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      const sidebar = document.getElementById("sidenav-main");
+      if (isSidebarOpen && sidebar && !sidebar.contains(event.target)) {
+        // Check if we're on mobile
+        if (window.innerWidth < 992) {
+          setIsSidebarOpen(false);
+        }
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    // Cleanup
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isSidebarOpen]);
+
+  // Add body class to control overall layout
+  useEffect(() => {
+    document.body.classList.toggle("g-sidenav-pinned", isSidebarOpen);
+    document.body.classList.add("g-sidenav-show");
+  }, [isSidebarOpen]);
+
   return (
     <div className="main-layout">
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />

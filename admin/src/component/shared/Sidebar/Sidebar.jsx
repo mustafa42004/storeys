@@ -25,7 +25,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       </div>
       <hr className="horizontal dark mt-0" />
       <div
-        className="collapse navbar-collapse  w-auto "
+        className="collapse navbar-collapse w-auto h-auto"
         id="sidenav-collapse-main"
       >
         <ul className="navbar-nav">
@@ -602,6 +602,16 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             </NavLink>
           </li>
         </ul>
+      </div>
+
+      {/* Mobile close button at the bottom */}
+      <div className="d-xl-none position-absolute bottom-0 start-0 end-0 py-3 text-center">
+        <button
+          className="btn btn-sm btn-secondary w-75"
+          onClick={toggleSidebar}
+        >
+          Close Menu
+        </button>
       </div>
     </aside>
   );
