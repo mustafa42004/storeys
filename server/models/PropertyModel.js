@@ -15,6 +15,12 @@ const propertySchema = new mongoose.Schema(
       },
     ],
     isFeatured: { type: Boolean, default: false },
+    city: {
+      type: String,
+      default: "",
+      trim: true,
+      required: [true, "City is required"],
+    },
     name: {
       type: String,
       required: [true, "Property name is required"],
