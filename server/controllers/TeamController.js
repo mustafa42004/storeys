@@ -15,23 +15,6 @@ const {
 
 // // AWS SDK Configurationconst
 // Ensure the uploads directory exists
-const uploadDir = "./uploads";
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir);
-}
-
-// Configure multer for local storage
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, uploadDir);
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    const extension = path.extname(file.originalname);
-    const newFilename = `process-${uniqueSuffix}${extension}`;
-    cb(null, newFilename);
-  },
-});
 
 // const s3Client = new S3Client({
 //     region: 'us-east-2',
@@ -75,31 +58,26 @@ const storage = multer.diskStorage({
 //     },
 // });
 
-const upload = multer({ storage });
-
 module.exports.getAllTeam = factoryController.getAllDocs(teamModel);
 
 module.exports.getSingleTeam = factoryController.getDoc(teamModel);
 
 module.exports.createTeam = catchAsync(async (req, res, next) => {
-  const members = req.body.team;
-  const files = req.files;
+  console.log(req.files);
+  const profile = req.files["profile"]
+    ? {
+        s3Url: `/uploads/${req.files["profile"][0].filename}`,
+        s3Key: req.files["profile"][0].filename,
+      }
+    : {};
 
-  const teamData = members.map((member, index) => {
-    const profile = {
-      s3Url: files[index]?.path,
-      s3Key: files[index]?.originalname,
-    };
-    return { ...member, profile };
-  });
-
-  const newTeam = await teamModel.insertMany(teamData);
+  const newTeam = await teamModel.create({ ...req.body, profile });
   res.status(200).send({ success: true, result: newTeam });
 });
 
 module.exports.updateTeam = catchAsync(async (req, res, next) => {
-  const file = req.file;
-  const { firstName, lastName, designation, updatedDate } = req.body;
+  const file = req.files["profile"];
+  const { firstName, lastName, designation } = req.body;
   const { id } = req.params;
 
   // Find the existing member
@@ -110,13 +88,13 @@ module.exports.updateTeam = catchAsync(async (req, res, next) => {
   if (file) {
     // If a new profile image is provided
     profile = {
-      s3Url: file.path,
-      s3Key: file.originalname,
+      s3Url: `/uploads/${req.files["profile"][0].filename}`,
+      s3Key: req.files["profile"][0].filename,
     };
 
     // Delete the old profile image if it exists
     if (existingMember.profile.s3Url) {
-      await deleteFromS3(existingMember.profile.s3Key);
+      fs.unlinkSync(`${__dirname}/../uploads/${existingMember.profile.s3Key}`);
     }
   }
 
@@ -127,7 +105,6 @@ module.exports.updateTeam = catchAsync(async (req, res, next) => {
       firstName,
       lastName,
       designation,
-      updatedDate,
       profile,
     },
     { new: true }
@@ -143,7 +120,9 @@ module.exports.deleteTeam = catchAsync(async (req, res, next) => {
       .status(404)
       .send({ success: false, message: "Member not found" });
   }
-  fs.unlinkSync(team.profile.s3Url);
+  if (fs.existsSync(`${__dirname}/../uploads/${team.profile.s3Key}`)) {
+    fs.unlinkSync(`${__dirname}/../uploads/${team.profile.s3Key}`);
+  }
   // await deleteFromS3(team.profile.s3Key)
   const deletedTeam = await teamModel.findByIdAndDelete(req.params.id);
   res.status(200).send({ success: true, result: deletedTeam });

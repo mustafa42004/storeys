@@ -9,7 +9,7 @@ router
   .get(teamController.getAllTeam)
   .post(
     authMiddleware.protect,
-    upload.single("profile"),
+    upload.fields([{ name: "profile", maxCount: 1 }]),
     teamController.createTeam
   );
 
@@ -18,7 +18,7 @@ router
   .get(teamController.getSingleTeam)
   .put(
     authMiddleware.protect,
-    upload.single("profile"),
+    upload.fields([{ name: "profile", maxCount: 1 }]),
     teamController.updateTeam
   )
   .delete(authMiddleware.protect, teamController.deleteTeam);
