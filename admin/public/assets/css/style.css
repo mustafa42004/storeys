@@ -138,6 +138,14 @@
   position: fixed !important;
   height: 100vh;
   z-index: 1030;
+  background-color: white !important;
+  overflow-y: auto;
+}
+
+.navbar-vertical .navbar-collapse {
+  height: auto !important;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto !important;
 }
 
 .sidenav.fixed-start ~ .main-content {
@@ -592,5 +600,31 @@
 
   .main-content {
     width: 100% !important;
+  }
+
+  .sidenav {
+    background-color: white !important;
+    height: 100vh !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .sidenav::-webkit-scrollbar {
+    width: 4px;
+    background-color: transparent;
+  }
+
+  .sidenav::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
+
+  .sidenav .navbar-collapse {
+    max-height: calc(100vh - 150px) !important;
+    overflow-y: auto !important;
+  }
+
+  .sidenav .navbar-collapse + div {
+    margin-top: 1rem;
   }
 }

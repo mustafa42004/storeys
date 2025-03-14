@@ -605,14 +605,14 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       </div>
 
       {/* Mobile close button at the bottom */}
-      <div className="d-xl-none position-absolute bottom-0 start-0 end-0 py-3 text-center">
+      {/* <div className="d-xl-none position-absolute bottom-0 start-0 end-0 py-3 text-center">
         <button
           className="btn btn-sm btn-secondary w-75"
           onClick={toggleSidebar}
         >
           Close Menu
         </button>
-      </div>
+      </div> */}
     </aside>
   );
 };
