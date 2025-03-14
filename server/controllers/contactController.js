@@ -1,5 +1,5 @@
 const factoryController = require("./factoryController");
-const contactModel = require("../models/Contact");
+const contactModel = require("../models/ContactModel");
 
 module.exports.createContact = factoryController.createDoc(contactModel);
 

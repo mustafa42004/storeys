@@ -6,9 +6,9 @@ const {
   createProperty,
   updateProperty,
   deleteProperty,
-} = require("../controllers/PropertyController");
+} = require("../controllers/propertyController");
 const upload = require("../utils/fileUpload");
-const authMiddleware = require("../middlewares/auth.middleware");
+const authMiddleware = require("../middlewares/authMiddleware");
 // Create and get all amenities
 router
   .route("/")

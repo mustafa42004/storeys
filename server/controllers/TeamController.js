@@ -1,4 +1,4 @@
-const teamModel = require("../models/TeamSchema");
+const teamModel = require("../models/TeamModel");
 const factoryController = require("./factoryController");
 const catchAsync = require("../utils/catchAsync");
 const path = require("path");
@@ -63,7 +63,6 @@ module.exports.getAllTeam = factoryController.getAllDocs(teamModel);
 module.exports.getSingleTeam = factoryController.getDoc(teamModel);
 
 module.exports.createTeam = catchAsync(async (req, res, next) => {
-  console.log(req.files);
   const profile = req.files["profile"]
     ? {
         s3Url: `/uploads/${req.files["profile"][0].filename}`,

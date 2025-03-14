@@ -1,4 +1,4 @@
-const propertyModel = require("../models/PropertySchema");
+const propertyModel = require("../models/PropertyModel");
 const ApiError = require("../utils/ApiError");
 const catchAsync = require("../utils/catchAsync");
 const fs = require("fs");

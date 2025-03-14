@@ -1,4 +1,4 @@
-const newsModel = require("../models/NewsSchema");
+const newsModel = require("../models/NewsModel");
 const factoryController = require("./factoryController");
 const catchAsync = require("../utils/catchAsync");
 const path = require("path");

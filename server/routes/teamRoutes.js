@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const teamController = require("../controllers/teamController");
 const upload = require("../utils/fileUpload");
-const authMiddleware = require("../middlewares/auth.middleware");
+const authMiddleware = require("../middlewares/authMiddleware");
 
 router
   .route("/")
