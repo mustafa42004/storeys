@@ -9,6 +9,9 @@ const propertyUpload = s3Upload("properties").fields([
   { name: "image", maxCount: 10 },
 ]);
 
+router.get("/cities", propertyController.getCities);
+router.get("/search", propertyController.searchProperties);
+
 router
   .route("/")
   .get(propertyController.getAllProperties)

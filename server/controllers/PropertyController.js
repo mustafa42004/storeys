@@ -154,3 +154,82 @@ module.exports.deleteProperty = catchAsync(async (req, res, next) => {
     data: null,
   });
 });
+
+module.exports.getCities = catchAsync(async (req, res, next) => {
+  const cities = await propertyModel.aggregate([
+    // Get unique cities
+    {
+      $group: {
+        _id: { $toLower: "$city" }, // Convert to lowercase for true uniqueness
+        city: { $first: "$city" }, // Keep original casing
+        count: { $sum: 1 }, // Count properties in each city
+      },
+    },
+    // Filter out null/empty cities
+    {
+      $match: {
+        _id: { $ne: null, $ne: "" },
+      },
+    },
+    // Sort alphabetically
+    {
+      $sort: {
+        _id: 1,
+      },
+    },
+    // Reshape the output
+    {
+      $project: {
+        _id: 0,
+        city: 1,
+        count: 1,
+      },
+    },
+  ]);
+
+  res.status(200).json({
+    status: "success",
+    results: cities.length,
+    data: cities,
+  });
+});
+
+module.exports.searchProperties = catchAsync(async (req, res, next) => {
+  const { city, bedrooms, propertyType, minPrice, maxPrice } = req.query;
+
+  // Build filter object
+  const filter = {};
+
+  // Add city filter (case-insensitive)
+  if (city) {
+    filter.city = { $regex: new RegExp(city, "i") };
+  }
+
+  // Add bedrooms filter
+  if (bedrooms) {
+    filter.bedrooms = parseInt(bedrooms);
+  }
+
+  // Add property type filter
+  if (propertyType) {
+    filter.propertyType = propertyType;
+  }
+
+  // Add price range filter
+  if (minPrice || maxPrice) {
+    filter.price = {};
+    if (minPrice) filter.price.$gte = parseFloat(minPrice);
+    if (maxPrice) filter.price.$lte = parseFloat(maxPrice);
+  }
+
+  const properties = await propertyModel
+    .find(filter)
+    .populate("amenities")
+    .sort("-createdAt");
+
+  res.status(200).json({
+    status: "success",
+    results: properties.length,
+    data: properties,
+  });
+});
