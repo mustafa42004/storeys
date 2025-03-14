@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const testimonialController = require("../controllers/testimonialController");
-const upload = require("../utils/fileUpload");
+const { s3Upload } = require("../utils/s3");
 const authMiddleware = require("../middlewares/authMiddleware");
 
 router
@@ -9,16 +9,16 @@ router
   .get(testimonialController.getAllTestimonials)
   .post(
     authMiddleware.protect,
-    upload.fields([{ name: "image", maxCount: 1 }]),
+    s3Upload("testimonials").single("image"),
     testimonialController.createTestimonial
   );
 
 router
   .route("/:id")
   .get(testimonialController.getTestimonial)
-  .put(
+  .patch(
     authMiddleware.protect,
-    upload.fields([{ name: "image", maxCount: 1 }]),
+    s3Upload("testimonials").single("image"),
     testimonialController.updateTestimonial
   )
   .delete(authMiddleware.protect, testimonialController.deleteTestimonial);

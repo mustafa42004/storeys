@@ -1,24 +1,24 @@
 const express = require("express");
 const router = express.Router();
 const newsController = require("../controllers/newsController");
+const { s3Upload } = require("../utils/s3");
 const authMiddleware = require("../middlewares/authMiddleware");
-const upload = require("../utils/fileUpload");
 
 router
   .route("/")
   .get(newsController.getAllNews)
   .post(
     authMiddleware.protect,
-    upload.fields([{ name: "banner", maxCount: 1 }]),
+    s3Upload("news").single("banner"),
     newsController.createNews
   );
 
 router
   .route("/:id")
   .get(newsController.getSingleNews)
-  .put(
+  .patch(
     authMiddleware.protect,
-    upload.fields([{ name: "banner", maxCount: 1 }]),
+    s3Upload("news").single("banner"),
     newsController.updateNews
   )
   .delete(authMiddleware.protect, newsController.deleteNews);

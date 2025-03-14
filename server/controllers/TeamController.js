@@ -12,6 +12,8 @@ const {
   GetObjectCommand,
   DeleteObjectCommand,
 } = require("@aws-sdk/client-s3");
+const { deleteFileFromS3 } = require("../utils/s3");
+const ApiError = require("../utils/ApiError");
 
 // // AWS SDK Configurationconst
 // Ensure the uploads directory exists
@@ -63,66 +65,77 @@ module.exports.getAllTeam = factoryController.getAllDocs(teamModel);
 module.exports.getSingleTeam = factoryController.getDoc(teamModel);
 
 module.exports.createTeam = catchAsync(async (req, res, next) => {
-  const profile = req.files["profile"]
-    ? {
-        s3Url: `/uploads/${req.files["profile"][0].filename}`,
-        s3Key: req.files["profile"][0].filename,
-      }
-    : {};
+  if (!req.file) {
+    return next(new ApiError("Please provide a profile image", 400));
+  }
 
-  const newTeam = await teamModel.create({ ...req.body, profile });
-  res.status(200).send({ success: true, result: newTeam });
+  const profile = {
+    s3Url: req.file.location,
+    s3Key: req.file.key,
+  };
+
+  const newTeam = await teamModel.create({
+    ...req.body,
+    profile,
+  });
+
+  res.status(201).json({
+    status: "success",
+    data: newTeam,
+  });
 });
 
 module.exports.updateTeam = catchAsync(async (req, res, next) => {
-  const file = req.files["profile"];
-  const { firstName, lastName, designation } = req.body;
-  const { id } = req.params;
-
-  // Find the existing member
-  const existingMember = await teamModel.findOne({ _id: id });
+  const existingMember = await teamModel.findById(req.params.id);
+  if (!existingMember) {
+    return next(new ApiError("Team member not found", 404));
+  }
 
   let profile = existingMember.profile;
 
-  if (file) {
-    // If a new profile image is provided
-    profile = {
-      s3Url: `/uploads/${req.files["profile"][0].filename}`,
-      s3Key: req.files["profile"][0].filename,
-    };
-
-    // Delete the old profile image if it exists
-    if (existingMember.profile.s3Url) {
-      fs.unlinkSync(`${__dirname}/../uploads/${existingMember.profile.s3Key}`);
+  if (req.file) {
+    // Delete old profile from S3
+    if (existingMember.profile.s3Key) {
+      await deleteFileFromS3(existingMember.profile.s3Key);
     }
+
+    // Update with new profile
+    profile = {
+      s3Url: req.file.location,
+      s3Key: req.file.key,
+    };
   }
 
-  // Update the member's data
   const updatedMember = await teamModel.findByIdAndUpdate(
     req.params.id,
     {
-      firstName,
-      lastName,
-      designation,
+      ...req.body,
       profile,
     },
-    { new: true }
+    { new: true, runValidators: true }
   );
 
-  res.status(200).send({ success: true, result: updatedMember });
+  res.status(200).json({
+    status: "success",
+    data: updatedMember,
+  });
 });
 
 module.exports.deleteTeam = catchAsync(async (req, res, next) => {
-  const team = await teamModel.findById(req.params.id);
-  if (!team) {
-    return res
-      .status(404)
-      .send({ success: false, message: "Member not found" });
+  const member = await teamModel.findById(req.params.id);
+  if (!member) {
+    return next(new ApiError("Team member not found", 404));
   }
-  if (fs.existsSync(`${__dirname}/../uploads/${team.profile.s3Key}`)) {
-    fs.unlinkSync(`${__dirname}/../uploads/${team.profile.s3Key}`);
+
+  // Delete profile from S3
+  if (member.profile.s3Key) {
+    await deleteFileFromS3(member.profile.s3Key);
   }
-  // await deleteFromS3(team.profile.s3Key)
-  const deletedTeam = await teamModel.findByIdAndDelete(req.params.id);
-  res.status(200).send({ success: true, result: deletedTeam });
+
+  await teamModel.findByIdAndDelete(req.params.id);
+
+  res.status(204).json({
+    status: "success",
+    data: null,
+  });
 });

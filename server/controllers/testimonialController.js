@@ -1,21 +1,22 @@
 const Testimonial = require("../models/TestimonialModel");
 const factory = require("./factoryController");
-const fs = require("fs");
 const catchAsync = require("../utils/catchAsync");
+const { deleteFileFromS3 } = require("../utils/s3");
+const ApiError = require("../utils/ApiError");
 
 exports.getAllTestimonials = factory.getAllDocs(Testimonial);
 
 exports.getTestimonial = factory.getDoc(Testimonial);
 
 exports.createTestimonial = catchAsync(async (req, res, next) => {
-  const image = req.files["image"]
-    ? {
-        s3Url: `/uploads/${req.files["image"][0].filename}`,
-        s3Key: req.files["image"][0].filename,
-      }
-    : {};
+  if (!req.file) {
+    return next(new ApiError("Please provide an image", 400));
+  }
 
-  console.log(req.files["image"]);
+  const image = {
+    s3Url: req.file.location, // S3 URL from multer-s3
+    s3Key: req.file.key, // S3 key from multer-s3
+  };
 
   const testimonial = await Testimonial.create({
     ...req.body,
@@ -29,54 +30,56 @@ exports.createTestimonial = catchAsync(async (req, res, next) => {
 });
 
 exports.updateTestimonial = catchAsync(async (req, res, next) => {
-  const file = req.files["image"];
-  const { id } = req.params;
-
-  // Find the existing member
-  const existingTestimonial = await Testimonial.findOne({ _id: id });
+  const existingTestimonial = await Testimonial.findById(req.params.id);
+  if (!existingTestimonial) {
+    return next(new ApiError("Testimonial not found", 404));
+  }
 
   let image = existingTestimonial.image;
 
-  if (file) {
-    // If a new profile image is provided
-    image = {
-      s3Url: `/uploads/${req.files["image"][0].filename}`,
-      s3Key: req.files["image"][0].filename,
-    };
-
-    // Delete the old profile image if it exists
-    if (existingTestimonial.image.s3Url) {
-      fs.unlinkSync(
-        `${__dirname}/../uploads/${existingTestimonial.image.s3Key}`
-      );
+  if (req.file) {
+    // Delete old image from S3
+    if (existingTestimonial.image.s3Key) {
+      await deleteFileFromS3(existingTestimonial.image.s3Key);
     }
+
+    // Update with new image
+    image = {
+      s3Url: req.file.location,
+      s3Key: req.file.key,
+    };
   }
 
-  // Update the member's data
   const updatedTestimonial = await Testimonial.findByIdAndUpdate(
     req.params.id,
     {
       ...req.body,
       image,
     },
-    { new: true }
+    { new: true, runValidators: true }
   );
 
-  res.status(200).send({ success: true, result: updatedTestimonial });
+  res.status(200).json({
+    status: "success",
+    data: updatedTestimonial,
+  });
 });
 
 exports.deleteTestimonial = catchAsync(async (req, res, next) => {
   const testimonial = await Testimonial.findById(req.params.id);
-
   if (!testimonial) {
-    return res
-      .status(404)
-      .send({ success: false, message: "Testimonial not found" });
+    return next(new ApiError("Testimonial not found", 404));
   }
-  if (fs.existsSync(`${__dirname}/../uploads/${testimonial.image.s3Key}`)) {
-    fs.unlinkSync(`${__dirname}/../uploads/${testimonial.image.s3Key}`);
+
+  // Delete image from S3
+  if (testimonial.image.s3Key) {
+    await deleteFileFromS3(testimonial.image.s3Key);
   }
-  // await deleteFromS3(team.profile.s3Key)
-  const deletedTestimonial = await Testimonial.findByIdAndDelete(req.params.id);
-  res.status(200).send({ success: true, result: deletedTestimonial });
+
+  await Testimonial.findByIdAndDelete(req.params.id);
+
+  res.status(204).json({
+    status: "success",
+    data: null,
+  });
 });

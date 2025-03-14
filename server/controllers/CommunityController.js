@@ -1,150 +1,104 @@
-const route = require('express').Router()
-const communityModel = require('../models/CommunitySchema')
-require('dotenv').config();
-const path = require("path");
-const { v4: uuidv4 } = require('uuid');
-const multerS3 = require('multer-s3');
-const multer = require('multer');
-const fs = require('fs')
-const { S3Client, PutObjectCommand, GetObjectCommand, DeleteObjectCommand } = require('@aws-sdk/client-s3');
+const communityModel = require("../models/CommunitySchema");
+const catchAsync = require("../utils/catchAsync");
+const { deleteFileFromS3 } = require("../utils/s3");
+const ApiError = require("../utils/ApiError");
 
-// // AWS SDK Configuration
-// const s3Client = new S3Client({
-//     region: 'us-east-2',
-//     credentials: {
-//         accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-//         secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-//     },
-// });
+exports.getAllCommunities = catchAsync(async (req, res) => {
+  const data = await communityModel.find();
 
-// const deleteFromS3 = async (imageKey) => {
-//     try {
-//         if (!imageKey) {
-//             console.error("Image key is missing");
-//             return;
-//         }
+  res.status(200).json({
+    status: "success",
+    data: data,
+  });
+});
 
-//         const deleteParams = {
-//             Bucket: process.env.AWS_BUCKET_NAME,
-//             Key: imageKey,
-//         };
+exports.getCommunity = catchAsync(async (req, res, next) => {
+  const data = await communityModel.findById(req.params.id);
 
-//         // console.log(`Attempting to delete image: ${imageKey}`);
-//         const command = new DeleteObjectCommand(deleteParams);
-//         const result = await s3Client.send(command);
+  if (!data) {
+    return next(new ApiError("Community not found", 404));
+  }
 
-//         console.log(`Image ${imageKey} successfully deleted from S3`, result);
-//     } catch (error) {
-//         console.error(`Error deleting image ${imageKey} from S3:`, error);
-//         throw new Error(`Failed to delete image ${imageKey} from S3`);
-//     }
-// };
+  res.status(200).json({
+    status: "success",
+    data: data,
+  });
+});
 
-// // Multer S3 storage configuration
-// const storage = multerS3({
-//     s3: s3Client,
-//     bucket: process.env.AWS_BUCKET_NAME,
-//     // acl: 'public-read',
-//     metadata: (req, file, cb) => {
-//         cb(null, { fieldName: file.fieldname });
-//     },
-//     key: (req, file, cb) => {
-//         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-//         const extension = path.extname(file.originalname);
-//         const newFilename = `slider/${uniqueSuffix}${extension}`;
-//         cb(null, newFilename); // S3 key (path within the bucket)
-//     },
-// });
+exports.createCommunity = catchAsync(async (req, res, next) => {
+  if (!req.file) {
+    return next(new ApiError("Please provide a banner image", 400));
+  }
 
-// // Multer instance with limits and file type filter
-// const upload = multer({
-//     storage: storage,
-//     limits: { fileSize: 10 * 1024 * 1024 * 1024 }, 
-//     fileFilter: (req, file, cb) => {
-//         cb(null, true);
-//     },
-// });
+  const banner = {
+    s3Url: req.file.location,
+    s3Key: req.file.key,
+  };
 
-route.get("/", async (req, res) => {
-    try {
-        const data = await communityModel.findOne({});
+  const newCommunity = await communityModel.create({
+    ...req.body,
+    banner,
+  });
 
-        if (!data) {
-            return res.status(404).send({ success: false, message: "Community not found" });
-        }
+  res.status(201).json({
+    status: "success",
+    data: newCommunity,
+  });
+});
 
-        res.status(200).send({ success: true, data: data })
-    } catch (error) {
-        console.log(error)
-        res.status(500).send({ success: false, message: "Server error" })
+exports.updateCommunity = catchAsync(async (req, res, next) => {
+  const community = await communityModel.findById(req.params.id);
+
+  if (!community) {
+    return next(new ApiError("Community not found", 404));
+  }
+
+  let banner = community.banner;
+
+  if (req.file) {
+    // Delete old banner from S3
+    if (community.banner.s3Key) {
+      await deleteFileFromS3(community.banner.s3Key);
     }
-})
 
-route.get('/:id', async(req, res) => {
-    try {
-        const data = await communityModel.findOne({ _id: req.params.id });
-        if (!data) {
-            return res.status(404).send({ success: false, message: "Community not found" });
-        }
-        res.status(200).send({ success: true, data: data })
-    } catch (error) {
-        console.log(error)
-        res.status(500).send({ success: false, message: "Server error" })
-    }
-})
+    // Update with new banner
+    banner = {
+      s3Url: req.file.location,
+      s3Key: req.file.key,
+    };
+  }
 
-route.post('/', upload.single('banner'), async (req, res) => {
-    try {
-        const banner = req.file ? {
-            s3Url: req.file.location,
-            s3Key: req.file.key
-        } : {};
+  const updatedCommunity = await communityModel.findByIdAndUpdate(
+    req.params.id,
+    {
+      ...req.body,
+      banner,
+    },
+    { new: true, runValidators: true }
+  );
 
-        const newCommunity = new communityModel({ ...req.body, banner })
-        await newCommunity.save()
-        res.status(200).send({ success: true, result: newCommunity })
-    } catch (error) {
-        console.log(error)
-        res.status(500).send({ success: false, message: "Server error", error })
-    }
-})
+  res.status(200).json({
+    status: "success",
+    data: updatedCommunity,
+  });
+});
 
-route.put('/:id', upload.single('banner'), async (req, res) => {
-    try {
-        const community = await communityModel.findById(req.params.id)
-        if (!community) {
-            return res.status(404).send({ success: false, message: "Community not found" });
-        }
-        if (req.file) {
-            await deleteFromS3(community.banner.s3Key)
-            const banner = req.file ? {
-                s3Url: req.file.location,
-                s3Key: req.file.key
-            } : {};
+exports.deleteCommunity = catchAsync(async (req, res, next) => {
+  const community = await communityModel.findById(req.params.id);
 
-            const updatedCommunity = await communityModel.findByIdAndUpdate(req.params.id, { ...req.body, banner }, { new: true })
-            res.status(200).send({ success: true, result: updatedCommunity })
-        } else {
-            const updatedCommunity = await communityModel.findByIdAndUpdate(req.params.id, req.body, { new: true })
-            res.status(200).send({ success: true, result: updatedCommunity })
-        }
-    } catch (error) {
-        console.log(error)
-        res.status(500).send({ success: false, message: "Server error", error })
-    }
-})
+  if (!community) {
+    return next(new ApiError("Community not found", 404));
+  }
 
-route.delete('/:id', async(req, res) => {
-    try {
-        const community = await communityModel.findById(req.params.id)
-        await deleteFromS3(community.banner.s3Key)
-        const deletedCommunity = await communityModel.findByIdAndDelete(req.params.id)
-        res.status(200).send({ success: true, result: deletedCommunity })
-    } catch (error) {
-        console.log(error)
-        res.status(500).send({ success: false, message: "Server error", error })
-    }
-})
+  // Delete banner from S3
+  if (community.banner.s3Key) {
+    await deleteFileFromS3(community.banner.s3Key);
+  }
 
+  await communityModel.findByIdAndDelete(req.params.id);
 
-module.exports = route;
+  res.status(204).json({
+    status: "success",
+    data: null,
+  });
+});

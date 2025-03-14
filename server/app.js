@@ -16,6 +16,19 @@ const globalErrorHandler = require("./controllers/errorController");
 const ApiError = require("./utils/ApiError");
 const morgan = require("morgan");
 
+const requiredEnvVars = [
+  "AWS_ACCESS_KEY_ID",
+  "AWS_SECRET_ACCESS_KEY",
+  "AWS_REGION",
+  "AWS_BUCKET_NAME",
+];
+
+requiredEnvVars.forEach((envVar) => {
+  if (!process.env[envVar]) {
+    throw new Error(`${envVar} is required in environment variables`);
+  }
+});
+
 connectToDB();
 
 // Create uploads directory if it doesn't exist
