@@ -9,7 +9,7 @@ router
   .get(newsController.getAllNews)
   .post(
     authMiddleware.protect,
-    upload.single("banner"),
+    upload.fields([{ name: "banner", maxCount: 1 }]), 
     newsController.createNews
   );
 
@@ -18,7 +18,7 @@ router
   .get(newsController.getSingleNews)
   .put(
     authMiddleware.protect,
-    upload.single("banner"),
+    upload.fields([{ name: "banner", maxCount: 1 }]),
     newsController.updateNews
   )
   .delete(authMiddleware.protect, newsController.deleteNews);

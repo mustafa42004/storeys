@@ -75,12 +75,14 @@ module.exports.getAllNews = factoryController.getAllDocs(newsModel);
 module.exports.getSingleNews = factoryController.getDoc(newsModel);
 
 module.exports.createNews = catchAsync(async (req, res, next) => {
-  const banner = req.file
+  const banner = req.files["banner"]
     ? {
-        s3Url: req.file.location,
-        s3Key: req.file.key,
+        s3Url: `/uploads/${req.files["banner"][0].filename}`,
+        s3Key: req.files["banner"][0].filename,
       }
     : {};
+
+  console.log(req.files);
 
   const newCommunity = new newsModel({ ...req.body, banner });
   await newCommunity.save();
@@ -89,17 +91,21 @@ module.exports.createNews = catchAsync(async (req, res, next) => {
 
 module.exports.updateNews = catchAsync(async (req, res, next) => {
   const community = await newsModel.findById(req.params.id);
+
   if (!community) {
     return res
       .status(404)
       .send({ success: false, message: "Community not found" });
   }
-  if (req.file) {
-    await deleteFromS3(community.banner.s3Key);
-    const banner = req.file
+
+  if (req.files["banner"]) {
+    if (fs.existsSync(`${__dirname}/../uploads/${community.banner.s3Key}`)) {
+      fs.unlinkSync(`${__dirname}/../uploads/${community.banner.s3Key}`);
+    }
+    const banner = req.files["banner"]
       ? {
-          s3Url: req.file.location,
-          s3Key: req.file.key,
+          s3Url: `/uploads/${req.files["banner"][0].filename}`,
+          s3Key: req.files["banner"][0].filename,
         }
       : {};
 
@@ -121,7 +127,9 @@ module.exports.updateNews = catchAsync(async (req, res, next) => {
 
 module.exports.deleteNews = catchAsync(async (req, res, next) => {
   const community = await newsModel.findById(req.params.id);
-  await deleteFromS3(community.banner.s3Key);
+  if (fs.existsSync(`${__dirname}/../uploads/${community.banner.s3Key}`)) {
+    fs.unlinkSync(`${__dirname}/../uploads/${community.banner.s3Key}`);
+  }
   const deletedCommunity = await newsModel.findByIdAndDelete(req.params.id);
   res.status(200).send({ success: true, result: deletedCommunity });
 });
