@@ -9,6 +9,7 @@ const amenityRoutes = require("./routes/amenityRoutes");
 const authRoutes = require("./routes/authRoutes");
 const newsRoutes = require("./routes/newsRoutes");
 const teamRoutes = require("./routes/teamRoutes");
+const contactRoutes = require("./routes/contactRoutes");
 const fs = require("fs");
 const globalErrorHandler = require("./controllers/errorController");
 const ApiError = require("./utils/ApiError");
@@ -43,7 +44,7 @@ app.use(`${BASE_URL}/properties`, propertyRoutes);
 app.use(`${BASE_URL}/amenities`, amenityRoutes);
 app.use(`${BASE_URL}/news`, newsRoutes);
 app.use(`${BASE_URL}/teams`, teamRoutes);
-
+app.use(`${BASE_URL}/contacts`, contactRoutes);
 app.all("*", (req, res, next) => {
   next(new ApiError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
