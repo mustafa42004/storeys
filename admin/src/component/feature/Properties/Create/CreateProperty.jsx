@@ -102,7 +102,7 @@ const CreateProperty = () => {
       formPayload.append("name", formData.name);
       formPayload.append("address", formData.address);
       formPayload.append("type", formData.type);
-      formPayload.append("amenities", JSON.stringify(initialValues.amenities));
+      formPayload.append("amenities", JSON.stringify(form.values.amenities));
       formPayload.append("createdDate", formData.createdDate);
       formPayload.append("status", formData.status);
       formPayload.append("banner", formData?.banner);
@@ -199,22 +199,26 @@ const CreateProperty = () => {
   };
 
   const handleAmenityChange = (e) => {
-    const value = e.target.value;
-    if (!initialValues.amenities.includes(value) && value !== "") {
-      setInitialValues((prevContent) => ({
-        ...prevContent,
-        amenities: [...prevContent.amenities, value],
-      }));
+    const selectedAmenity = e.target.value;
+    if (selectedAmenity && !form.values.amenities.includes(selectedAmenity)) {
+      // Update Formik's state directly instead of initialValues
+      const updatedAmenities = [...form.values.amenities, selectedAmenity];
+      form.setFieldValue("amenities", updatedAmenities);
     }
   };
 
   const removeAmenity = (amenityToRemove) => {
-    setInitialValues((prevContent) => ({
-      ...prevContent,
-      amenities: prevContent.amenities.filter(
-        (amenity) => amenity !== amenityToRemove
-      ),
-    }));
+    const updatedAmenities = form.values.amenities.filter(
+      (amenity) => amenity !== amenityToRemove
+    );
+    form.setFieldValue("amenities", updatedAmenities);
+  };
+
+  const formatDateForInput = (timestamp) => {
+    if (!timestamp) return "";
+
+    const date = new Date(timestamp);
+    return date.toISOString().split("T")[0]; // Returns yyyy-MM-dd format
   };
 
   return (
@@ -282,7 +286,7 @@ const CreateProperty = () => {
                     <div className="">
                       <input
                         type="number"
-                        value={form.values?.price}
+                        value={form.values?.price ?? ""}
                         onChange={form.handleChange}
                         className="form-control"
                         name="price"
@@ -293,7 +297,7 @@ const CreateProperty = () => {
                     <div className="">
                       <input
                         type="number"
-                        value={form.values?.bedrooms}
+                        value={form.values?.bedrooms ?? ""}
                         onChange={form.handleChange}
                         className="form-control"
                         name="bedrooms"
@@ -304,7 +308,7 @@ const CreateProperty = () => {
                     <div className="">
                       <input
                         type="number"
-                        value={form.values?.bathrooms}
+                        value={form.values?.bathrooms ?? ""}
                         onChange={form.handleChange}
                         className="form-control"
                         name="bathrooms"
@@ -315,7 +319,7 @@ const CreateProperty = () => {
                     <div className="">
                       <input
                         type="number"
-                        value={form.values?.parking}
+                        value={form.values?.parking ?? ""}
                         onChange={form.handleChange}
                         className="form-control"
                         name="parking"
@@ -326,7 +330,7 @@ const CreateProperty = () => {
                     <div className="">
                       <input
                         type="number"
-                        value={form.values?.sqft}
+                        value={form.values?.sqft ?? ""}
                         onChange={form.handleChange}
                         className="form-control"
                         name="sqft"
@@ -337,8 +341,13 @@ const CreateProperty = () => {
                     <div className="">
                       <input
                         type="date"
-                        value={form.values?.createdDate}
-                        onChange={form.handleChange}
+                        value={formatDateForInput(form.values?.createdDate)}
+                        onChange={(e) => {
+                          const date = e.target.value
+                            ? new Date(e.target.value).getTime()
+                            : null;
+                          form.setFieldValue("createdDate", date);
+                        }}
                         className="form-control"
                         name="createdDate"
                         placeholder="Property Date"
@@ -359,7 +368,7 @@ const CreateProperty = () => {
                           <option
                             key={index}
                             value={amenity.name}
-                            disabled={initialValues.amenities.includes(
+                            disabled={form.values.amenities.includes(
                               amenity.name
                             )}
                           >
@@ -369,7 +378,7 @@ const CreateProperty = () => {
                       </select>
 
                       <div className="selected-amenities d-flex flex-wrap gap-2">
-                        {initialValues.amenities.map((amenity, index) => (
+                        {form.values.amenities.map((amenity, index) => (
                           <div
                             key={index}
                             className="badge bg-primary d-flex align-items-center gap-2"
@@ -420,7 +429,7 @@ const CreateProperty = () => {
                     <div className="">
                       <input
                         type="number"
-                        value={form.values?.propertyInfo?.reference}
+                        value={form.values?.propertyInfo?.reference ?? ""}
                         onChange={form.handleChange}
                         className="form-control"
                         name="propertyInfo.reference"
@@ -442,8 +451,15 @@ const CreateProperty = () => {
                     <div className="">
                       <input
                         type="date"
-                        value={form.values?.propertyInfo?.date}
-                        onChange={form.handleChange}
+                        value={formatDateForInput(
+                          form.values?.propertyInfo?.date
+                        )}
+                        onChange={(e) => {
+                          const date = e.target.value
+                            ? new Date(e.target.value).getTime()
+                            : null;
+                          form.setFieldValue("propertyInfo.date", date);
+                        }}
                         className="form-control"
                         name="propertyInfo.date"
                         placeholder="Property Date"
@@ -474,7 +490,7 @@ const CreateProperty = () => {
                     <div className="">
                       <input
                         type="number"
-                        value={form.values?.buildingInfo?.floors}
+                        value={form.values?.buildingInfo?.floors ?? ""}
                         onChange={form.handleChange}
                         className="form-control"
                         name="buildingInfo.floors"
@@ -485,7 +501,7 @@ const CreateProperty = () => {
                     <div className="">
                       <input
                         type="number"
-                        value={form.values?.buildingInfo?.sqft}
+                        value={form.values?.buildingInfo?.sqft ?? ""}
                         onChange={form.handleChange}
                         className="form-control"
                         name="buildingInfo.sqft"
@@ -496,7 +512,7 @@ const CreateProperty = () => {
                     <div className="">
                       <input
                         type="number"
-                        value={form.values?.buildingInfo?.offices}
+                        value={form.values?.buildingInfo?.offices ?? ""}
                         onChange={form.handleChange}
                         className="form-control"
                         name="buildingInfo.offices"
@@ -508,10 +524,10 @@ const CreateProperty = () => {
                 </div>
               </div>
 
-              <Content
+              {/* <Content
                 savedContent={id ? form.values?.description : []}
                 fetchContent={fetchContent}
-              />
+              /> */}
             </div>
             <div className="col-md-4">
               <div className="card mb-3">

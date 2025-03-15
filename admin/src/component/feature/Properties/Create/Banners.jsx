@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useRef } from "react";
 import { useState } from "react";
 import PreviewBannerModal from "./PreviewBannerModal";
@@ -69,7 +69,7 @@ const Banners = ({ fetchBanners, savedBanners }) => {
           <div className="projects-banners">
             {saved.length > 0 &&
               saved?.map((value, index) => (
-                <>
+                <React.Fragment key={`saved-item-${index}`}>
                   {index !== 0 && <div className="divider"></div>}
                   <div className="mb-2 flex-cs w-100 header">
                     <h5 className="m-0">Banner {index !== 0 && index + 1}</h5>
@@ -98,7 +98,7 @@ const Banners = ({ fetchBanners, savedBanners }) => {
                   <div key={index} className="layout">
                     <img src={value.s3Url} alt="" />
                   </div>
-                </>
+                </React.Fragment>
               ))}
             {banners?.map((value, index) => (
               <>

@@ -1,29 +1,52 @@
-import Pill from "./Helpers/Pill"
-import Center from "./Helpers/Center"
+import Pill from "./Helpers/Pill";
+import Center from "./Helpers/Center";
 
 const Thumbnail = ({ name, img, price, bed, bath, sqft, status }) => {
   return (
     <>
-        <div className="thumbnail-card" >
-            <div className="banner">
-                {img && (
-                    <img
-                        src={img}
-                        alt="Main Banner Preview"
-                        style={{ maxWidth: "100%" }}
-                        />
-                )}
-                <Pill title={`For ${status}`} />
-            </div>
-            <div className="content">
-                <div className="top">
-                    <h4 className="font-sm text-left dark bold">{name || "Property Name"}</h4>
-                    <h4 className="font-sm text-left font-atyp justify-self-end dark bold">{price || "Price"}AED</h4>
-                </div>
-                
-                <Center bed={bed} bath={bath} sqft={sqft} />
+      <div className="thumbnail-card">
+        <div className="banner">
+          {img && (
+            <img
+              src={img}
+              alt="Main Banner Preview"
+              style={{ maxWidth: "100%" }}
+            />
+          )}
+          <Pill title={`For ${status}`} />
+        </div>
+        <div className="content">
+          <div
+            className="top"
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              width: "100%",
+            }}
+          >
+            <h4
+              className="font-sm text-left dark bold"
+              style={{
+                maxWidth: "60%",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
+              {name || "Property Name"}
+            </h4>
+            <h4
+              className="font-sm text-left font-atyp dark bold"
+              style={{ flex: "0 0 auto" }}
+            >
+              {price || "Price"} AED
+            </h4>
+          </div>
 
-                {/* <div className="bottom">
+          <Center bed={bed} bath={bath} sqft={sqft} />
+
+          {/* <div className="bottom">
                     <div className="profile">
                         <img src="/assets/img/property-profile.svg" alt="" />
                     </div>
@@ -33,10 +56,10 @@ const Thumbnail = ({ name, img, price, bed, bath, sqft, status }) => {
                         <button><img src="/assets/img/call.svg" alt="" /></button>
                     </div>
                 </div> */}
-            </div>
         </div>
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default Thumbnail
+export default Thumbnail;
