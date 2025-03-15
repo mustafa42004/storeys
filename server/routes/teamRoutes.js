@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const teamController = require("../controllers/teamController");
-const upload = require("../utils/fileUpload");
+const { s3Upload } = require("../utils/s3");
 const authMiddleware = require("../middlewares/authMiddleware");
 
 router
@@ -9,7 +9,7 @@ router
   .get(teamController.getAllTeam)
   .post(
     authMiddleware.protect,
-    upload.fields([{ name: "profile", maxCount: 1 }]),
+    s3Upload("team").single("profile"),
     teamController.createTeam
   );
 
@@ -18,7 +18,7 @@ router
   .get(teamController.getSingleTeam)
   .put(
     authMiddleware.protect,
-    upload.fields([{ name: "profile", maxCount: 1 }]),
+    s3Upload("team").single("profile"),
     teamController.updateTeam
   )
   .delete(authMiddleware.protect, teamController.deleteTeam);

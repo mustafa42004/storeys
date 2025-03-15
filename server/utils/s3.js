@@ -43,7 +43,6 @@ const s3Upload = (folder) => {
     storage: multerS3({
       s3: s3Client,
       bucket: process.env.AWS_BUCKET_NAME,
-      acl: "public-read",
       contentType: multerS3.AUTO_CONTENT_TYPE,
       metadata: (req, file, cb) => {
         cb(null, { fieldName: file.fieldname });
@@ -55,10 +54,15 @@ const s3Upload = (folder) => {
       },
     }),
     limits: {
-      fileSize: 5 * 1024 * 1024, // 5MB limit
+      fileSize: 50 * 1024 * 1024, // 50MB limit
     },
     fileFilter: (req, file, cb) => {
-      const allowedTypes = /jpeg|jpg|png|gif/;
+      // Handle SVG files specially
+      if (file.mimetype === "image/svg+xml") {
+        return cb(null, true);
+      }
+
+      const allowedTypes = /jpeg|jpg|png|gif|svg/;
       const ext = allowedTypes.test(
         path.extname(file.originalname).toLowerCase()
       );
@@ -67,7 +71,7 @@ const s3Upload = (folder) => {
       if (ext && mimetype) {
         return cb(null, true);
       }
-      cb(new Error("Only images are allowed"));
+      cb(new Error("Only images (JPEG, JPG, PNG, GIF, SVG) are allowed"));
     },
   });
 };
