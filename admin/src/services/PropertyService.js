@@ -54,9 +54,11 @@ const deleteProperty = async (id) => {
   }
 };
 
-const fetch = async () => {
+const fetch = async (page = 1, limit = 10) => {
   try {
-    const response = await axios.get(`${API_URL}/properties`);
+    const response = await axios.get(
+      `${API_URL}/properties?page=${page}&limit=${limit}`
+    );
     return response.data;
   } catch (error) {
     console.error("Property fetch error:", error);
