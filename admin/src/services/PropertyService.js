@@ -25,9 +25,16 @@ const create = async (formData) => {
 const update = async (dataModel) => {
   try {
     const { id, formData } = dataModel;
-    const response = await axios.put(`${API_URL}/properties/${id}`, formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
+    const response = await axios.patch(
+      `${API_URL}/properties/${id}`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error("Property update error:", error);
@@ -43,8 +50,13 @@ const update = async (dataModel) => {
 
 const deleteProperty = async (id) => {
   try {
-    const response = await axios.delete(`${API_URL}/properties/${id}`);
-    return response.data;
+    const response = await axios.delete(`${API_URL}/properties/${id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    return response;
   } catch (error) {
     console.error("Property deletion error:", error);
     return {

@@ -222,7 +222,10 @@ const Property = () => {
           </div>
         </div>
       </div>
-      <DeleteModal property={selectedProperty} />
+      <DeleteModal
+        property={selectedProperty}
+        onDeleteSuccess={() => getProperties(pagination.page, pagination.limit)}
+      />
     </>
   );
 };

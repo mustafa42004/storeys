@@ -40,7 +40,7 @@ if (!fs.existsSync(uploadDir)) {
 app.use(
   cors({
     origin: "*", // Allow all origins
-    methods: ["GET", "POST", "PUT", "DELETE"], // Allow required methods
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"], // Allow required methods
     allowedHeaders: ["Content-Type", "Authorization"], // Allow required headers
   })
 );
