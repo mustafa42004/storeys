@@ -264,6 +264,17 @@ const CreateProperty = () => {
                     <div className="">
                       <input
                         type="text"
+                        value={form.values?.city}
+                        onChange={form.handleChange}
+                        className="form-control"
+                        name="city"
+                        placeholder="City"
+                        id=""
+                      />
+                    </div>
+                    <div className="">
+                      <input
+                        type="text"
                         value={form.values?.address}
                         onChange={form.handleChange}
                         className="form-control"
@@ -335,22 +346,6 @@ const CreateProperty = () => {
                         className="form-control"
                         name="sqft"
                         placeholder="Property Sqft"
-                        id=""
-                      />
-                    </div>
-                    <div className="">
-                      <input
-                        type="date"
-                        value={formatDateForInput(form.values?.createdDate)}
-                        onChange={(e) => {
-                          const date = e.target.value
-                            ? new Date(e.target.value).getTime()
-                            : null;
-                          form.setFieldValue("createdDate", date);
-                        }}
-                        className="form-control"
-                        name="createdDate"
-                        placeholder="Property Date"
                         id=""
                       />
                     </div>
