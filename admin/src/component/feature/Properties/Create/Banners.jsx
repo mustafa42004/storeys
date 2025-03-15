@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PreviewBannerModal from "./PreviewBannerModal";
 
 const Banners = ({ fetchBanners, savedBanners }) => {
@@ -49,11 +49,6 @@ const Banners = ({ fetchBanners, savedBanners }) => {
     setBanners(updatedBanners);
   };
 
-  // Clear all banners
-  const clearAllBanners = () => {
-    setBanners([]);
-  };
-
   // Update banners in parent component
   useEffect(() => {
     fetchBanners(banners, removed);
@@ -64,22 +59,7 @@ const Banners = ({ fetchBanners, savedBanners }) => {
       <div className="card my-3">
         <div className="card-header pt-4 pb-2">
           <div className="flex-cs header">
-            <h6>
-              Add Banners
-              <span data-tooltip="Preview">
-                <button
-                  className="cs-btn"
-                  type="button"
-                  data-bs-toggle="modal"
-                  data-bs-target="#modal-banner"
-                >
-                  <i
-                    className="fa-regular fa-lg fa-circle-info"
-                    style={{ color: "#aaa" }}
-                  />
-                </button>
-              </span>
-            </h6>
+            <h6>Add Banners</h6>
           </div>
         </div>
         <div className="card-body py-2">

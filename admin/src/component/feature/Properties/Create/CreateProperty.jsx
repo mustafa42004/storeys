@@ -524,6 +524,11 @@ const CreateProperty = () => {
                 </div>
               </div>
 
+              <Banners
+                savedBanners={id ? images : []}
+                fetchBanners={fetchBanners}
+              />
+
               {/* <Content
                 savedContent={id ? form.values?.description : []}
                 fetchContent={fetchContent}
@@ -563,10 +568,6 @@ const CreateProperty = () => {
                 sqft={form.values?.sqft}
               />
 
-              <Banners
-                savedBanners={id ? images : []}
-                fetchBanners={fetchBanners}
-              />
               {/* <Preview /> */}
             </div>
           </div>
