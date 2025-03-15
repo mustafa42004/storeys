@@ -203,17 +203,20 @@ const CreateProperty = () => {
   // };
 
   const handleAmenityChange = (e) => {
-    const selectedAmenity = e.target.value;
-    if (selectedAmenity && !form.values.amenities.includes(selectedAmenity)) {
-      // Update Formik's state directly instead of initialValues
-      const updatedAmenities = [...form.values.amenities, selectedAmenity];
+    const selectedAmenityId = e.target.value;
+    if (
+      selectedAmenityId &&
+      !form.values.amenities.includes(selectedAmenityId)
+    ) {
+      // Update Formik's state directly with the amenity ID
+      const updatedAmenities = [...form.values.amenities, selectedAmenityId];
       form.setFieldValue("amenities", updatedAmenities);
     }
   };
 
-  const removeAmenity = (amenityToRemove) => {
+  const removeAmenity = (amenityIdToRemove) => {
     const updatedAmenities = form.values.amenities.filter(
-      (amenity) => amenity !== amenityToRemove
+      (amenityId) => amenityId !== amenityIdToRemove
     );
     form.setFieldValue("amenities", updatedAmenities);
   };
@@ -359,12 +362,12 @@ const CreateProperty = () => {
                         value=""
                       >
                         <option value="">Select Amenity</option>
-                        {amenitiesList.map((amenity, index) => (
+                        {amenitiesList.map((amenity) => (
                           <option
-                            key={index}
-                            value={amenity.name}
+                            key={amenity._id}
+                            value={amenity._id}
                             disabled={form.values.amenities.includes(
-                              amenity.name
+                              amenity._id
                             )}
                           >
                             {amenity.name}
@@ -373,20 +376,26 @@ const CreateProperty = () => {
                       </select>
 
                       <div className="selected-amenities d-flex flex-wrap gap-2">
-                        {form.values.amenities.map((amenity, index) => (
-                          <div
-                            key={index}
-                            className="badge bg-primary d-flex align-items-center gap-2"
-                          >
-                            {amenity}
-                            <button
-                              type="button"
-                              className="btn-close btn-close-white"
-                              style={{ fontSize: "0.6rem" }}
-                              onClick={() => removeAmenity(amenity)}
-                            />
-                          </div>
-                        ))}
+                        {form.values.amenities.map((amenityId, index) => {
+                          // Find the amenity object that matches this ID
+                          const amenity = amenitiesList.find(
+                            (a) => a._id === amenityId
+                          );
+                          return (
+                            <div
+                              key={index}
+                              className="badge bg-primary d-flex align-items-center gap-2"
+                            >
+                              {amenity ? amenity.name : amenityId}
+                              <button
+                                type="button"
+                                className="btn-close btn-close-white"
+                                style={{ fontSize: "0.6rem" }}
+                                onClick={() => removeAmenity(amenityId)}
+                              />
+                            </div>
+                          );
+                        })}
                       </div>
                     </div>
                   </div>

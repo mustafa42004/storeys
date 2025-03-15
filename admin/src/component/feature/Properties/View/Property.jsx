@@ -81,7 +81,7 @@ const Property = () => {
                             </td>
                             <td className="align-middle flex-cs gap-3 text-center text-center">
                               <NavLink
-                                to={`/create-property/${property?._id}`}
+                                to={`/edit-property/${property?._id}`}
                                 className="btn btn-success btn m-0 font-weight-bold text-xs"
                                 data-toggle="tooltip"
                                 data-original-title="Edit user"

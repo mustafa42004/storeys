@@ -9,7 +9,7 @@ import News from "../../component/feature/News/View/News";
 import CreateNews from "../../component/feature/News/Create/CreateNews";
 import TeamList from "../../component/feature/Teams/View/TeamList";
 import Amenity from "../../component/feature/amenities/View/Amenity";
-// import CreateAmenity from "../../component/feature/amenities/Create/CreateAmenity";
+import CreateAmenity from "../../component/feature/amenities/Create/CreateAmenity";
 
 const rootRoutes = [
   {
@@ -25,7 +25,7 @@ const rootRoutes = [
     element: <CreateProperty />,
   },
   {
-    path: "create-property/:id",
+    path: "edit-property/:id",
     element: <CreateProperty />,
   },
   {
@@ -60,10 +60,14 @@ const rootRoutes = [
     path: "amenity",
     element: <Amenity />,
   },
-  //   {
-  //     path: "create-amenity",
-  //     element: <CreateAmenity />,
-  //   },
+  {
+    path: "create-amenity",
+    element: <CreateAmenity />,
+  },
+  {
+    path: "edit-amenity/:id",
+    element: <CreateAmenity />,
+  },
   {
     path: "logout",
     element: <Logout />,

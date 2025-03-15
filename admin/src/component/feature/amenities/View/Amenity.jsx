@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import DeleteModal from "./DeleteModal";
 import { useState } from "react";
@@ -6,46 +6,55 @@ import { formateDate } from "../../../../util/formateDate";
 
 export const amenities = [
   {
+    _id: "60d21b4667d0d8992e610c85",
     name: "Swimming Pool",
     status: "Active",
     createdDate: "2025-01-01",
   },
   {
+    _id: "60d21b4667d0d8992e610c86",
     name: "Gym",
     status: "Active",
     createdDate: "2025-01-01",
   },
   {
+    _id: "60d21b4667d0d8992e610c87",
     name: "Parking",
     status: "Active",
     createdDate: "2025-01-01",
   },
   {
+    _id: "60d21b4667d0d8992e610c88",
     name: "Laundry",
     status: "Active",
     createdDate: "2025-01-01",
   },
   {
+    _id: "60d21b4667d0d8992e610c89",
     name: "Restaurant",
     status: "Active",
     createdDate: "2025-01-01",
   },
   {
+    _id: "60d21b4667d0d8992e610c8a",
     name: "Room Service",
     status: "Active",
     createdDate: "2025-01-01",
   },
   {
+    _id: "60d21b4667d0d8992e610c8b",
     name: "Wifi",
     status: "Active",
     createdDate: "2025-01-01",
   },
   {
+    _id: "60d21b4667d0d8992e610c8c",
     name: "Security",
     status: "Active",
     createdDate: "2025-01-01",
   },
   {
+    _id: "60d21b4667d0d8992e610c8d",
     name: "Air Conditioning",
     status: "Active",
     createdDate: "2025-01-01",
