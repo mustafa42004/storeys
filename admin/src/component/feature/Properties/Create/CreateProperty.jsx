@@ -9,7 +9,6 @@ import Spinner from "../../../shared/Spinner/Spinner";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Banners from "./Banners";
-import Content from "./Content";
 import Thumbnail from "./Thumbnail";
 import {
   handlePostProperty,
@@ -17,6 +16,7 @@ import {
 } from "../../../../redux/PropertyDataSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { amenities as amenitiesList } from "../../amenities/View/Amenity";
+import DubaiAreasDropdown from "./DubaiAreasDropdown";
 
 const CreateProperty = () => {
   const navigate = useNavigate();
@@ -31,8 +31,7 @@ const CreateProperty = () => {
   const [images, setImages] = useState([]);
   const [banners, setBanners] = useState([]);
   const [removedImage, setRemovedImage] = useState([]);
-  const [content, setContent] = useState([]);
-  const [tagInput, setTagInput] = useState("");
+  // const [content, setContent] = useState([]);
   const [mainBannerPreview, setMainBannerPreview] = useState("");
   const [initialValues, setInitialValues] = useState({
     name: "",
@@ -119,7 +118,7 @@ const CreateProperty = () => {
       formPayload.append("parking", formData?.parking);
       formPayload.append("price", formData?.price);
       formPayload.append("sqft", formData?.sqft);
-      formPayload.append("description", JSON.stringify(content));
+      formPayload.append("description", "");
 
       if (removedImage.length > 0) {
         formPayload.append("removedImages", JSON.stringify(removedImage));
@@ -141,7 +140,7 @@ const CreateProperty = () => {
         }
       } catch (error) {
         setIsLoading(false);
-        toast.error("Something went wrong !!");
+        toast.error(error?.message || "Something went wrong !!");
       }
     },
   });
@@ -194,9 +193,9 @@ const CreateProperty = () => {
     setRemovedImage(removed);
   };
 
-  const fetchContent = (data) => {
-    setContent(data);
-  };
+  // const fetchContent = (data) => {
+  //   setContent(data);
+  // };
 
   const handleAmenityChange = (e) => {
     const selectedAmenity = e.target.value;
@@ -262,14 +261,11 @@ const CreateProperty = () => {
                 <div className="card-body py-2">
                   <div className="grid-cs gap-4">
                     <div className="">
-                      <input
-                        type="text"
+                      <DubaiAreasDropdown
                         value={form.values?.city}
                         onChange={form.handleChange}
-                        className="form-control"
                         name="city"
-                        placeholder="City"
-                        id=""
+                        placeholder="Area Name"
                       />
                     </div>
                     <div className="">
