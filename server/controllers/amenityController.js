@@ -1,104 +1,17 @@
 const Amenity = require("../models/AmenityModel");
+const factory = require("./factoryController");
 
 // Create a new amenity
-exports.createAmenity = async (req, res) => {
-  try {
-    const amenity = new Amenity(req.body);
-    await amenity.save();
-    res.status(201).json({
-      success: true,
-      data: amenity,
-    });
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      error: error.message,
-    });
-  }
-};
+exports.createAmenity = factory.createDoc(Amenity);
 
 // Get all amenities
-exports.getAllAmenities = async (req, res) => {
-  try {
-    const amenities = await Amenity.find();
-    res.status(200).json({
-      success: true,
-      count: amenities.length,
-      data: amenities,
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      error: error.message,
-    });
-  }
-};
+exports.getAllAmenities = factory.getAllDocs(Amenity);
 
 // Get single amenity
-exports.getAmenity = async (req, res) => {
-  try {
-    const amenity = await Amenity.findById(req.params.id);
-    if (!amenity) {
-      return res.status(404).json({
-        success: false,
-        error: "Amenity not found",
-      });
-    }
-    res.status(200).json({
-      success: true,
-      data: amenity,
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      error: error.message,
-    });
-  }
-};
+exports.getAmenity = factory.getDoc(Amenity);
 
 // Update amenity
-exports.updateAmenity = async (req, res) => {
-  try {
-    const amenity = await Amenity.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-    if (!amenity) {
-      return res.status(404).json({
-        success: false,
-        error: "Amenity not found",
-      });
-    }
-    res.status(200).json({
-      success: true,
-      data: amenity,
-    });
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      error: error.message,
-    });
-  }
-};
+exports.updateAmenity = factory.updateDoc(Amenity);
 
 // Delete amenity
-exports.deleteAmenity = async (req, res) => {
-  try {
-    const amenity = await Amenity.findByIdAndDelete(req.params.id);
-    if (!amenity) {
-      return res.status(404).json({
-        success: false,
-        error: "Amenity not found",
-      });
-    }
-    res.status(200).json({
-      success: true,
-      data: {},
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      error: error.message,
-    });
-  }
-};
+exports.deleteAmenity = factory.deleteDoc(Amenity);

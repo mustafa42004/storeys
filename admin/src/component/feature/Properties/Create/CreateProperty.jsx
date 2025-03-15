@@ -15,13 +15,13 @@ import {
   handleUpdateProperty,
 } from "../../../../redux/PropertyDataSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { amenities as amenitiesList } from "../../amenities/View/Amenity";
 import SharedDropdown from "../../../shared/SharedDropdown";
 import {
   flatPropertyTypes,
   propertyCategories,
 } from "../../../../constants/propertyTypes";
 import dubaiAreas from "../../../../constants/dubaiAreas";
+import { fetch as fetchAmenities } from "../../../../services/AmenityService";
 
 const CreateProperty = () => {
   const navigate = useNavigate();
@@ -39,6 +39,8 @@ const CreateProperty = () => {
   const [removedImage, setRemovedImage] = useState([]);
   const [errors, setErrors] = useState({});
   const [mainBannerPreview, setMainBannerPreview] = useState("");
+  const [amenitiesList, setAmenitiesList] = useState([]);
+  const [amenitiesLoading, setAmenitiesLoading] = useState(false);
   const [initialValues, setInitialValues] = useState({
     name: "",
     address: "",
@@ -69,6 +71,8 @@ const CreateProperty = () => {
   });
 
   useEffect(() => {
+    getAmenities();
+
     if (id) {
       const property = propertyData.find((property) => property._id === id);
       if (property) {
@@ -80,7 +84,7 @@ const CreateProperty = () => {
         fetchProperty();
       }
     }
-  }, [id, propertyData]); // Dependency on propertyData to refetch if not found
+  }, [id, propertyData]);
 
   const fetchProperty = async () => {
     setFetchLoading(true);
@@ -306,6 +310,95 @@ const CreateProperty = () => {
     return date.toISOString().split("T")[0]; // Returns yyyy-MM-dd format
   };
 
+  // Fetch amenities from API
+  const getAmenities = async () => {
+    setAmenitiesLoading(true);
+    try {
+      const response = await fetchAmenities(1, 100); // Fetch up to 100 amenities
+
+      if (response.success || response.status === "success") {
+        setAmenitiesList(response?.data?.docs || []);
+      } else {
+        toast.error(response.message || "Failed to fetch amenities");
+      }
+    } catch (error) {
+      console.error("Error fetching amenities:", error);
+      toast.error("Something went wrong while fetching amenities");
+    } finally {
+      setAmenitiesLoading(false);
+    }
+  };
+
+  // Replace the amenity selection UI with this updated version
+  const renderAmenitiesSection = () => {
+    return (
+      <div className="card my-3">
+        <div className="card-header pt-4 pb-2">
+          <h6>Amenities</h6>
+        </div>
+        <div className="card-body py-2">
+          {amenitiesLoading ? (
+            <div className="text-center py-3">
+              <div
+                className="spinner-border spinner-border-sm text-primary"
+                role="status"
+              >
+                <span className="visually-hidden">Loading amenities...</span>
+              </div>
+              <span className="ms-2">Loading amenities...</span>
+            </div>
+          ) : amenitiesList.length === 0 ? (
+            <div className="alert alert-info">No amenities available</div>
+          ) : (
+            <>
+              <select
+                className="form-select mb-3"
+                onChange={handleAmenityChange}
+                value=""
+              >
+                <option value="">Select an amenity to add</option>
+                {amenitiesList.map((amenity) => (
+                  <option key={amenity._id} value={amenity._id}>
+                    {amenity.name}
+                  </option>
+                ))}
+              </select>
+
+              {form.values.amenities && form.values.amenities.length > 0 ? (
+                <div className="selected-amenities mt-3">
+                  <h6 className="text-sm mb-2">Selected Amenities:</h6>
+                  <div className="d-flex flex-wrap gap-2">
+                    {form.values.amenities.map((amenityId) => {
+                      const amenity = amenitiesList.find(
+                        (a) => a._id === amenityId
+                      );
+                      return (
+                        <div
+                          key={amenityId}
+                          className="badge bg-primary p-2 d-flex align-items-center"
+                        >
+                          <span>{amenity?.name || "Unknown amenity"}</span>
+                          <button
+                            type="button"
+                            className="btn-close btn-close-white ms-2"
+                            onClick={() => removeAmenity(amenityId)}
+                            style={{ fontSize: "10px" }}
+                          ></button>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : (
+                <div className="text-muted">No amenities selected</div>
+              )}
+            </>
+          )}
+        </div>
+      </div>
+    );
+  };
+
   if (fetchLoading) {
     return (
       <div
@@ -476,52 +569,7 @@ const CreateProperty = () => {
                       />
                     </div>
                   </div>
-                  <div className="tag-input-container my-3">
-                    <h6>Amenities</h6>
-                    <div className="d-flex flex-column gap-3">
-                      <select
-                        className="form-control"
-                        onChange={handleAmenityChange}
-                        value=""
-                      >
-                        <option value="">Select Amenity</option>
-                        {amenitiesList.map((amenity) => (
-                          <option
-                            key={amenity._id}
-                            value={amenity._id}
-                            disabled={form.values.amenities.includes(
-                              amenity._id
-                            )}
-                          >
-                            {amenity.name}
-                          </option>
-                        ))}
-                      </select>
-
-                      <div className="selected-amenities d-flex flex-wrap gap-2">
-                        {form.values.amenities.map((amenityId, index) => {
-                          // Find the amenity object that matches this ID
-                          const amenity = amenitiesList.find(
-                            (a) => a._id === amenityId
-                          );
-                          return (
-                            <div
-                              key={index}
-                              className="badge bg-primary d-flex align-items-center gap-2"
-                            >
-                              {amenity ? amenity.name : amenityId}
-                              <button
-                                type="button"
-                                className="btn-close btn-close-white"
-                                style={{ fontSize: "0.6rem" }}
-                                onClick={() => removeAmenity(amenityId)}
-                              />
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </div>
+                  {renderAmenitiesSection()}
                 </div>
               </div>
 
