@@ -4,29 +4,47 @@ import PreviewContentModal from "./PreviewContentModal";
 
 const Content = ({ fetchContent, savedContent }) => {
   const [content, setContent] = useState([""]);
+  const [initialLoad, setInitialLoad] = useState(true);
 
+  // Only load savedContent initially, not on every savedContent change
   useEffect(() => {
-    setContent(savedContent);
-  }, [savedContent]);
+    if (savedContent) {
+      // Ensure no null values in the array
+      const validContent = savedContent.map((item) =>
+        item === null ? "" : item
+      );
+
+      if (
+        initialLoad ||
+        JSON.stringify(validContent) !== JSON.stringify(content)
+      ) {
+        setContent(validContent);
+        setInitialLoad(false);
+      }
+    }
+  }, [savedContent, content, initialLoad]);
 
   // Add new content
-  const addContent = () => setContent([...content, ""]);
+  const addContent = () => {
+    const newContent = [...content, ""];
+    setContent(newContent);
+    fetchContent(newContent);
+  };
 
   // Update a specific content field
   const updateContent = (index, value) => {
     const updatedContent = [...content];
-    updatedContent[index] = value;
+    updatedContent[index] = value || ""; // Ensure value is never null
     setContent(updatedContent);
+    fetchContent(updatedContent);
   };
 
   // Remove specific content
   const removeContent = (index) => {
-    setContent(content.filter((_, i) => i !== index));
+    const updatedContent = content.filter((_, i) => i !== index);
+    setContent(updatedContent);
+    fetchContent(updatedContent);
   };
-
-  useEffect(() => {
-    fetchContent(content);
-  }, [content]);
 
   return (
     <>
@@ -54,9 +72,9 @@ const Content = ({ fetchContent, savedContent }) => {
         <div className="card-body py-2">
           <div className="projects-content">
             {content?.map((value, index) => (
-              <>
+              <div key={index}>
                 {index !== 0 && <div className="divider"></div>}
-                <div key={index} className="layout">
+                <div className="layout">
                   <div className="mb-2 w-100 flex-cs header">
                     <h5 className="m-0">
                       {index !== 0 ? `Content ${index}` : `Heading`}
@@ -75,7 +93,7 @@ const Content = ({ fetchContent, savedContent }) => {
                     {index === 0 ? (
                       <input
                         type="text"
-                        value={value}
+                        value={value || ""}
                         onChange={(e) => updateContent(index, e.target.value)}
                         className="form-control"
                         placeholder="Enter Title"
@@ -83,7 +101,7 @@ const Content = ({ fetchContent, savedContent }) => {
                     ) : (
                       <textarea
                         type="text"
-                        value={value}
+                        value={value || ""}
                         onChange={(e) => updateContent(index, e.target.value)}
                         className="form-control"
                         rows={5}
@@ -92,7 +110,7 @@ const Content = ({ fetchContent, savedContent }) => {
                     )}
                   </div>
                 </div>
-              </>
+              </div>
             ))}
             <button
               type="button"
