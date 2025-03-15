@@ -4,7 +4,10 @@ import axios from "axios";
 const create = async (formData) => {
   try {
     const response = await axios.post(`${API_URL}/properties`, formData, {
-      headers: { "Content-Type": "multipart/form-data" },
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
     });
     return response.data;
   } catch (error) {

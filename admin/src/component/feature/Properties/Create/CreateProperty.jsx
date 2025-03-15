@@ -33,15 +33,17 @@ const CreateProperty = () => {
   );
 
   const [isLoading, setIsLoading] = useState(false);
+  const [fetchLoading, setFetchLoading] = useState(false);
   const [images, setImages] = useState([]);
   const [banners, setBanners] = useState([]);
   const [removedImage, setRemovedImage] = useState([]);
-  // const [content, setContent] = useState([]);
+  const [errors, setErrors] = useState({});
   const [mainBannerPreview, setMainBannerPreview] = useState("");
   const [initialValues, setInitialValues] = useState({
     name: "",
     address: "",
     type: "",
+    city: "",
     amenities: [],
     bedrooms: null,
     bathrooms: null,
@@ -81,29 +83,69 @@ const CreateProperty = () => {
   }, [id, propertyData]); // Dependency on propertyData to refetch if not found
 
   const fetchProperty = async () => {
+    setFetchLoading(true);
     try {
       const response = await fetchById(id);
-      if (response?.success) {
+      if (response?.success || response?.status === "success") {
         const property = response.data;
         setMainBannerPreview(property?.banner?.s3Url);
         setInitialValues(property);
         setImages(property?.image);
         form.setValues(property);
       } else {
-        toast.error(response?.message);
+        toast.error(response?.message || "Failed to fetch property details");
       }
     } catch (error) {
       console.error("Error fetching property:", error);
-      toast.error("Something went wrong");
+      toast.error("Something went wrong while fetching property details");
+    } finally {
+      setFetchLoading(false);
     }
+  };
+
+  const validateFormData = (formData) => {
+    const validationErrors = {};
+
+    if (!formData.name || formData.name.trim() === "") {
+      validationErrors.name = "Property name is required";
+    }
+
+    if (!formData.city || formData.city.trim() === "") {
+      validationErrors.city = "Area name is required";
+    }
+
+    if (!formData.type || formData.type.trim() === "") {
+      validationErrors.type = "Property type is required";
+    }
+
+    if (!formData.address || formData.address.trim() === "") {
+      validationErrors.address = "Property address is required";
+    }
+
+    if (!formData.price || formData.price <= 0) {
+      validationErrors.price = "Valid property price is required";
+    }
+
+    return validationErrors;
   };
 
   const form = useFormik({
     initialValues,
     enableReinitialize: true, // Reinitialize form when initialValues change
     onSubmit: async (formData) => {
+      // Validate form data
+      const validationErrors = validateFormData(formData);
+      if (Object.keys(validationErrors).length > 0) {
+        setErrors(validationErrors);
+        Object.values(validationErrors).forEach((error) => toast.error(error));
+        return;
+      }
+
+      setErrors({});
+
       const formPayload = new FormData();
       formPayload.append("name", formData.name);
+      formPayload.append("city", formData.city);
       formPayload.append("address", formData.address);
       formPayload.append("type", formData.type);
       formPayload.append("amenities", JSON.stringify(form.values.amenities));
@@ -136,47 +178,64 @@ const CreateProperty = () => {
           }
         });
       }
+
       setIsLoading(true);
       try {
         if (!id) {
-          onCreate(formPayload);
+          await onCreate(formPayload);
         } else {
-          onUpdate(formPayload);
+          await onUpdate(formPayload);
         }
       } catch (error) {
         setIsLoading(false);
-        toast.error(error?.message || "Something went wrong !!");
+        const errorMessage =
+          error?.message || "Something went wrong while saving the property!";
+        toast.error(errorMessage);
+        console.error("Property save error:", error);
       }
     },
   });
 
   const onCreate = async (formPayload) => {
-    const response = await create(formPayload);
-    if (response.success) {
-      dispatch(handlePostProperty(response?.result));
+    try {
+      const response = await create(formPayload);
+
+      if (response?.success || response?.status === "success") {
+        dispatch(handlePostProperty(response?.result));
+        navigate("/property");
+        toast.success("Property created successfully!");
+      } else {
+        throw new Error(response.message || "Failed to create property");
+      }
+    } catch (error) {
+      console.error("Error creating property:", error);
+      throw error;
+    } finally {
       setIsLoading(false);
-      navigate("/property");
-      toast.success("Property is Created !!");
-    } else {
-      setIsLoading(false);
-      toast.error("Something went wrong !!");
     }
   };
 
   const onUpdate = async (formPayload) => {
-    const dataModel = {
-      id,
-      formData: formPayload,
-    };
-    const response = await update(dataModel);
-    if (response.success) {
-      dispatch(handleUpdateProperty(response?.result));
+    try {
+      const dataModel = {
+        id,
+        formData: formPayload,
+      };
+
+      const response = await update(dataModel);
+
+      if (response?.success || response?.status === "success") {
+        dispatch(handleUpdateProperty(response?.result));
+        navigate("/property");
+        toast.success("Property updated successfully!");
+      } else {
+        throw new Error(response.message || "Failed to update property");
+      }
+    } catch (error) {
+      console.error("Error updating property:", error);
+      throw error;
+    } finally {
       setIsLoading(false);
-      navigate("/property");
-      toast.success("Property is Updated !!");
-    } else {
-      setIsLoading(false);
-      toast.error("Something went wrong !!");
     }
   };
 
@@ -184,11 +243,34 @@ const CreateProperty = () => {
   const handleMainBannerUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
+      // Validate file size (maximum 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        toast.error("Banner image size should be less than 5MB");
+        e.target.value = null;
+        return;
+      }
+
+      // Validate file type
+      const allowedTypes = [
+        "image/jpeg",
+        "image/png",
+        "image/svg+xml",
+        "image/webp",
+      ];
+      if (!allowedTypes.includes(file.type)) {
+        toast.error(
+          "Please upload a valid image file (JPEG, PNG, SVG, or WEBP)"
+        );
+        e.target.value = null;
+        return;
+      }
+
       form.setFieldValue("banner", file);
 
       // Generate preview
       const reader = new FileReader();
       reader.onload = () => setMainBannerPreview(reader.result);
+      reader.onerror = () => toast.error("Failed to read the selected file");
       reader.readAsDataURL(file);
     }
   };
@@ -197,10 +279,6 @@ const CreateProperty = () => {
     setBanners(data);
     setRemovedImage(removed);
   };
-
-  // const fetchContent = (data) => {
-  //   setContent(data);
-  // };
 
   const handleAmenityChange = (e) => {
     const selectedAmenityId = e.target.value;
@@ -228,6 +306,18 @@ const CreateProperty = () => {
     return date.toISOString().split("T")[0]; // Returns yyyy-MM-dd format
   };
 
+  if (fetchLoading) {
+    return (
+      <div
+        className="container-fluid d-flex justify-content-center align-items-center"
+        style={{ minHeight: "60vh" }}
+      >
+        <Spinner />
+        <p className="ms-3">Loading property details...</p>
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="container-fluid">
@@ -244,11 +334,15 @@ const CreateProperty = () => {
                       type="text"
                       value={form.values?.name}
                       onChange={form.handleChange}
-                      className="form-control"
+                      className={`form-control ${
+                        errors.name ? "is-invalid" : ""
+                      }`}
                       name="name"
                       placeholder="Property Name"
-                      id=""
                     />
+                    {errors.name && (
+                      <div className="invalid-feedback">{errors.name}</div>
+                    )}
                   </div>
                   <div className="my-3">
                     <input
@@ -256,8 +350,17 @@ const CreateProperty = () => {
                       onChange={handleMainBannerUpload}
                       className="form-control"
                       name="banner"
-                      id=""
                     />
+                    {mainBannerPreview && (
+                      <div className="mt-2">
+                        <img
+                          src={mainBannerPreview}
+                          alt="Banner Preview"
+                          style={{ maxHeight: "100px" }}
+                          className="img-thumbnail"
+                        />
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -275,18 +378,28 @@ const CreateProperty = () => {
                         name="city"
                         placeholder="Area Name"
                         options={dubaiAreas}
+                        className={errors.city ? "is-invalid" : ""}
                       />
+                      {errors.city && (
+                        <div className="text-danger small mt-1">
+                          {errors.city}
+                        </div>
+                      )}
                     </div>
                     <div className="">
                       <input
                         type="text"
                         value={form.values?.address}
                         onChange={form.handleChange}
-                        className="form-control"
+                        className={`form-control ${
+                          errors.address ? "is-invalid" : ""
+                        }`}
                         name="address"
                         placeholder="Property Address"
-                        id=""
                       />
+                      {errors.address && (
+                        <div className="invalid-feedback">{errors.address}</div>
+                      )}
                     </div>
                     <div className="">
                       <SharedDropdown
@@ -295,18 +408,28 @@ const CreateProperty = () => {
                         name="type"
                         placeholder="Select Property Type"
                         options={flatPropertyTypes}
+                        className={errors.type ? "is-invalid" : ""}
                       />
+                      {errors.type && (
+                        <div className="text-danger small mt-1">
+                          {errors.type}
+                        </div>
+                      )}
                     </div>
                     <div className="">
                       <input
                         type="number"
                         value={form.values?.price ?? ""}
                         onChange={form.handleChange}
-                        className="form-control"
+                        className={`form-control ${
+                          errors.price ? "is-invalid" : ""
+                        }`}
                         name="price"
                         placeholder="Property Price"
-                        id=""
                       />
+                      {errors.price && (
+                        <div className="invalid-feedback">{errors.price}</div>
+                      )}
                     </div>
                     <div className="">
                       <input
@@ -526,11 +649,6 @@ const CreateProperty = () => {
                 savedBanners={id ? images : []}
                 fetchBanners={fetchBanners}
               />
-
-              {/* <Content
-                savedContent={id ? form.values?.description : []}
-                fetchContent={fetchContent}
-              /> */}
             </div>
             <div className="col-md-4">
               <div className="card mb-3">
@@ -546,13 +664,6 @@ const CreateProperty = () => {
                     <option value="rent">For Rent</option>
                     <option value="sell">For sell</option>
                   </select>
-                  <button
-                    type="submit"
-                    disabled={isLoading}
-                    className="btn btn-primary btn-lg m-0"
-                  >
-                    Save Project {isLoading && <Spinner />}
-                  </button>
                 </div>
               </div>
 
@@ -566,7 +677,26 @@ const CreateProperty = () => {
                 sqft={form.values?.sqft}
               />
 
-              {/* <Preview /> */}
+              <div className="fixed-bottom-button bg-white p-4">
+                <button
+                  disabled={isLoading}
+                  type="submit"
+                  className="btn bg-gradient-primary"
+                >
+                  {isLoading ? (
+                    <span>
+                      <span
+                        className="spinner-border spinner-border-sm me-2"
+                        role="status"
+                        aria-hidden="true"
+                      ></span>
+                      {id ? "Updating..." : "Creating..."}
+                    </span>
+                  ) : (
+                    <span>{id ? "Update Property" : "Create Property"}</span>
+                  )}
+                </button>
+              </div>
             </div>
           </div>
         </form>
