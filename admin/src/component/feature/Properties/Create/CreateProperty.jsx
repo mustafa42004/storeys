@@ -16,7 +16,12 @@ import {
 } from "../../../../redux/PropertyDataSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { amenities as amenitiesList } from "../../amenities/View/Amenity";
-import DubaiAreasDropdown from "./DubaiAreasDropdown";
+import SharedDropdown from "../../../shared/SharedDropdown";
+import {
+  flatPropertyTypes,
+  propertyCategories,
+} from "../../../../constants/propertyTypes";
+import dubaiAreas from "../../../../constants/dubaiAreas";
 
 const CreateProperty = () => {
   const navigate = useNavigate();
@@ -261,11 +266,12 @@ const CreateProperty = () => {
                 <div className="card-body py-2">
                   <div className="grid-cs gap-4">
                     <div className="">
-                      <DubaiAreasDropdown
+                      <SharedDropdown
                         value={form.values?.city}
                         onChange={form.handleChange}
                         name="city"
                         placeholder="Area Name"
+                        options={dubaiAreas}
                       />
                     </div>
                     <div className="">
@@ -280,14 +286,12 @@ const CreateProperty = () => {
                       />
                     </div>
                     <div className="">
-                      <input
-                        type="text"
+                      <SharedDropdown
                         value={form.values?.type}
                         onChange={form.handleChange}
-                        className="form-control"
                         name="type"
-                        placeholder="Property Type"
-                        id=""
+                        placeholder="Select Property Type"
+                        options={flatPropertyTypes}
                       />
                     </div>
                     <div className="">
@@ -396,25 +400,21 @@ const CreateProperty = () => {
                 <div className="card-body py-3">
                   <div className="grid-cs gap-4">
                     <div className="">
-                      <input
-                        type="text"
+                      <SharedDropdown
                         value={form.values?.propertyInfo?.type}
                         onChange={form.handleChange}
-                        className="form-control"
                         name="propertyInfo.type"
-                        placeholder="Property Type"
-                        id=""
+                        placeholder="Select Property Type"
+                        options={flatPropertyTypes}
                       />
                     </div>
                     <div className="">
-                      <input
-                        type="text"
+                      <SharedDropdown
                         value={form.values?.propertyInfo?.purpose}
                         onChange={form.handleChange}
-                        className="form-control"
                         name="propertyInfo.purpose"
-                        placeholder="Property Purpose"
-                        id=""
+                        placeholder="Select Property Purpose"
+                        options={propertyCategories}
                       />
                     </div>
                     <div className="">
@@ -429,14 +429,12 @@ const CreateProperty = () => {
                       />
                     </div>
                     <div className="">
-                      <input
-                        type="text"
+                      <SharedDropdown
                         value={form.values?.propertyInfo?.furnishing}
                         onChange={form.handleChange}
-                        className="form-control"
                         name="propertyInfo.furnishing"
-                        placeholder="Property Furnishing"
-                        id=""
+                        placeholder="Select Property Furnishing"
+                        options={["Furnished", "Semi-Furnished", "Unfurnished"]}
                       />
                     </div>
                     <div className="">

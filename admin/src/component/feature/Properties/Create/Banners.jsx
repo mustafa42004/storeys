@@ -172,40 +172,7 @@ const Banners = ({ fetchBanners, savedBanners }) => {
       </div>
 
       {/* Add CSS for the banner grid */}
-      <style jsx>{`
-        .banner-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-          gap: 15px;
-        }
-
-        .banner-preview {
-          position: relative;
-          border-radius: 8px;
-          overflow: hidden;
-          aspect-ratio: 16/9;
-        }
-
-        .banner-preview img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
-        .banner-actions {
-          position: absolute;
-          top: 0;
-          right: 0;
-          padding: 5px;
-          background: rgba(0, 0, 0, 0.5);
-          border-bottom-left-radius: 8px;
-        }
-
-        .banner-actions button {
-          padding: 3px 8px;
-          font-size: 0.7rem;
-        }
-      `}</style>
+      {/* <style jsx>{``}</style> */}
 
       <PreviewBannerModal img={"/assets/img/banner.JPG"} />
     </>
