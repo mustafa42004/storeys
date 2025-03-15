@@ -86,17 +86,11 @@ const Amenity = () => {
                   <table className="table align-items-center mb-0">
                     <thead>
                       <tr>
-                        <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                          Image
-                        </th>
                         <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                           Amenity Name
                         </th>
                         <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                          Status
-                        </th>
-                        <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                          Creat Date
+                          Created Date
                         </th>
                         <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                           Actions
@@ -113,11 +107,7 @@ const Amenity = () => {
                                 {amenity?.name}
                               </p>
                             </td>
-                            <td className="align-middle text-center text-sm">
-                              <span className="badge badge-sm bg-gradient-success">
-                                {amenity?.status}
-                              </span>
-                            </td>
+
                             <td className="align-middle text-center">
                               <span className="text-secondary text-xs font-weight-bold">
                                 {formateDate(amenity?.createdDate)}
