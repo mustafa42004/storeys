@@ -1,3 +1,3 @@
-const API_URL = `http://localhost:8080/admin`
+const API_URL = `http://localhost:8080/api/v1`;
 
-export { API_URL }
+export { API_URL };

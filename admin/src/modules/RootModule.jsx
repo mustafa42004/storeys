@@ -14,7 +14,7 @@ const RootModule = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
-    if (!localStorage.getItem("ddlj")) {
+    if (!localStorage.getItem("token")) {
       navigate("/signin");
     }
   }, []);

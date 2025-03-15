@@ -4,6 +4,7 @@ import { validationSchema } from "../../../schemas/SigninForm";
 import { signin } from "../../../services/AuthService";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../Spinner/Spinner";
+import { toast } from "react-toastify";
 
 const Signin = () => {
   const navigate = useNavigate();
@@ -19,131 +20,123 @@ const Signin = () => {
     validationSchema,
     onSubmit: async (formData) => {
       setIsLoading(true);
-      // const response = await signin(formData);
-      let response = { success: false };
-      if (
-        formData.email === "admin@gmail.com" &&
-        formData.password === "admin"
-      ) {
-        response = { success: true, token: "admin" };
-      }
+      const response = await signin(formData);
 
-      console.log(formData);
+      setIsLoading(false);
 
-      if (response.success) {
-        setIsLoading(false);
-        localStorage.setItem("ddlj", response.token);
+      console.log(response);
+
+      if (response?.status === "success") {
+        localStorage.setItem("token", response?.data?.token);
         navigate("/");
+      } else {
+        toast.error(response?.message || "An error occurred during sign in");
       }
     },
   });
 
   return (
-    <>
-      <main className="main-content mt-0">
-        <section>
-          <div className="page-header min-vh-100">
-            <div className="container">
-              <div className="row">
-                <div className="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
-                  <div className="card card-plain mt-8">
-                    <div className="card-header pb-0 text-left bg-transparent">
-                      <h3 className="font-weight-bolder text-info text-gradient">
-                        Welcome to Storeys
-                      </h3>
-                      <p className="mb-0">
-                        Enter your email and password to sign in
-                      </p>
-                    </div>
-                    <div className="card-body">
-                      <form onSubmit={signinForm.handleSubmit} role="form">
-                        <label>Email</label>
-                        <div className="mb-3">
-                          <input
-                            type="email"
-                            name="email"
-                            className="form-control"
-                            placeholder="Email"
-                            aria-label="Email"
-                            aria-describedby="email-addon"
-                            value={signinForm.values.email}
-                            onChange={signinForm.handleChange}
-                            onBlur={signinForm.handleBlur}
-                          />
-                          {signinForm.touched.email &&
-                          signinForm.errors.email ? (
-                            <div className="text-danger text-sm">
-                              {signinForm.errors.email}
-                            </div>
-                          ) : null}
-                        </div>
+    <main className="main-content mt-0">
+      <section>
+        <div className="page-header min-vh-100">
+          <div className="container">
+            <div className="row">
+              <div className="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
+                <div className="card card-plain mt-8">
+                  <div className="card-header pb-0 text-left bg-transparent">
+                    <h3 className="font-weight-bolder text-info text-gradient">
+                      Welcome to Storeys
+                    </h3>
+                    <p className="mb-0">
+                      Enter your email and password to sign in
+                    </p>
+                  </div>
+                  <div className="card-body">
+                    <form onSubmit={signinForm.handleSubmit} role="form">
+                      <label>Email</label>
+                      <div className="mb-3">
+                        <input
+                          type="email"
+                          name="email"
+                          className="form-control"
+                          placeholder="Email"
+                          aria-label="Email"
+                          aria-describedby="email-addon"
+                          value={signinForm.values.email}
+                          onChange={signinForm.handleChange}
+                          onBlur={signinForm.handleBlur}
+                        />
+                        {signinForm.touched.email && signinForm.errors.email ? (
+                          <div className="text-danger text-sm">
+                            {signinForm.errors.email}
+                          </div>
+                        ) : null}
+                      </div>
 
-                        <label>Password</label>
-                        <div className="mb-3">
-                          <input
-                            type="password"
-                            name="password"
-                            className="form-control"
-                            placeholder="Password"
-                            aria-label="Password"
-                            aria-describedby="password-addon"
-                            value={signinForm.values.password}
-                            onChange={signinForm.handleChange}
-                            onBlur={signinForm.handleBlur}
-                          />
-                          {signinForm.touched.password &&
-                          signinForm.errors.password ? (
-                            <div className="text-danger text-sm">
-                              {signinForm.errors.password}
-                            </div>
-                          ) : null}
-                        </div>
+                      <label>Password</label>
+                      <div className="mb-3">
+                        <input
+                          type="password"
+                          name="password"
+                          className="form-control"
+                          placeholder="Password"
+                          aria-label="Password"
+                          aria-describedby="password-addon"
+                          value={signinForm.values.password}
+                          onChange={signinForm.handleChange}
+                          onBlur={signinForm.handleBlur}
+                        />
+                        {signinForm.touched.password &&
+                        signinForm.errors.password ? (
+                          <div className="text-danger text-sm">
+                            {signinForm.errors.password}
+                          </div>
+                        ) : null}
+                      </div>
 
-                        <div className="form-check form-switch">
-                          <input
-                            className="form-check-input"
-                            type="checkbox"
-                            name="rememberMe"
-                            id="rememberMe"
-                          />
-                          <label
-                            className="form-check-label"
-                            htmlFor="rememberMe"
-                          >
-                            Remember me
-                          </label>
-                        </div>
+                      <div className="form-check form-switch">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          name="rememberMe"
+                          id="rememberMe"
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="rememberMe"
+                        >
+                          Remember me
+                        </label>
+                      </div>
 
-                        <div className="text-center">
-                          <button
-                            type="submit"
-                            className="btn bg-gradient-info w-100 mt-4 mb-0"
-                          >
-                            Sign in
-                            {isLoading && <Spinner />}
-                          </button>
-                        </div>
-                      </form>
-                    </div>
+                      <div className="text-center">
+                        <button
+                          type="submit"
+                          className="btn bg-gradient-info w-100 mt-4 mb-0"
+                        >
+                          Sign in
+                          {isLoading && <Spinner />}
+                        </button>
+                      </div>
+                    </form>
                   </div>
                 </div>
-                <div className="col-md-6">
-                  <div className="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
-                    <div
-                      className="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6"
-                      style={{
-                        backgroundImage:
-                          'url("../assets/img/home-decor-3.jpg")',
-                      }}
-                    />
-                  </div>
+              </div>
+              <div className="col-md-6">
+                <div className="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
+                  <div
+                    className="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6"
+                    style={{
+                      backgroundImage: 'url("../assets/img/home-decor-3.jpg")',
+                    }}
+                  />
                 </div>
               </div>
             </div>
           </div>
-        </section>
-      </main>
-    </>
+        </div>
+      </section>
+    </main>
   );
 };
 
