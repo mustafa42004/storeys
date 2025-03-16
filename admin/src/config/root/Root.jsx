@@ -11,7 +11,7 @@ import TestimonialList from "../../component/feature/Testimonials/View/Testimoni
 import CreateTestimonial from "../../component/feature/Testimonials/Create/CreateTestimonial";
 import ChangePassword from "../../component/shared/Auth/ChangePassword";
 import { Navigate } from "react-router-dom";
-
+import ListContacts from "../../component/feature/contacts/ListContacts";
 const rootRoutes = [
   {
     path: "/",
@@ -29,6 +29,10 @@ const rootRoutes = [
   {
     path: "edit-property/:id",
     element: <CreateProperty />,
+  },
+  {
+    path: "contacts",
+    element: <ListContacts />,
   },
   {
     path: "teams",
