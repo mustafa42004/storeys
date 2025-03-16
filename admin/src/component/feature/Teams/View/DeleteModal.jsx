@@ -1,88 +1,112 @@
 import { toast } from "react-toastify";
-import { deleteMember } from "../../../../services/TeamService"
+import { deleteProperty as deleteTeamMember } from "../../../../services/TeamService";
 import { useState } from "react";
 import Spinner from "../../../shared/Spinner/Spinner";
 import { useDispatch } from "react-redux";
 import { handleDeleteTeam } from "../../../../redux/TeamDataSlice";
 
-const DeleteModal = ({ member }) => {
+const DeleteModal = ({ member, onDeleteSuccess }) => {
+  const [isDeleting, setIsDeleting] = useState(false);
+  const dispatch = useDispatch();
 
-    const [isLoading, setIsLoading] = useState(false);
-    const dispatch = useDispatch()
-
-    const triggerDeleteAction = async() => {
-        setIsLoading(true);
-        const response = await deleteMember(member._id)
-        try {
-            if(response.success){
-                dispatch(handleDeleteTeam(member))
-                setIsLoading(false);
-                toast.success("Member deleted !!")
-                const modalInstance = bootstrap.Modal.getInstance(document.getElementById('modal-banner'));
-                modalInstance.hide();
-            } else {
-                setIsLoading(false);
-                toast.error("Failed to delete member")
-            }    
-        } catch (error) {
-            setIsLoading(false);
-            toast.error("Failed to delete member")
-        } finally {
-            setIsLoading(false);
-        }
+  const handleDelete = async () => {
+    if (!member?._id) {
+      toast.error("Team member ID is missing");
+      return;
     }
 
-  return (
-    <>
-        <div
-            className="modal fade"
-            id="modal-banner"
-            tabIndex={-1}
-            role="dialog"
-            aria-labelledby="modal-notification"
-            aria-hidden="true"
-        >
-            <div
-            className="modal-dialog cs-modal-width modal-danger modal-dialog-centered modal-"
-            role="document"
-            >
-            <div className="modal-content">
-                <div className="modal-header">
-                <h6
-                    className="modal-title"
-                    id="modal-title-notification"
-                >
-                    <span className="fw-bold">Delete Member</span>
-                </h6>
-                <button
-                    type="button"
-                    className="btn-close btn-lg text-dark"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                >
-                    <span className="fs-18" aria-hidden="true">×</span>
-                </button>
-                </div>
-                <div className="modal-body">
-                    <h6 className="fw-600 fs-20">Do you want to delete {member?.firstName} {member?.lastName} ?</h6>
-                </div>
-                <div className="modal-footer">
-                    <div className="flex-cs gap-2">
-                        <button
-                            type="button"
-                            className="btn bg-secondary text-white m-0"
-                            data-bs-dismiss="modal"
-                        >
-                            Close
-                        </button>
-                        <button type="button" onClick={triggerDeleteAction} className="btn text-white m-0 bg-danger">Delete {isLoading && <Spinner />}</button>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </div>
-    </>
-  )
-}
+    setIsDeleting(true);
+    try {
+      const response = await deleteTeamMember(member._id);
 
-export default DeleteModal
+      if (response.success || response.status === "success") {
+        // Update Redux store
+        dispatch(handleDeleteTeam(member));
+
+        toast.success("Team member deleted successfully");
+
+        // Close the modal
+        document.getElementById("modal-close-button").click();
+
+        // Call the callback to refresh the team list
+        if (onDeleteSuccess && typeof onDeleteSuccess === "function") {
+          onDeleteSuccess();
+        }
+      } else {
+        toast.error(response.message || "Failed to delete team member");
+      }
+    } catch (error) {
+      console.error("Error deleting team member:", error);
+      toast.error("An unexpected error occurred while deleting team member");
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
+  return (
+    <div
+      className="modal fade"
+      id="modal-team-delete"
+      tabIndex={-1}
+      role="dialog"
+      aria-labelledby="modal-team-delete"
+      aria-hidden="true"
+    >
+      <div className="modal-dialog modal-dialog-centered" role="document">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h6 className="modal-title" id="modal-title-default">
+              Delete Team Member
+            </h6>
+            <button
+              type="button"
+              className="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              id="modal-close-button"
+            ></button>
+          </div>
+          <div className="modal-body">
+            <p>
+              Are you sure you want to delete team member{" "}
+              <b>
+                {member?.firstName} {member?.lastName}
+              </b>
+              ? This action cannot be undone.
+            </p>
+          </div>
+          <div className="modal-footer">
+            <button
+              type="button"
+              className="btn bg-gradient-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={handleDelete}
+              disabled={isDeleting}
+              className="btn bg-gradient-danger"
+            >
+              {isDeleting ? (
+                <>
+                  <span
+                    className="spinner-border spinner-border-sm me-2"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  Deleting...
+                </>
+              ) : (
+                "Delete Team Member"
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default DeleteModal;
