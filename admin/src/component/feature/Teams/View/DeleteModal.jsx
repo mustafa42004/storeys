@@ -19,7 +19,7 @@ const DeleteModal = ({ member, onDeleteSuccess }) => {
     try {
       const response = await deleteTeamMember(member._id);
 
-      if (response.success || response.status === "success") {
+      if (response.success || response.status == "204") {
         // Update Redux store
         dispatch(handleDeleteTeam(member));
 

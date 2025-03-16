@@ -15,7 +15,6 @@ const AddMember = ({ onDataChange, teamData, errors, touched }) => {
   });
   const [isUpdated, setIsUpdated] = useState(false);
   const [fileError, setFileError] = useState(null);
-  const [shouldUpdateParent, setShouldUpdateParent] = useState(false);
 
   // Only set initial data once when teamData changes
   useEffect(() => {
@@ -62,28 +61,20 @@ const AddMember = ({ onDataChange, teamData, errors, touched }) => {
       reader.onload = () => {
         newData.profile.preview = reader.result;
         setData(newData);
-        setShouldUpdateParent(true);
+        onDataChange(newData); // Call with the new data directly
       };
       reader.readAsDataURL(file);
     }
   };
 
-  // IMPORTANT: This is what was causing the infinite loop - now fixed
-  // Only call onDataChange when explicitly triggered, not on every render
-  useEffect(() => {
-    if (shouldUpdateParent) {
-      onDataChange(data);
-      setShouldUpdateParent(false);
-    }
-  }, [shouldUpdateParent]); // FIXED: Removed data and onDataChange from dependencies
-
-  // Update the handlers to set the update flag
+  // Update the handlers to call onDataChange directly with the new data
   const handleInputChange = (field, value) => {
-    setData((prevData) => ({
-      ...prevData,
+    const newData = {
+      ...data,
       [field]: value,
-    }));
-    setShouldUpdateParent(true);
+    };
+    setData(newData);
+    onDataChange(newData); // Call with the new data immediately
   };
 
   return (

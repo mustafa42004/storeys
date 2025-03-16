@@ -25,7 +25,7 @@ const create = async (formData) => {
 const update = async (dataModel) => {
   try {
     const { id, formData } = dataModel;
-    const response = await axios.patch(`${API_URL}/teams/${id}`, formData, {
+    const response = await axios.put(`${API_URL}/teams/${id}`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
