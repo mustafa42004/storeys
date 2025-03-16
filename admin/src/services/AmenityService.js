@@ -1,14 +1,8 @@
-import { API_URL } from "../util/API_URL";
-import axios from "axios";
+import apiInstance from "../util/apiConfig";
 
 const create = async (formData) => {
   try {
-    const response = await axios.post(`${API_URL}/amenities`, formData, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
+    const response = await apiInstance.post(`/amenities`, formData);
     return response.data;
   } catch (error) {
     console.error("Amenity creation error:", error);
@@ -26,12 +20,7 @@ const update = async (dataModel) => {
   try {
     const { id, formData } = dataModel;
     console.log(formData);
-    const response = await axios.put(`${API_URL}/amenities/${id}`, formData, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
+    const response = await apiInstance.put(`/amenities/${id}`, formData);
     return response.data;
   } catch (error) {
     console.error("Amenity update error:", error);
@@ -47,11 +36,7 @@ const update = async (dataModel) => {
 
 const deleteProperty = async (id) => {
   try {
-    const response = await axios.delete(`${API_URL}/amenities/${id}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
+    const response = await apiInstance.delete(`/amenities/${id}`);
 
     return response;
   } catch (error) {
@@ -68,8 +53,8 @@ const deleteProperty = async (id) => {
 
 const fetch = async (page = 1, limit = 10) => {
   try {
-    const response = await axios.get(
-      `${API_URL}/amenities?page=${page}&limit=${limit}`
+    const response = await apiInstance.get(
+      `/amenities?page=${page}&limit=${limit}`
     );
     return response.data;
   } catch (error) {
@@ -86,11 +71,7 @@ const fetch = async (page = 1, limit = 10) => {
 
 const fetchById = async (id) => {
   try {
-    const response = await axios.get(`${API_URL}/amenities/${id}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
+    const response = await apiInstance.get(`/amenities/${id}`);
     return response.data;
   } catch (error) {
     console.error("Amenity fetch by ID error:", error);

@@ -1,9 +1,8 @@
-import { API_URL } from "../util/API_URL";
-import axios from "axios";
+import apiInstance from "../util/apiConfig";
 
 const signin = async (formData) => {
   try {
-    const response = await axios.post(`${API_URL}/auth/login`, formData);
+    const response = await apiInstance.post(`/auth/login`, formData);
     return response.data;
   } catch (error) {
     console.error("Login error:", error);
@@ -18,15 +17,7 @@ const signin = async (formData) => {
 
 const changePassword = async (formData) => {
   try {
-    const response = await axios.patch(
-      `${API_URL}/auth/change-password`,
-      formData,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      }
-    );
+    const response = await apiInstance.patch(`/auth/change-password`, formData);
     return response.data;
   } catch (error) {
     console.error("Change password error:", error);

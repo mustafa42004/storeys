@@ -1,12 +1,10 @@
-import { API_URL } from "../util/API_URL";
-import axios from "axios";
+import apiInstance from "../util/apiConfig";
 
 const create = async (formData) => {
   try {
-    const response = await axios.post(`${API_URL}/news`, formData, {
+    const response = await apiInstance.post(`/news`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
     return response.data;
@@ -25,10 +23,9 @@ const create = async (formData) => {
 const update = async (dataModel) => {
   try {
     const { id, formData } = dataModel;
-    const response = await axios.patch(`${API_URL}/news/${id}`, formData, {
+    const response = await apiInstance.patch(`/news/${id}`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
     return response.data;
@@ -46,11 +43,7 @@ const update = async (dataModel) => {
 
 const deleteProperty = async (id) => {
   try {
-    const response = await axios.delete(`${API_URL}/news/${id}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
+    const response = await apiInstance.delete(`/news/${id}`);
 
     return response;
   } catch (error) {
@@ -67,9 +60,7 @@ const deleteProperty = async (id) => {
 
 const fetch = async (page = 1, limit = 10) => {
   try {
-    const response = await axios.get(
-      `${API_URL}/news?page=${page}&limit=${limit}`
-    );
+    const response = await apiInstance.get(`/news?page=${page}&limit=${limit}`);
     return response.data;
   } catch (error) {
     console.error("News fetch error:", error);
@@ -85,11 +76,7 @@ const fetch = async (page = 1, limit = 10) => {
 
 const fetchById = async (id) => {
   try {
-    const response = await axios.get(`${API_URL}/news/${id}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
+    const response = await apiInstance.get(`/news/${id}`);
     return response.data;
   } catch (error) {
     console.error("News fetch by ID error:", error);
