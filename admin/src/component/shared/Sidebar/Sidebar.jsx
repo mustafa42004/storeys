@@ -29,7 +29,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         id="sidenav-collapse-main"
       >
         <ul className="navbar-nav">
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <NavLink to="/" className="nav-link  ">
               <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg
@@ -70,7 +70,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
               </div>
               <span className="nav-link-text ms-1">Home</span>
             </NavLink>
-          </li>
+          </li> */}
           <li className="nav-item mt-3">
             <h6 className="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">
               Properties

@@ -10,14 +10,15 @@ import Amenity from "../../component/feature/amenities/View/Amenity";
 import CreateAmenity from "../../component/feature/amenities/Create/CreateAmenity";
 import TestimonialList from "../../component/feature/Testimonials/View/TestimonialList";
 import CreateTestimonial from "../../component/feature/Testimonials/Create/CreateTestimonial";
-
+import { Navigate } from "react-router-dom";
 const rootRoutes = [
   {
     path: "/",
-    element: <Home />,
+    element: <Navigate to="/property" replace />,
   },
   {
     path: "property",
+    index: true,
     element: <Property />,
   },
   {

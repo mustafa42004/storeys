@@ -20,12 +20,16 @@ const AllRoutes = () => {
     // Unauthenticated routes
     {
       path: "/signin",
-      element: isTokenPresent ? <Navigate to="/" replace /> : <Signin />,
+      element: isTokenPresent ? (
+        <Navigate to="/property" replace />
+      ) : (
+        <Signin />
+      ),
     },
     // Catch-all for undefined routes
     {
       path: "*",
-      element: <Navigate to="/" replace />,
+      element: <Navigate to="/property" replace />,
     },
   ];
 
