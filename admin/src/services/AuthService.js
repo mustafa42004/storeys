@@ -16,4 +16,28 @@ const signin = async (formData) => {
   }
 };
 
-export { signin };
+const changePassword = async (formData) => {
+  try {
+    const response = await axios.patch(
+      `${API_URL}/auth/change-password`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Change password error:", error);
+    return {
+      success: false,
+      message:
+        error.response?.data?.message ||
+        "Failed to change password. Please try again.",
+      error: error.response?.data || error.message,
+    };
+  }
+};
+
+export { signin, changePassword };

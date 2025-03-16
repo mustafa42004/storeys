@@ -1,8 +1,10 @@
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Header = ({ toggleSidebar }) => {
+  const navigate = useNavigate();
+
   return (
     <>
       <nav
@@ -27,25 +29,27 @@ const Header = ({ toggleSidebar }) => {
                 <a className="opacity-5 text-dark">Pages</a>
               </li>
               <li
-                className="breadcrumb-item text-sm text-dark active"
+                className="breadcrumb-item text-sm text-dark active text-capitalize "
                 aria-current="page"
               >
-                Tables
+                {window.location.pathname.substring(1)}
               </li>
             </ol>
-            <h6 className="font-weight-bolder mb-0">Tables</h6>
           </nav>
 
           <div className="ms-auto d-flex align-items-center">
             <ul className="navbar-nav justify-content-end">
               <li className="nav-item d-flex align-items-center">
-                <NavLink
-                  to="/logout"
-                  className="nav-link text-body font-weight-bold px-0"
+                <div
+                  className="nav-link text-body font-weight-bold px-0 cursor-pointer"
+                  onClick={() => {
+                    localStorage.removeItem("token");
+                    navigate("/login");
+                  }}
                 >
                   <i className="fa fa-user me-sm-1" />
                   <span className="d-none d-sm-inline">LogOut</span>
-                </NavLink>
+                </div>
               </li>
             </ul>
           </div>

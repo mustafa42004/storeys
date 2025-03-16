@@ -1,4 +1,3 @@
-import Home from "../../component/feature/Home/Home";
 import CreateProperty from "../../component/feature/Properties/Create/CreateProperty";
 import Property from "../../component/feature/Properties/View/Property";
 import Logout from "../../component/shared/Auth/Logout";
@@ -10,7 +9,9 @@ import Amenity from "../../component/feature/amenities/View/Amenity";
 import CreateAmenity from "../../component/feature/amenities/Create/CreateAmenity";
 import TestimonialList from "../../component/feature/Testimonials/View/TestimonialList";
 import CreateTestimonial from "../../component/feature/Testimonials/Create/CreateTestimonial";
+import ChangePassword from "../../component/shared/Auth/ChangePassword";
 import { Navigate } from "react-router-dom";
+
 const rootRoutes = [
   {
     path: "/",
@@ -80,6 +81,10 @@ const rootRoutes = [
   {
     path: "logout",
     element: <Logout />,
+  },
+  {
+    path: "password-change",
+    element: <ChangePassword />,
   },
 ];
 
