@@ -354,11 +354,11 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           </li>
           <li className="nav-item mt-3">
             <h6 className="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">
-              Dubai Community
+              Testimonials
             </h6>
           </li>
           <li className="nav-item">
-            <NavLink className="nav-link  " to="/community">
+            <NavLink className="nav-link  " to="/testimonials">
               <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg
                   width="12px"
@@ -400,11 +400,11 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                   </g>
                 </svg>
               </div>
-              <span className="nav-link-text ms-1">List Community</span>
+              <span className="nav-link-text ms-1">List Testimonials</span>
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink className="nav-link  " to="/create-community">
+            <NavLink className="nav-link  " to="/create-testimonials">
               <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <svg
                   width="12px"
@@ -446,12 +446,12 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                   </g>
                 </svg>
               </div>
-              <span className="nav-link-text ms-1">Add Community</span>
+              <span className="nav-link-text ms-1">Add Testimonials</span>
             </NavLink>
           </li>
           <li className="nav-item mt-3">
             <h6 className="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">
-              Dubai News
+              News
             </h6>
           </li>
           <li className="nav-item">

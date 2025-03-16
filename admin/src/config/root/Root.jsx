@@ -3,13 +3,13 @@ import CreateProperty from "../../component/feature/Properties/Create/CreateProp
 import Property from "../../component/feature/Properties/View/Property";
 import Logout from "../../component/shared/Auth/Logout";
 import Teams from "../../component/feature/Teams/Create/Teams";
-import Community from "../../component/feature/Community/View/Community";
-import CreateCommunity from "../../component/feature/Community/Create/CreateCommunity";
 import News from "../../component/feature/News/View/News";
 import CreateNews from "../../component/feature/News/Create/CreateNews";
 import TeamList from "../../component/feature/Teams/View/TeamList";
 import Amenity from "../../component/feature/amenities/View/Amenity";
 import CreateAmenity from "../../component/feature/amenities/Create/CreateAmenity";
+import TestimonialList from "../../component/feature/Testimonials/View/TestimonialList";
+import CreateTestimonial from "../../component/feature/Testimonials/Create/CreateTestimonial";
 
 const rootRoutes = [
   {
@@ -41,12 +41,16 @@ const rootRoutes = [
     element: <Teams />,
   },
   {
-    path: "community",
-    element: <Community />,
+    path: "testimonials",
+    element: <TestimonialList />,
   },
   {
-    path: "create-community",
-    element: <CreateCommunity />,
+    path: "create-testimonial",
+    element: <CreateTestimonial />,
+  },
+  {
+    path: "edit-testimonial/:id",
+    element: <CreateTestimonial />,
   },
   {
     path: "news",
