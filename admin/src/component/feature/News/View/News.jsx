@@ -73,7 +73,7 @@ const News = () => {
     try {
       const response = await deleteNews(id);
 
-      if (response.success || response.status === "success") {
+      if (response.success || response.status == "204") {
         toast.success("News deleted successfully");
         getNews(pagination.page, pagination.limit);
       } else {
