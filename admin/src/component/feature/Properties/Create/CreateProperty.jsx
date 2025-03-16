@@ -74,38 +74,50 @@ const CreateProperty = () => {
     getAmenities();
 
     if (id) {
-      const property = propertyData.find((property) => property._id === id);
-      if (property) {
-        setMainBannerPreview(property?.banner?.s3Url);
-        setInitialValues(property);
-        setImages(property?.image);
-        form.setValues(property);
-      } else {
-        fetchProperty();
-      }
-    }
-  }, [id, propertyData]);
+      const fetchPropertyData = async () => {
+        setFetchLoading(true);
+        try {
+          const response = await fetchById(id);
+          if (response.success || response.status === "success") {
+            const propertyData = response.data;
 
-  const fetchProperty = async () => {
-    setFetchLoading(true);
-    try {
-      const response = await fetchById(id);
-      if (response?.success || response?.status === "success") {
-        const property = response.data;
-        setMainBannerPreview(property?.banner?.s3Url);
-        setInitialValues(property);
-        setImages(property?.image);
-        form.setValues(property);
-      } else {
-        toast.error(response?.message || "Failed to fetch property details");
-      }
-    } catch (error) {
-      console.error("Error fetching property:", error);
-      toast.error("Something went wrong while fetching property details");
-    } finally {
-      setFetchLoading(false);
+            // Process amenities correctly
+            let amenityIds = [];
+            if (
+              propertyData.amenities &&
+              Array.isArray(propertyData.amenities)
+            ) {
+              // Handle both formats: array of objects or array of strings
+              amenityIds = propertyData.amenities.map((amenity) =>
+                typeof amenity === "object" && amenity._id
+                  ? amenity._id
+                  : amenity
+              );
+            }
+
+            // Set form values with processed amenities
+            form.setValues({
+              ...propertyData,
+              amenities: amenityIds,
+              // ... other form fields ...
+            });
+
+            // Fetch amenities list to ensure we have the data for display
+            getAmenities();
+          } else {
+            toast.error(response.message || "Failed to fetch property details");
+          }
+        } catch (error) {
+          console.error("Error fetching property:", error);
+          toast.error("Something went wrong while fetching property details");
+        } finally {
+          setFetchLoading(false);
+        }
+      };
+
+      fetchPropertyData();
     }
-  };
+  }, [id]);
 
   const validateFormData = (formData) => {
     const validationErrors = {};
@@ -369,15 +381,23 @@ const CreateProperty = () => {
                   <h6 className="text-sm mb-2">Selected Amenities:</h6>
                   <div className="d-flex flex-wrap gap-2">
                     {form.values.amenities.map((amenityId) => {
+                      // Find the amenity in the list
                       const amenity = amenitiesList.find(
                         (a) => a._id === amenityId
                       );
+
+                      // If not found in the list, check if it's in the original data
+                      let amenityName = "Unknown amenity";
+                      if (amenity) {
+                        amenityName = amenity.name;
+                      }
+
                       return (
                         <div
                           key={amenityId}
                           className="badge bg-primary p-2 d-flex align-items-center"
                         >
-                          <span>{amenity?.name || "Unknown amenity"}</span>
+                          <span>{amenityName}</span>
                           <button
                             type="button"
                             className="btn-close btn-close-white ms-2"
