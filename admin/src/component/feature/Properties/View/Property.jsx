@@ -2,7 +2,10 @@ import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import DeleteModal from "./DeleteModal";
 import { formateDate } from "../../../../util/formateDate";
-import { fetch as fetchProperties } from "../../../../services/PropertyService";
+import {
+  fetch as fetchProperties,
+  toggleFeatured,
+} from "../../../../services/PropertyService";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Pagination from "../../../shared/Pagination/Pagination";
@@ -11,6 +14,7 @@ const Property = () => {
   const [properties, setProperties] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedProperty, setSelectedProperty] = useState(null);
+  const [featuringProperty, setFeaturingProperty] = useState(null);
   const [pagination, setPagination] = useState({
     page: 1,
     limit: 10,
@@ -53,6 +57,39 @@ const Property = () => {
 
   const handleLimitChange = (newLimit) => {
     getProperties(1, newLimit);
+  };
+
+  // Add function to handle toggling featured status
+  const handleToggleFeatured = async (property) => {
+    if (!property || !property._id) return;
+
+    setFeaturingProperty(property._id);
+
+    try {
+      const response = await toggleFeatured(property._id);
+
+      if (response.success || response.status === "success") {
+        // Update the property in the local state
+        const updatedProperties = properties.map((p) =>
+          p._id === property._id ? { ...p, isFeatured: !p.isFeatured } : p
+        );
+
+        setProperties(updatedProperties);
+
+        toast.success(
+          `Property ${
+            property.isFeatured ? "removed from" : "marked as"
+          } featured successfully`
+        );
+      } else {
+        toast.error(response.message || "Failed to update featured status");
+      }
+    } catch (error) {
+      console.error("Error toggling featured status:", error);
+      toast.error("An unexpected error occurred");
+    } finally {
+      setFeaturingProperty(null);
+    }
   };
 
   return (
@@ -148,7 +185,13 @@ const Property = () => {
                                   </span>
                                 </td>
                                 <td className="align-middle text-center">
-                                  <span className="text-secondary text-xs font-weight-bold">
+                                  <span
+                                    className={`badge badge-sm ${
+                                      property?.isFeatured
+                                        ? "bg-gradient-success"
+                                        : "bg-gradient-secondary"
+                                    }`}
+                                  >
                                     {property?.isFeatured ? "Yes" : "No"}
                                   </span>
                                 </td>
@@ -163,7 +206,7 @@ const Property = () => {
                                 <td className="align-middle flex-cs gap-3 text-center text-center">
                                   <NavLink
                                     to={`/edit-property/${property?._id}`}
-                                    className="btn btn-success btn m-0 font-weight-bold text-xs"
+                                    className="btn btn-success btn-sm m-0 font-weight-bold text-xs"
                                     data-toggle="tooltip"
                                     data-original-title="Edit user"
                                   >
@@ -175,26 +218,44 @@ const Property = () => {
                                     onClick={() =>
                                       setSelectedProperty(property)
                                     }
-                                    className="btn-danger btn m-0 font-weight-bold text-xs"
+                                    className="btn-danger btn btn-sm m-0 font-weight-bold text-xs"
                                   >
                                     Delete
                                   </button>
                                   <button
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#modal-banner"
                                     onClick={() =>
-                                      setSelectedProperty(property)
+                                      handleToggleFeatured(property)
                                     }
-                                    className="btn-warning btn m-0 font-weight-bold text-xs"
+                                    className={`btn-${
+                                      property?.isFeatured
+                                        ? "secondary"
+                                        : "warning"
+                                    } btn btn-sm m-0 font-weight-bold text-xs`}
+                                    disabled={
+                                      featuringProperty === property?._id
+                                    }
                                   >
-                                    Featured
+                                    {featuringProperty === property?._id ? (
+                                      <>
+                                        <span
+                                          className="spinner-border spinner-border-sm me-1"
+                                          role="status"
+                                          aria-hidden="true"
+                                        ></span>
+                                        Updating...
+                                      </>
+                                    ) : property?.isFeatured ? (
+                                      "Unfeature"
+                                    ) : (
+                                      "Feature"
+                                    )}
                                   </button>
                                 </td>
                               </tr>
                             ))
                           ) : (
                             <tr>
-                              <td colSpan="7" className="text-center py-4">
+                              <td colSpan="8" className="text-center py-4">
                                 No properties found
                               </td>
                             </tr>

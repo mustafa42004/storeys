@@ -103,4 +103,28 @@ const fetchById = async (id) => {
   }
 };
 
-export { create, update, deleteProperty, fetch, fetchById };
+const toggleFeatured = async (id) => {
+  try {
+    const response = await axios.patch(
+      `${API_URL}/properties/toggle-featured/${id}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Property toggle featured error:", error);
+    return {
+      success: false,
+      message:
+        error.response?.data?.message ||
+        "Failed to toggle featured property. Please try again.",
+      error: error.response?.data || error.message,
+    };
+  }
+};
+
+export { create, update, deleteProperty, fetch, fetchById, toggleFeatured };

@@ -233,3 +233,25 @@ module.exports.searchProperties = catchAsync(async (req, res, next) => {
     data: properties,
   });
 });
+
+module.exports.toggleFeaturedProperty = catchAsync(async (req, res, next) => {
+  const property = await propertyModel.findById(req.params.id);
+
+  if (!property) {
+    return next(new ApiError("Property not found", 404));
+  }
+
+  // Toggle the isFeatured status
+  property.isFeatured = !property.isFeatured;
+  await property.save();
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      property,
+      message: `Property ${
+        property.isFeatured ? "set as featured" : "removed from featured"
+      }`,
+    },
+  });
+});

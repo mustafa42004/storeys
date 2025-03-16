@@ -12,6 +12,12 @@ const propertyUpload = s3Upload("properties").fields([
 router.get("/cities", propertyController.getCities);
 router.get("/search", propertyController.searchProperties);
 
+router.patch(
+  "/toggle-featured/:id",
+  authMiddleware.protect,
+  propertyController.toggleFeaturedProperty
+);
+
 router
   .route("/")
   .get(propertyController.getAllProperties)
