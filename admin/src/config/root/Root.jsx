@@ -57,6 +57,10 @@ const rootRoutes = [
     element: <CreateNews />,
   },
   {
+    path: "edit-news/:id",
+    element: <CreateNews />,
+  },
+  {
     path: "amenity",
     element: <Amenity />,
   },
