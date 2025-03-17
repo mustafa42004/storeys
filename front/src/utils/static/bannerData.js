@@ -1,5 +1,5 @@
 export const homeBanner = {
-    title: "Integrity.Expertise.Excellence",
+    title: "Integrity . Expertise . Excellence",
     description: "Dubai’s fastest growing brokerage, while providing a new standard of service.",
     isFilter: true,
     bg: '/assets/img/main-banner.svg',

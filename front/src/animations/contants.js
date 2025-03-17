@@ -5,5 +5,5 @@ export const SLIDER_ITEMS = Array.from({ length: 14 }, (_, index) => ({
 
 export const ANIMATION_CONFIG = {
     duration: 15,
-    gap: '30px'
+    gap: '15px'
 };

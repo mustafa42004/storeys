@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Heading from "../../../shared/Headings/Heading"
+import { Link } from "react-router-dom";
 
 const FixedBgComp = () => {
     const [isMobile, setIsMobile] = useState(false);
@@ -19,7 +20,7 @@ const FixedBgComp = () => {
     <>
         <Heading title="List your property" className={ `${isMobile ? "fs-36 light w-80 " : "light fs-60"}`} description="Take your property ‘Exclusive’ with Storeys and enjoy all the exclusive benefits." descriptionClassName="light" />
 
-        <button className="cs-btn light">Book a Valuation <i className="fa-regular fa-arrow-right"></i></button>
+        <Link  to = '/contact' className="cs-btn light">Book a Valuation <i className="fa-regular fa-arrow-right"></i></Link>
     </>
   )
 }
