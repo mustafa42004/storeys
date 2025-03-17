@@ -1,6 +1,8 @@
-import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "react-toastify";
+import CareerService from "./../../../services/career.service"; // Adjust the import path as necessary
 
 const validationSchema = Yup.object({
   firstName: Yup.string().required("First name is required"),
@@ -15,6 +17,21 @@ const validationSchema = Yup.object({
 });
 
 const CareerModel = () => {
+  const { mutate: createContact, isLoading } = useMutation({
+    mutationFn: CareerService.createCareer,
+    onSuccess: () => {
+      toast.success("Application sent successfully");
+    },
+    onError: (error) => {
+      toast.error(error.response?.data?.message || "An error occurred");
+    },
+  });
+
+  const handleSubmit = (values, { resetForm }) => {
+    createContact(values);
+    resetForm();
+  };
+
   return (
     <div
       className="modal fade"
@@ -37,9 +54,7 @@ const CareerModel = () => {
                 resume: null,
               }}
               validationSchema={validationSchema}
-              onSubmit={(values) => {
-                console.log("Form Data:", values);
-              }}
+              onSubmit={handleSubmit}
             >
               {({ setFieldValue }) => (
                 <Form>
@@ -102,8 +117,12 @@ const CareerModel = () => {
                     >
                       Close
                     </button>
-                    <button type="submit" className="btn btn-primary">
-                      Submit
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                      disabled={isLoading}
+                    >
+                      {isLoading ? "Submitting..." : "Submit"}
                     </button>
                   </div>
                 </Form>
