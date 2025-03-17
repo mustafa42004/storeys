@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const mongoosePaginate = require("mongoose-paginate-v2");
 const validator = require("validator");
 
-const contactSchema = new mongoose.Schema(
+const careerSchema = new mongoose.Schema(
   {
     firstName: {
       type: String,
@@ -33,17 +33,21 @@ const contactSchema = new mongoose.Schema(
       required: [true, "Phone number is required"],
       trim: true,
     },
-    message: {
+    designation: {
       type: String,
       default: "",
-      required: [true, "Message is required"],
+      required: [true, "Designation is required"],
       trim: true,
     },
+    resume: {
+      s3Url: { type: String, default: "" },
+      s3Key: { type: String, default: "" },
+    },
   },
-  { collection: "contact", timestamps: true }
+  { collection: "career", timestamps: true }
 );
 
 // using paginate plugin
-contactSchema.plugin(mongoosePaginate);
+careerSchema.plugin(mongoosePaginate);
 
-module.exports = mongoose.model("contact", contactSchema);
+module.exports = mongoose.model("career", careerSchema);

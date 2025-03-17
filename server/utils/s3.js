@@ -62,7 +62,7 @@ const s3Upload = (folder) => {
         return cb(null, true);
       }
 
-      const allowedTypes = /jpeg|jpg|png|gif|svg/;
+      const allowedTypes = /jpeg|jpg|png|gif|svg|pdf|doc|docx|ppt/;
       const ext = allowedTypes.test(
         path.extname(file.originalname).toLowerCase()
       );
@@ -71,7 +71,11 @@ const s3Upload = (folder) => {
       if (ext && mimetype) {
         return cb(null, true);
       }
-      cb(new Error("Only images (JPEG, JPG, PNG, GIF, SVG) are allowed"));
+      cb(
+        new Error(
+          "Only images (JPEG, JPG, PNG, GIF, SVG)  and PDFs are allowed"
+        )
+      );
     },
   });
 };

@@ -9,6 +9,7 @@ const amenityRoutes = require("./routes/amenityRoutes");
 const authRoutes = require("./routes/authRoutes");
 const newsRoutes = require("./routes/newsRoutes");
 const teamRoutes = require("./routes/teamRoutes");
+const careerRoutes = require("./routes/careerRoutes");
 const contactRoutes = require("./routes/contactRoutes");
 const testimonialRoutes = require("./routes/testimonialRoutes");
 const fs = require("fs");
@@ -58,6 +59,7 @@ app.use(`${BASE_URL}/properties`, propertyRoutes);
 app.use(`${BASE_URL}/amenities`, amenityRoutes);
 app.use(`${BASE_URL}/news`, newsRoutes);
 app.use(`${BASE_URL}/teams`, teamRoutes);
+app.use(`${BASE_URL}/careers`, careerRoutes);
 app.use(`${BASE_URL}/contacts`, contactRoutes);
 app.use(`${BASE_URL}/testimonials`, testimonialRoutes);
 
