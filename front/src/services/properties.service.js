@@ -1,8 +1,10 @@
 import api from "./api";
 
 class propertiesService {
-  static async getProperties() {
-    const response = await api.get("/properties");
+  static async getProperties({ queryKey }) {
+    const response = await api.get("/properties", {
+      params: queryKey?.[1] ? queryKey[1] : {},
+    });
     return response.data;
   }
 

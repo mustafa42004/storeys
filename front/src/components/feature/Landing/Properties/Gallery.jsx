@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Gallery = () => {
+const Gallery = (data) => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const showContent = (index, isHovered) => {
@@ -54,58 +54,64 @@ const Gallery = () => {
     },
   ];
 
+  console.log(data);
+
   return (
     <div className="gallery">
-      {galleryItems.map((item, index) => (
-        <div
-          key={index}
-          onMouseEnter={() => showContent(index, true)}
-          onMouseLeave={() => showContent(index, false)}
-          className="item"
-        >
-          <img src={item.image} alt={`Property - ${item.description}`} />
-
-          <button
-            className="round-btn"
-            aria-label="View details"
-            style={{
-              marginTop: hoveredIndex === index ? "20px" : "0px",
-              marginRight: hoveredIndex === index ? "20px" : "0px",
-            }}
-          >
-            <i className="fa-regular fa-arrow-up-right"></i>
-          </button>
+      {data?.length &&
+        data?.map((item, index) => (
           <div
-            className="content"
-            style={{ opacity: hoveredIndex === index ? 1 : 0 }}
+            key={index}
+            onMouseEnter={() => showContent(index, true)}
+            onMouseLeave={() => showContent(index, false)}
+            className="item"
           >
-            <h4 className="font-lg text-left light fs-36">{item.price}</h4>
-            <p className="font-lg text-left font-sans light fs-18">
-              {item.description}
-            </p>
-            <div className="flex-cs justify-between w-100">
+            <img
+              src={item?.banner?.s3Url}
+              alt={`Property - ${item.description}`}
+            />
+
+            <button
+              className="round-btn"
+              aria-label="View details"
+              style={{
+                marginTop: hoveredIndex === index ? "20px" : "0px",
+                marginRight: hoveredIndex === index ? "20px" : "0px",
+              }}
+            >
+              <i className="fa-regular fa-arrow-up-right"></i>
+            </button>
+            <div
+              className="content"
+              style={{ opacity: hoveredIndex === index ? 1 : 0 }}
+            >
+              <h4 className="font-lg text-left light fs-36">{item.price}</h4>
               <p className="font-lg text-left font-sans light fs-18">
-                {item.names}
+                {item.description}
               </p>
-              <div className="grid-cs gtc-4 data">
-                {item.data.map((dataItem, dataIndex) => (
-                  <div
-                    key={dataIndex}
-                    className={dataIndex !== 2 ? "divider" : ""}
-                  >
-                    <p className="font-lg font-sans light fs-18">
-                      {dataItem.name}
-                    </p>
-                    <p className="font-lg font-sans light fs-18">
-                      {dataItem.value}
-                    </p>
-                  </div>
-                ))}
+              <div className="flex-cs justify-between w-100">
+                <p className="font-lg text-left font-sans light fs-18">
+                  {item.names}
+                </p>
+                <div className="grid-cs gtc-4 data">
+                  {item.data.map((dataItem, dataIndex) => (
+                    <div
+                      key={dataIndex}
+                      className={dataIndex !== 2 ? "divider" : ""}
+                    >
+                      <p className="font-lg font-sans light fs-18">
+                        {dataItem.name}
+                      </p>
+                      <p className="font-lg font-sans light fs-18">
+                        {dataItem.value}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
     </div>
   );
 };
