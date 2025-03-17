@@ -13,6 +13,7 @@ const validationSchema = Yup.object({
   phone: Yup.string()
     .matches(/^\d{10}$/, "Phone number must be 10 digits")
     .required("Phone number is required"),
+  designation: Yup.string().required("Designation is required"),
   resume: Yup.mixed().required("Resume is required"),
 });
 
@@ -51,6 +52,7 @@ const CareerModel = () => {
                 lastName: "",
                 email: "",
                 phone: "",
+                designation: "",
                 resume: null,
               }}
               validationSchema={validationSchema}
@@ -90,6 +92,15 @@ const CareerModel = () => {
                     <Field name="phone" className="form-control" />
                     <ErrorMessage
                       name="phone"
+                      component="div"
+                      className="text-danger"
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">Designation</label>
+                    <Field name="designation" className="form-control" />
+                    <ErrorMessage
+                      name="designation"
                       component="div"
                       className="text-danger"
                     />
