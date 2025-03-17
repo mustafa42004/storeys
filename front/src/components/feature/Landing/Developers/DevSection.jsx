@@ -13,7 +13,7 @@ const DevSection = () => {
     <>
       <section className="dev-section pt-cs">
         <Heading
-          title="Our Developers"
+          title="Our Partners"
           className={`${isMobile ? "fs-50 w-80 " : "auto"}`}
         />
         <Slider />

@@ -55,7 +55,7 @@ const Content = ({ heading }) => {
     <>
       <div className="form-content">
         <h4 className="font-lg light text-left lh-36 fs-36">
-          {heading || "List Your Property with Storeys Real Estate"}
+          {heading || "List Your Property with Storeys \nReal Estate"}
         </h4>
         <h6 className="font-sm light text-left lh-24 fs-16 medium">
           At Storeys, we believe in adding as much value as possible when you
@@ -160,7 +160,7 @@ const Content = ({ heading }) => {
                   id="message"
                   name="message"
                   rows={5}
-                  className={`w-80 text-white ${
+                  className={`w-100 text-white ${
                     errors.message && touched.message ? "error-input" : ""
                   }`}
                   placeholder="Enter a Brief Description"

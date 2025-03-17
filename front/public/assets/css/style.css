@@ -450,10 +450,11 @@ select.dropdown-select option:hover {
 
 .price-input {
   flex: 1;
-  padding: 8px 12px;
+  padding: 8px 2px;
   border: 1px solid #e0e0e0;
   border-radius: 4px;
-  width: calc(50% - 10px);
+  width: calc(100% - 2px);
+
 }
 
 .separator {
@@ -480,11 +481,11 @@ select.dropdown-select option:hover {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 15px;
     .row1,
     .row2 {
       display: flex;
-      gap: 30px;
+      gap: 15px;
       white-space: nowrap;
       will-change: transform;
       .item {
@@ -494,12 +495,12 @@ select.dropdown-select option:hover {
         background: #fff;
         box-shadow: 0px 2.86px 19.064px 0px rgba(0, 0, 0, 0.1);
         padding: 20px;
-        width: 180px;
-        height: 80px;
+        width: 150px;
+        height: 75px;
         img {
           width: 100%;
           height: 100%;
-          object-fit: contain;
+          object-fit: fill;
         }
       }
     }
@@ -888,6 +889,9 @@ select.dropdown-select option:hover {
       height: auto;
     }
   }
+  .form-content h4 {
+    white-space: pre-line;
+  }
 }
 
 .w-80 {
@@ -1205,6 +1209,7 @@ select.dropdown-select option:hover {
       background: #fff;
       box-shadow: 0px 0px 20px 11px rgba(0, 0, 0, 0.04);
       position: relative;
+      font-size: 12px;
       img {
         width: 100%;
         height: 100%;

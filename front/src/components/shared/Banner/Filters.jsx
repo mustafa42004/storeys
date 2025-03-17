@@ -158,7 +158,7 @@ const Filters = ({ theme }) => {
               value={formData.minPrice}
               onChange={handleInputChange}
               placeholder="Min price"
-              className={`font-sm fs-16 price-input price-range ${classes.sm}`}
+              className={`font-sm fs-12 price-input price-range ${classes.sm}`}
             />
             <span className="separator">-</span>
             <input
@@ -167,7 +167,7 @@ const Filters = ({ theme }) => {
               value={formData.maxPrice}
               onChange={handleInputChange}
               placeholder="Max price"
-              className={`font-sm fs-16 price-input price-range ${classes.sm}`}
+              className={`font-sm fs-12 price-input price-range ${classes.sm}`}
             />
           </div>
         </div>

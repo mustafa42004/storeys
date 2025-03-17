@@ -1,4 +1,4 @@
-import React from "react";
+
 import Heading from "../../../shared/Headings/Heading";
 import Cards from "./Cards";
 
@@ -10,7 +10,7 @@ const Layout = () => {
       <div className="container">
         <div className="row">
           <div className="col-md-12">
-            <p className="font-sm mb-4 fs-20 medium">Our Team</p>
+            {/* <p className="font-sm mb-4 fs-20 medium">Our Team</p> */}
             <Heading title="You're in safe hands" className="fs-50" />
             <div className="layout">
               {[
@@ -59,12 +59,13 @@ const Layout = () => {
                   name: "Shahbaaz Ahamed",
                   designation: "Senior Sales Manager",
                 },
+                
               ].map((value, index) => (
-                <Cards
+                <Cards 
                   key={index}
                   image={value.image}
-                  name={value.name}
-                  designation={value.designation}
+                  name={<span className="fs-16 font-bold">{value.name}</span>}
+                  designation={<span className="fs-12 text-gray-500">{value.designation}</span>}
                 />
               ))}
             </div>

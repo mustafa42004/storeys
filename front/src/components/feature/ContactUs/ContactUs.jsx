@@ -18,7 +18,7 @@ const ContactUs = () => {
         <Header height={setHeight} />
         <Banner title={contactBanner.title} description={contactBanner.description} isFilter={false} isBtn={false} bg={contactBanner.bg} width={contactBanner.width} height={contactBanner.height} marginTop="100"   />
         <Frame frame={contactFrame} Component={InfoSection} />
-        <FormSection heading="Feel free to get in touch with us!-" />
+        <FormSection heading="Feel free to get in touch with us!" />
         <Footer />
     </>
   )

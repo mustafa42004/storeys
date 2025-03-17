@@ -10,7 +10,7 @@ const Cards = ({title, description, image}) => {
                 <h4 className="font-lg text-left fs-18">{title}</h4>
                 <p className="font-sm text-left">{description}</p>
             </div>
-                <button className="cs-btn hover">Explore More <i className="fa-regular fa-arrow-right"></i></button>
+                {/* <button className="cs-btn hover">Explore More <i className="fa-regular fa-arrow-right"></i></button> */}
         </div>
     </>
   )
