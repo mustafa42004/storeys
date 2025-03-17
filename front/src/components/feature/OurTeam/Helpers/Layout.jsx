@@ -65,9 +65,6 @@ const Layout = () => {
                   image={value.image}
                   name={<span className="fs-16 font-bold">{value.name}</span>}
                   designation={<span className="fs-12 text-gray-500">{value.designation}</span>}
-
-                  // name={value.name}
-                  // designation={value.designation}
                 />
               ))}
             </div>
