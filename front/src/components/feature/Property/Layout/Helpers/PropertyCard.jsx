@@ -3,10 +3,12 @@ import { NavLink } from "react-router-dom";
 import Center from "./Center";
 import Pill from "./Pill";
 import { startCardAnimation } from "../../../../../animations/animation";
+import { useNavigate } from "react-router-dom";
 
 const PropertyCard = ({ index, property }) => {
   const { image, location, price, agentName, agentImage } = property;
 
+  const navigate = useNavigate();
   const cardRef = useRef(null);
   const rowRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -76,7 +78,7 @@ const PropertyCard = ({ index, property }) => {
             </div>
             <h4 className="font-sm text-left fs-20 dark bold">{agentName}</h4>
             <div className="buttons">
-              <button>
+              <button onClick={() => navigate("/contact")}>
                 <img src="/assets/img/message.svg" alt="" />
               </button>
               <button>

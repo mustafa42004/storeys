@@ -21,7 +21,7 @@ const Center = () => {
                 <div>
                     <h4 className="font-sm text-left dark medium fs-16">1,420 m<sup>2</sup> &nbsp; <img src="/assets/img/sqft.svg" alt="" className="icon" /></h4>
                 </div>
-                    <h4 className="font-sm text-left dark medium fs-16">Square Ft</h4>
+                    <h4 className="font-sm text-left dark medium fs-16">Sq.Ft</h4>
 
             </div>
         </div>
