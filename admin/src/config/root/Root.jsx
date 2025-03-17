@@ -12,6 +12,8 @@ import CreateTestimonial from "../../component/feature/Testimonials/Create/Creat
 import ChangePassword from "../../component/shared/Auth/ChangePassword";
 import { Navigate } from "react-router-dom";
 import ListContacts from "../../component/feature/contacts/ListContacts";
+import ListCareers from "../../component/feature/Careers/ListCareers";
+
 const rootRoutes = [
   {
     path: "/",
@@ -33,6 +35,10 @@ const rootRoutes = [
   {
     path: "contacts",
     element: <ListContacts />,
+  },
+  {
+    path: "careers",
+    element: <ListCareers />,
   },
   {
     path: "teams",
