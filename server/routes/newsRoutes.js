@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const newsController = require("../controllers/newsController");
+const newsController = require("../controllers/NewsController");
 const { s3Upload } = require("../utils/s3");
 const authMiddleware = require("../middlewares/authMiddleware");
 
