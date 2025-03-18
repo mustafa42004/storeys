@@ -29,7 +29,16 @@ const CareerModel = () => {
   });
 
   const handleSubmit = (values, { resetForm }) => {
-    createContact(values);
+    const formData = new FormData();
+    console.log("runnning");
+    formData.append("firstName", values.firstName);
+    formData.append("lastName", values.lastName);
+    formData.append("email", values.email);
+    formData.append("phone", values.phone);
+    formData.append("designation", values.designation);
+    formData.append("resume", values.resume);
+
+    createContact(formData);
     resetForm();
   };
 
