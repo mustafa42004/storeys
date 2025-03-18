@@ -6,8 +6,8 @@ class NewsService {
     return response.data;
   }
 
-  static async getNewsById(id) {
-    const response = await api.get(`/news/${id}`);
+  static async getNewsById({ queryKey }) {
+    const response = await api.get(`/news/${queryKey[1]}`);
     return response.data;
   }
 }
