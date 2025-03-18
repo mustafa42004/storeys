@@ -36,7 +36,7 @@ const Testimonial = () => {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: 5,
     slidesToScroll: 1,
     arrows: false,
     className: "testimonial-slides",
@@ -57,8 +57,8 @@ const Testimonial = () => {
       <div className="our-team card">
         <img src={image} alt="" />
         <div className="content">
-          <h4 className="font-sm text-left font-atyp dark medium">{name}</h4>
-          <p className="font-sm text-left">{designation}</p>
+          <h4 className="fs-16 text-left font-atyp dark medium">{name}</h4>
+          <p className="fs-12 text-left">{designation}</p>
         </div>
       </div>
     );

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import SharedDropdown from "../../static_components/SharedDropdown";
 
 const Filters = ({ theme }) => {
   const navigate = useNavigate();
@@ -78,22 +79,14 @@ const Filters = ({ theme }) => {
       <div className={`filters ${classes.display} ${classes.theme}`}>
         <div className="item divide">
           <h4 className={`font-sm medium ${classes.medium}`}>Location</h4>
-          <div className="dropdown">
-            <input
-              list="locations"
-              name="location"
-              value={formData.location}
-              onChange={handleInputChange}
-              placeholder="Search Location"
-              className={`font-sm fs-16 dropdown-select text-left ${classes.select}`}
-            />
-            <datalist id="locations">
-              <option value="Downtown" />
-              <option value="Suburbs" />
-              <option value="West End" />
-              <option value="East End" />
-            </datalist>
-          </div>
+          <SharedDropdown
+            value={""}
+            onChange={(value) => console.log(value)}
+            name="location"
+            placeholder="enter location"
+            options={["dubai"]}
+            className={classes.select}
+          />
         </div>
         <div className="item divide">
           <h4 className={`font-sm medium ${classes.medium}`}>Bedrooms</h4>
