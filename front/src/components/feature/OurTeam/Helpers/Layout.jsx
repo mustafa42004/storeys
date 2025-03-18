@@ -29,8 +29,12 @@ const Layout = () => {
                 data?.map((value, index) => (
                   <Cards
                     key={index}
-                    image={value.image}
-                    name={<span className="fs-16 font-bold">{value.name}</span>}
+                    image={value?.profile?.s3Url}
+                    name={
+                      <span className="fs-16 font-bold">
+                        {value.firstName} {value.lastName}
+                      </span>
+                    }
                     designation={
                       <span className="fs-12 text-gray-500">
                         {value.designation}
