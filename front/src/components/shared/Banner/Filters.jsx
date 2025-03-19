@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import SharedDropdown from "../../static_components/SharedDropdown";
+import dubaiAreas from "../../../constants/dubaiAreas";
+import { flatPropertyTypes } from "../../../constants/propertyTypes";
+import { toast } from "react-toastify";
 
 const Filters = ({ theme }) => {
   const navigate = useNavigate();
@@ -64,6 +67,11 @@ const Filters = ({ theme }) => {
   };
 
   const handleSearch = () => {
+    if (!Object.values(formData).every((val) => !!val)) {
+      toast.error("All Values are required");
+      return;
+    }
+
     // Filter out empty values
     const params = new URLSearchParams();
     Object.entries(formData).forEach(([key, value]) => {
@@ -80,44 +88,36 @@ const Filters = ({ theme }) => {
         <div className="item divide">
           <h4 className={`font-sm medium ${classes.medium}`}>Location</h4>
           <SharedDropdown
-            value={""}
-            onChange={(value) => console.log(value)}
+            value={formData?.location}
+            onChange={handleInputChange}
             name="location"
-            placeholder="enter location"
-            options={["dubai"]}
+            placeholder="Select Location"
+            options={dubaiAreas}
             className={classes.select}
           />
         </div>
         <div className="item divide">
           <h4 className={`font-sm medium ${classes.medium}`}>Bedrooms</h4>
-          <div className="dropdown">
-            <select
-              name="bedrooms"
-              value={formData.bedrooms}
-              onChange={handleInputChange}
-              className={`font-sm fs-16 dropdown-select text-left ${classes.select}`}
-            >
-              <option className="dropdown-option" value="">
-                Select Bedrooms
-              </option>
-              <option className="dropdown-option" value="1">
-                1 Bedroom
-              </option>
-              <option className="dropdown-option" value="2">
-                2 Bedrooms
-              </option>
-              <option className="dropdown-option" value="3">
-                3 Bedrooms
-              </option>
-              <option className="dropdown-option" value="4">
-                4+ Bedrooms
-              </option>
-            </select>
-          </div>
+          <SharedDropdown
+            value={formData?.bedrooms}
+            onChange={handleInputChange}
+            name="bedrooms"
+            placeholder="Select Bedroom"
+            options={["1 Bedroom", "2 Bedrooms", "3 Bedrooms", "4 Bedrooms"]}
+            className={classes.select}
+          />
         </div>
         <div className="item divide">
           <h4 className={`font-sm medium ${classes.medium}`}>Types</h4>
-          <div className="dropdown">
+          <SharedDropdown
+            value={formData?.type}
+            onChange={handleInputChange}
+            name="type"
+            placeholder="Select Type"
+            options={flatPropertyTypes}
+            className={classes.select}
+          />
+          {/* <div className="dropdown">
             <select
               name="type"
               value={formData.type}
@@ -140,7 +140,7 @@ const Filters = ({ theme }) => {
                 Villa
               </option>
             </select>
-          </div>
+          </div> */}
         </div>
         <div className="item">
           <h4 className={`font-sm medium ${classes.medium}`}>Price Range</h4>
