@@ -1,14 +1,15 @@
 import Heading from "../../../shared/Headings/Heading";
 import { useEffect, useState } from "react";
 import PropertyCard from "./Helpers/PropertyCard";
-import { propertyData } from "../../../../utils/static/propertyData";
 import { useQuery } from "@tanstack/react-query";
 import propertiesService from "../../../../services/properties.service";
 import { useSearchParams } from "react-router-dom";
 
 const Layout = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [activeButton, setActiveButton] = useState("sell");
-  const [searchParams] = useSearchParams();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [allProperties, setAllProperties] = useState([]);
 
   const [formData, setFormData] = useState({
     location: "",
@@ -26,22 +27,57 @@ const Layout = () => {
       minPrice: searchParams.get("minPrice") || "",
       maxPrice: searchParams.get("maxPrice") || "",
     });
+
+    setActiveButton(searchParams.get("status") || "sell");
+    // Reset properties and page when search params change
+    setAllProperties([]);
+    setCurrentPage(1);
   }, [searchParams]);
 
-  const { data, isLoading, isError, error } = useQuery({
+  const { data, isLoading, isError, error, refetch } = useQuery({
     queryKey: [
       "properties",
       {
-        location: formData.location,
+        city: formData.location,
         bedrooms: parseInt(formData.bedrooms),
         type: formData.type,
         "price[gte]": formData.minPrice,
         "price[lte]": formData.maxPrice,
+        status: activeButton,
+        page: currentPage,
       },
     ],
     queryFn: propertiesService.getProperties,
     select: (data) => data?.data,
   });
+
+  useEffect(() => {
+    if (data?.docs && !isLoading) {
+      if (currentPage === 1) {
+        setAllProperties(data.docs);
+      } else {
+        setAllProperties((prev) => [...prev, ...data.docs]);
+      }
+    }
+  }, [data, isLoading, currentPage]);
+
+  const handleLoadMore = () => {
+    if (data?.hasNextPage) {
+      setCurrentPage((prev) => prev + 1);
+    }
+  };
+
+  useEffect(() => {
+    if (currentPage > 1) {
+      refetch();
+    }
+  }, [currentPage, refetch]);
+
+  useEffect(() => {
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set("status", activeButton);
+    setSearchParams(newSearchParams);
+  }, [activeButton]);
 
   return (
     <>
@@ -63,7 +99,11 @@ const Layout = () => {
                   className={`cs-btn ${
                     activeButton === "sell" ? "" : "outline hover"
                   }`}
-                  onClick={() => setActiveButton("sell")}
+                  onClick={() => {
+                    setActiveButton("sell");
+                    setCurrentPage(1);
+                    setAllProperties([]);
+                  }}
                 >
                   For Sell
                 </button>
@@ -71,23 +111,29 @@ const Layout = () => {
                   className={`cs-btn  ${
                     activeButton === "rent" ? "" : "outline hover"
                   }`}
-                  onClick={() => setActiveButton("rent")}
+                  onClick={() => {
+                    setActiveButton("rent");
+                    setCurrentPage(1);
+                    setAllProperties([]);
+                  }}
                 >
                   For Rent
                 </button>
               </div>
 
-              {isLoading && <p className="text-center ">Loading...</p>}
+              {isLoading && currentPage === 1 && (
+                <p className="text-center">Loading...</p>
+              )}
               {isError && (
                 <p className="text-center">
                   {error?.message ||
-                    "Propeties not loaded. Something went wrong"}
+                    "Properties not loaded. Something went wrong"}
                 </p>
               )}
 
               <div className="card-layout">
-                {data?.docs?.length &&
-                  data?.docs.map((property, index) => (
+                {allProperties?.length > 0 &&
+                  allProperties.map((property, index) => (
                     <PropertyCard
                       key={property._id}
                       property={property}
@@ -95,11 +141,35 @@ const Layout = () => {
                     />
                   ))}
               </div>
-              <div className="w-100 mt-5 flex-cs">
-                <button className="cs-btn">
-                  Explore More <i className="fa-regular fa-arrow-right"></i>
-                </button>
-              </div>
+
+              {isLoading && currentPage > 1 && (
+                <div className="text-center mt-4">
+                  <p>Loading more properties...</p>
+                </div>
+              )}
+
+              {data?.hasNextPage && (
+                <div className="w-100 mt-5 flex-cs">
+                  <button
+                    className="cs-btn"
+                    onClick={handleLoadMore}
+                    disabled={!data?.hasNextPage || isLoading}
+                  >
+                    {data?.hasNextPage ? (
+                      <>
+                        Explore More{" "}
+                        <i className="fa-regular fa-arrow-right"></i>
+                      </>
+                    ) : (
+                      "You have got all the properties"
+                    )}
+                  </button>
+                </div>
+              )}
+
+              {!allProperties?.length && (
+                <p className="text-center">No properties Found</p>
+              )}
             </div>
           </div>
         </div>

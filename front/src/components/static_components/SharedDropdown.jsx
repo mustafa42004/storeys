@@ -148,7 +148,7 @@ const SharedDropdown = ({
             filteredOptions.map((option, index) => (
               <button
                 key={index}
-                className={`dropdown-item${className} text-capitalize text-wrap`}
+                className={`dropdown-item ${className} text-capitalize text-wrap`}
                 type="button"
                 onClick={() => handleOptionSelect(option)}
               >
