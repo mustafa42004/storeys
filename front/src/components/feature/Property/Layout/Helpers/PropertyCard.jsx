@@ -1,12 +1,21 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import Center from "./Center";
 import Pill from "./Pill";
-import { startCardAnimation } from "../../../../../animations/animation";
 import { useNavigate } from "react-router-dom";
 
 const PropertyCard = ({ index, property }) => {
-  const { image, location, price, agentName, agentImage } = property;
+  const {
+    banner,
+    location,
+    price,
+    agentName,
+    agentImage,
+    bathrooms,
+    bedrooms,
+    sqft,
+    _id,
+  } = property;
 
   const navigate = useNavigate();
   const cardRef = useRef(null);
@@ -57,10 +66,10 @@ const PropertyCard = ({ index, property }) => {
         }),
       }}
     >
-      <NavLink to="/property/1" className="card" ref={cardRef}>
+      <NavLink to={`/property/${_id}`} className="card" ref={cardRef}>
         <div className="banner">
-          <img src={image} alt="" />
-          <Pill title="For Sale" />
+          <img src={banner?.s3Url} alt="" />
+          <Pill title={`For ${property?.status}`} />
         </div>
         <div className="content">
           <div className="top">
@@ -70,13 +79,15 @@ const PropertyCard = ({ index, property }) => {
             </h4>
           </div>
 
-          <Center />
+          <Center baths={bathrooms} beds={bedrooms} sqft={sqft} />
 
           <div className="bottom">
             <div className="profile">
-              <img src={agentImage} alt="" />
+              <img src={"/assets/img/property-profile.svg"} alt="agent-image" />
             </div>
-            <h4 className="font-sm text-left fs-20 dark bold">{agentName}</h4>
+            <h4 className="font-sm text-left fs-20 dark bold">
+              {"Talan Culhane"}
+            </h4>
             <div className="buttons">
               <button onClick={() => navigate("/contact")}>
                 <img src="/assets/img/message.svg" alt="" />

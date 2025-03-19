@@ -117,30 +117,6 @@ const Filters = ({ theme }) => {
             options={flatPropertyTypes}
             className={classes.select}
           />
-          {/* <div className="dropdown">
-            <select
-              name="type"
-              value={formData.type}
-              onChange={handleInputChange}
-              className={`font-sm fs-16 dropdown-select text-left ${classes.select}`}
-            >
-              <option className="dropdown-option" value="">
-                Select Types
-              </option>
-              <option className="dropdown-option" value="apartment">
-                Apartment
-              </option>
-              <option className="dropdown-option" value="house">
-                House
-              </option>
-              <option className="dropdown-option" value="condo">
-                Condo
-              </option>
-              <option className="dropdown-option" value="villa">
-                Villa
-              </option>
-            </select>
-          </div> */}
         </div>
         <div className="item">
           <h4 className={`font-sm medium ${classes.medium}`}>Price Range</h4>
