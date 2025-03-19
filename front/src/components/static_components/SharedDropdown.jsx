@@ -121,7 +121,8 @@ const SharedDropdown = ({
 
   return (
     <div
-      className="dropdown shared-dropdown position-relative"
+      className="dropdown shared-dropdown position-relative "
+      style={{ zIndex: 9999 }}
       ref={dropdownRef}
     >
       <input
@@ -135,7 +136,7 @@ const SharedDropdown = ({
         placeholder={placeholder}
         autoComplete="off"
         readOnly={!searchable}
-        className={`font-sm fs-16 dropdown-select text-left ${className}`}
+        className={`fs-16 text-truncate dropdown-select text-left ${className}`}
       />
 
       {isOpen && (
@@ -147,7 +148,7 @@ const SharedDropdown = ({
             filteredOptions.map((option, index) => (
               <button
                 key={index}
-                className={`dropdown-item ${className}`}
+                className={`dropdown-item ${className} text-capitalize text-wrap`}
                 type="button"
                 onClick={() => handleOptionSelect(option)}
               >

@@ -13,7 +13,8 @@ const Notification = () => {
       pauseOnFocusLoss
       draggable
       pauseOnHover
-      theme="colored"
+      theme="light"
+      className={"toast-position"}
     />
   );
 };

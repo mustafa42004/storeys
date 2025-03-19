@@ -454,7 +454,6 @@ select.dropdown-select option:hover {
   border: 1px solid #e0e0e0;
   border-radius: 4px;
   width: calc(100% - 2px);
-
 }
 
 .separator {
@@ -2060,4 +2059,8 @@ select.dropdown-select option:hover {
 .list-unstyled {
   padding-left: 0;
   /* list-style: none; */
+}
+
+.Toastify__toast-container {
+  margin-top: 100px;
 }
