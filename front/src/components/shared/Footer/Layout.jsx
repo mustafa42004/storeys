@@ -12,8 +12,8 @@ const Layout = () => {
                     <Logo />
                 </div>
                 <div className="footer-buttons">
-                    <Link to='/contact' className="cs-btn p-16-65">Book a  Valuation <i className="fa-regular fa-arrow-right"></i></Link>
-                    <Link to='/property' className="cs-btn outline">Explore More <i className="fa-regular fa-arrow-right"></i></Link>
+                    <Link to='/contact' className="cs-btn p-16-60 fs-14">Book a  Valuation <i className="fa-regular fa-arrow-right"></i></Link>
+                    <Link to='/property' className="cs-btn outline fs-14">Explore More <i className="fa-regular fa-arrow-right"></i></Link>
                 </div>
                 <p className="font-sm text-left fs-16">Storeys is a top real estate brokerage in Dubai, excelling in Sales, Leasing, and Off-Plan properties. With 20+ years of expertise, we offer innovative strategies, helping investors maximize their real estate potential in a dynamic market.</p>
             </div>
