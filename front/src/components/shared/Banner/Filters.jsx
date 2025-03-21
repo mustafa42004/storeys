@@ -118,7 +118,7 @@ const Filters = ({ theme }) => {
             className={classes.select}
           />
         </div>
-        <div className="item">
+        <div className="item last-divide">
           <h4 className={`font-sm medium ${classes.medium}`}>Price Range</h4>
           <div className="price-range-inputs">
             <input
@@ -140,7 +140,7 @@ const Filters = ({ theme }) => {
             />
           </div>
         </div>
-        <div className="item p-0">
+        <div className="item p-0 ">
           <button
             className={`cs-btn align-self-end ${classes.button}`}
             onClick={handleSearch}
