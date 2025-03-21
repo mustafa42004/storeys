@@ -52,7 +52,7 @@ const CareerModel = () => {
       aria-labelledby="staticBackdropLabel"
       aria-hidden="true"
     >
-      <div className="modal-dialog modal-dialog-centered">
+      <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div className="modal-content">
           <div className="modal-body">
             <Formik
@@ -131,15 +131,8 @@ const CareerModel = () => {
                   </div>
                   <div className="modal-footer">
                     <button
-                      type="button"
-                      className="btn btn-secondary"
-                      data-bs-dismiss="modal"
-                    >
-                      Close
-                    </button>
-                    <button
                       type="submit"
-                      className="btn btn-primary"
+                      className="cs-btn"
                       disabled={isLoading}
                     >
                       {isLoading ? "Submitting..." : "Submit"}
