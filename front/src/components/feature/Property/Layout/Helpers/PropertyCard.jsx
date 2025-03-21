@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const PropertyCard = ({ index, property }) => {
   const {
     banner,
-    location,
+    city,
     price,
     agentName,
     agentImage,
@@ -73,9 +73,17 @@ const PropertyCard = ({ index, property }) => {
         </div>
         <div className="content">
           <div className="top">
-            <h4 className="font-sm text-left dark bold">{location}</h4>
+            <h4 className="font-sm text-left dark bold">{city}</h4>
             <h4 className="font-sm text-left font-atyp justify-self-end dark bold">
-              {price}
+              {new Intl.NumberFormat("en-AE", {
+                style: "currency",
+                currency: "AED",
+                maximumFractionDigits: 0,
+                currencyDisplay: "code",
+              })
+                ?.format(Number(price))
+                ?.replace("AED", "")
+                ?.trim() + " AED"}{" "}
             </h4>
           </div>
 

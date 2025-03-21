@@ -514,6 +514,30 @@
     }
   }
 
+  .property-card {
+    .content {
+      width: 100%;
+
+      .top {
+        h4 {
+          font-size: 18px !important;
+        }
+      }
+
+      .center {
+        .item {
+          .my-flex {
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 10px;
+            align-items: center;
+            justify-content: space-between;
+          }
+        }
+      }
+    }
+  }
+
   /* .home-heading {
     margin-top: 100px;
     font-size: 45px;
