@@ -2,6 +2,7 @@ const { S3Client, DeleteObjectCommand } = require("@aws-sdk/client-s3");
 const multer = require("multer");
 const multerS3 = require("multer-s3");
 const path = require("path");
+const ApiError = require("./ApiError");
 
 if (!process.env.AWS_BUCKET_NAME) {
   throw new Error("AWS_BUCKET_NAME is required in environment variables");
@@ -72,8 +73,9 @@ const s3Upload = (folder) => {
         return cb(null, true);
       }
       cb(
-        new Error(
-          "Only images (JPEG, JPG, PNG, GIF, SVG)  and PDFs are allowed"
+        new ApiError(
+          "Only images (JPEG, JPG, PNG, GIF, SVG)  and PDFs are allowed",
+          400
         )
       );
     },
