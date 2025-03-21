@@ -68,7 +68,7 @@ const Content = ({ heading }) => {
           onSubmit={handleSubmit}
         >
           {({ errors, touched }) => (
-            <Form>
+            <Form >
               <div className="grid-cs gap-30 w-80">
                 <div>
                   <label htmlFor="firstName" className="font-sm mb-2 light">

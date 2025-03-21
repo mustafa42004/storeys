@@ -153,6 +153,14 @@
     .form-content {
       padding: 25px;
       gap: 20px;
+
+      form {
+        width: 100%;
+
+        .cs-btn {
+          width: 100%;
+        }
+      }
     }
   }
   .w-80 {
