@@ -65,7 +65,7 @@ const Gallery = (data) => {
                     </p>
                     <p className="font-lg font-sans light fs-18">Beds</p>
                   </div>
-                  <div className={"divider"}>
+                  <div className={"divider l-divider"}>
                     <p className="font-lg font-sans light fs-18">
                       {item.bathrooms}
                     </p>

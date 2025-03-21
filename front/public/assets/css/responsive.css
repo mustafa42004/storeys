@@ -62,6 +62,16 @@
         .content {
           top: 8px;
           gap: 4px;
+
+          .grid-cs {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .l-divider {
+              border-right: none;
+            }
+          }
         }
       }
     }
