@@ -36,7 +36,17 @@ const Gallery = (data) => {
               className="content"
               style={{ opacity: hoveredIndex === index ? 1 : 0 }}
             >
-              <h4 className="font-lg text-left light fs-36">{item.price}</h4>
+              <h4 className="font-lg text-left light fs-36">
+                {new Intl.NumberFormat("en-AE", {
+                  style: "currency",
+                  currency: "AED",
+                  maximumFractionDigits: 0,
+                  currencyDisplay: "code",
+                })
+                  ?.format(Number(item?.price))
+                  ?.replace("AED", "")
+                  ?.trim() + " AED"}{" "}
+              </h4>
               <p className="font-lg text-left font-sans light fs-18">
                 {item.description}
               </p>
