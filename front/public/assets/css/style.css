@@ -1731,7 +1731,7 @@ select.dropdown-select option:hover {
     background: transparent !important;
     border: none;
   }
-  .accordion-header {
+  .accordion-item {
     border-bottom: 1px solid #1e1e1e;
   }
 }
