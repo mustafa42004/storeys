@@ -313,7 +313,7 @@
     .layout {
       display: flex;
       align-items: start;
-      position: relative;
+      position: static;
       justify-content: center;
       flex-direction: column-reverse;
       gap: 10px;
@@ -547,6 +547,13 @@
     /* background-color: #000; */
   }
 
+  .property-inner-info {
+    .box-cs {
+      padding: 0px;
+      gap: 0px !important;
+    }
+  }
+
   /* .home-heading {
     margin-top: 100px;
     font-size: 45px;
@@ -566,6 +573,21 @@
   .Listing {
     .filters {
       width: 90%;
+    }
+  }
+
+  .property-content {
+    .layout {
+      flex-direction: column-reverse;
+      align-items: start;
+      justify-content: center;
+
+      .profile-card-layout {
+        align-items: center;
+        position: static;
+        justify-content: center;
+        width: 100%;
+      }
     }
   }
 }
