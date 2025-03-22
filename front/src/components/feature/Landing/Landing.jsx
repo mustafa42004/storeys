@@ -24,6 +24,7 @@ const Landing = () => {
     <>
       <Header />
       <Banner
+        isHome={true}
         title={title}
         description={description}
         isFilter={isFilter}

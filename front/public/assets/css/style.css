@@ -2086,3 +2086,7 @@ select.dropdown-select option:hover {
     }
   }
 }
+
+.home-sm-heading {
+  display: none;
+}

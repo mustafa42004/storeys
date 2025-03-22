@@ -2,6 +2,7 @@ import Heading from "../Headings/Heading";
 import Filters from "./Filters";
 
 const Banner = ({
+  isHome = false,
   title,
   description,
   isFilter,
@@ -25,6 +26,7 @@ const Banner = ({
           }}
         >
           <Heading
+            isHome={isHome}
             title={title}
             className="light w-100 home-heading"
             description={description}

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 const Heading = ({
+  isHome = false,
   title,
   className,
   width,
@@ -38,7 +39,7 @@ const Heading = ({
           <h4
             className={`font-header ${className} ${
               isVisible ? "fade-in-up" : ""
-            }`}
+            } ${isHome ? "home-lg-heading" : ""}`}
             ref={titleRef}
             style={{
               opacity: 0,
@@ -52,6 +53,27 @@ const Heading = ({
           >
             {title}
           </h4>
+          {isHome ? (
+            <h4
+              className={`font-header ${className} ${
+                isVisible ? "fade-in-up" : ""
+              } home-sm-heading`}
+              ref={titleRef}
+              style={{
+                opacity: 0,
+                transform: "translateY(20px)",
+                transition: "opacity 0.8s ease, transform 0.8s ease",
+                ...(isVisible && {
+                  opacity: 1,
+                  transform: "translateY(0)",
+                }),
+              }}
+            >
+              {title.split(" . ").slice(0, 2).join(" . ")}
+              <br />
+              {title.split(" . ").at(2)}
+            </h4>
+          ) : null}
           {description && (
             <p
               className={`font-sm ${descriptionClassName} ${

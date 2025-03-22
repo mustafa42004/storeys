@@ -554,6 +554,15 @@
     }
   }
 
+  .home-sm-heading {
+    margin-top: 100px;
+    display: block;
+  }
+
+  .home-lg-heading {
+    display: none;
+  }
+
   /* .home-heading {
     margin-top: 100px;
     font-size: 45px;
