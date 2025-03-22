@@ -1,4 +1,4 @@
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 780px) {
   .font-header {
     font-size: 48px;
   }
@@ -538,10 +538,36 @@
     }
   }
 
+  .property-layout {
+    width: 100%;
+
+    .card-layout {
+      grid-template-columns: 1fr;
+    }
+    /* background-color: #000; */
+  }
+
   /* .home-heading {
     margin-top: 100px;
     font-size: 45px;
   } */
+}
+
+@media (min-width: 780px) and (max-width: 1199.98px) {
+  .property-layout {
+    width: 100%;
+
+    .card-layout {
+      grid-template-columns: 1fr 1fr;
+    }
+    /* background-color: #000; */
+  }
+
+  .Listing {
+    .filters {
+      width: 90%;
+    }
+  }
 }
 
 /*------------------------------------------------------------------ */

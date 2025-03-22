@@ -46,6 +46,7 @@ const Layout = () => {
         status: activeButton,
         page: currentPage,
       },
+      activeButton,
     ],
     queryFn: propertiesService.getProperties,
     select: (data) => data?.data,
