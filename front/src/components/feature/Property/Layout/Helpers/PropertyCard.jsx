@@ -46,6 +46,19 @@ const PropertyCard = ({ index, property }) => {
   // Calculate which row this card belongs to (assuming 4 cards per row)
   const rowIndex = Math.floor(index / 4);
 
+  // Handle button clicks with stopPropagation
+  const handleMessageClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigate("/contact");
+  };
+
+  const handleCallClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    // Add your call functionality here
+  };
+
   // useEffect(() => {
   //   startCardAnimation(cardRef.current, index);
   // }, [index]);
@@ -97,10 +110,10 @@ const PropertyCard = ({ index, property }) => {
               {"Talan Culhane"}
             </h4>
             <div className="buttons">
-              <button onClick={() => navigate("/contact")}>
+              <button onClick={handleMessageClick} className="z-3">
                 <img src="/assets/img/message.svg" alt="" />
               </button>
-              <button>
+              <button onClick={handleCallClick} className="z-3">
                 <img src="/assets/img/call.svg" alt="" />
               </button>
             </div>
