@@ -638,6 +638,17 @@ select.dropdown-select option:hover {
         justify-content: center;
         flex-direction: column;
         gap: 10px;
+
+        .grid-cs {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .l-divider {
+            border-right: none;
+          }
+        }
+
         .divider {
           border-right: 1px solid #ffffff5f;
           padding-right: 10px;
@@ -2074,7 +2085,4 @@ select.dropdown-select option:hover {
       justify-content: space-between;
     }
   }
-}
-
-@media (max-width: 767.98px) {
 }
