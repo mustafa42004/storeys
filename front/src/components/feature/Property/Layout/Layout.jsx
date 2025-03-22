@@ -1,5 +1,5 @@
 import Heading from "../../../shared/Headings/Heading";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import PropertyCard from "./Helpers/PropertyCard";
 import { useQuery } from "@tanstack/react-query";
 import propertiesService from "../../../../services/properties.service";
@@ -10,6 +10,7 @@ const Layout = () => {
   const [activeButton, setActiveButton] = useState("sell");
   const [currentPage, setCurrentPage] = useState(1);
   const [allProperties, setAllProperties] = useState([]);
+  const isButtonChangeRef = useRef(false);
 
   const [formData, setFormData] = useState({
     location: "",
@@ -19,7 +20,10 @@ const Layout = () => {
     maxPrice: "",
   });
 
+  // Handle search params changes
   useEffect(() => {
+    const status = searchParams.get("status") || "sell";
+
     setFormData({
       location: searchParams.get("location") || "",
       bedrooms: searchParams.get("bedrooms") || "",
@@ -28,16 +32,21 @@ const Layout = () => {
       maxPrice: searchParams.get("maxPrice") || "",
     });
 
-    setActiveButton(searchParams.get("status") || "sell");
-    // Reset properties and page when search params change
-    setAllProperties([]);
-    setCurrentPage(1);
+    // Only reset if the status actually changed
+    if (status !== activeButton) {
+      console.log(`Status changed from URL: ${activeButton} -> ${status}`);
+      setActiveButton(status);
+      setCurrentPage(1);
+      setAllProperties([]);
+    }
   }, [searchParams]);
 
+  // Query for properties
   const { data, isLoading, isError, error, refetch } = useQuery({
     queryKey: [
       "properties",
       {
+        limit: 9,
         city: formData.location,
         bedrooms: parseInt(formData.bedrooms),
         type: formData.type,
@@ -46,39 +55,64 @@ const Layout = () => {
         status: activeButton,
         page: currentPage,
       },
-      activeButton,
     ],
     queryFn: propertiesService.getProperties,
     select: (data) => data?.data,
+    refetchOnWindowFocus: false,
+    enabled: true, // Always enabled
   });
 
+  // Update properties when data changes
   useEffect(() => {
     if (data?.docs && !isLoading) {
+      console.log(
+        `Setting properties for ${activeButton}, page ${currentPage}:`,
+        data.docs
+      );
+
       if (currentPage === 1) {
-        setAllProperties(data.docs);
+        setAllProperties([...data.docs]);
       } else {
         setAllProperties((prev) => [...prev, ...data.docs]);
       }
     }
   }, [data, isLoading, currentPage]);
 
+  // Handle load more button
   const handleLoadMore = () => {
     if (data?.hasNextPage) {
       setCurrentPage((prev) => prev + 1);
     }
   };
 
+  // Refetch when page changes
   useEffect(() => {
     if (currentPage > 1) {
       refetch();
     }
   }, [currentPage, refetch]);
 
+  // Update URL when active button changes
   useEffect(() => {
     const newSearchParams = new URLSearchParams(searchParams);
     newSearchParams.set("status", activeButton);
     setSearchParams(newSearchParams);
-  }, [activeButton]);
+
+    // Force a refetch when active button changes
+    refetch();
+  }, [activeButton, setSearchParams, searchParams, refetch]);
+
+  // Handle button click
+  const handleButtonClick = (status) => {
+    if (status !== activeButton) {
+      console.log(`Button clicked: ${activeButton} -> ${status}`);
+      isButtonChangeRef.current = true;
+      setActiveButton(status);
+      setCurrentPage(1);
+      // We'll clear properties after the activeButton state is updated
+      setAllProperties([]);
+    }
+  };
 
   return (
     <>
@@ -100,11 +134,7 @@ const Layout = () => {
                   className={`cs-btn ${
                     activeButton === "sell" ? "" : "outline hover"
                   }`}
-                  onClick={() => {
-                    setActiveButton("sell");
-                    setCurrentPage(1);
-                    setAllProperties([]);
-                  }}
+                  onClick={() => handleButtonClick("sell")}
                 >
                   For Sell
                 </button>
@@ -112,11 +142,7 @@ const Layout = () => {
                   className={`cs-btn  ${
                     activeButton === "rent" ? "" : "outline hover"
                   }`}
-                  onClick={() => {
-                    setActiveButton("rent");
-                    setCurrentPage(1);
-                    setAllProperties([]);
-                  }}
+                  onClick={() => handleButtonClick("rent")}
                 >
                   For Rent
                 </button>
@@ -156,19 +182,14 @@ const Layout = () => {
                     onClick={handleLoadMore}
                     disabled={!data?.hasNextPage || isLoading}
                   >
-                    {data?.hasNextPage ? (
-                      <>
-                        Explore More{" "}
-                        <i className="fa-regular fa-arrow-right"></i>
-                      </>
-                    ) : (
-                      "You have got all the properties"
-                    )}
+                    <>
+                      Explore More <i className="fa-regular fa-arrow-right"></i>
+                    </>
                   </button>
                 </div>
               )}
 
-              {!allProperties?.length && (
+              {!isLoading && !allProperties?.length && (
                 <p className="text-center">No properties Found</p>
               )}
             </div>
