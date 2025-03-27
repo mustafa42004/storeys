@@ -13,23 +13,23 @@ const Counter = () => {
         <h2 className="font-lg font-sans text-left medium fs-70 counter-num">
           {inView ? <CountUp end={80} duration={2.5} suffix="+" /> : "0+"}
         </h2>
-        <h4 className="font-lg font-sans text-left medium">
+        <h4 className="font-lg font-sans text-left medium counter-title">
           years of combined experience
         </h4>
       </div>
       <div className="item">
-        <h2 className="font-lg font-sans text-left medium fs-70">
+        <h2 className="font-lg font-sans text-left medium fs-70 counter-num">
           {inView ? <CountUp end={93} duration={2.5} suffix="%" /> : "0%"}
         </h2>
-        <h4 className="font-lg font-sans text-left medium">
+        <h4 className="font-lg font-sans text-left medium counter-title">
           Unmatched expertise in Off-Plan investments
         </h4>
       </div>
       <div className="item">
-        <h2 className="font-lg font-sans text-left medium fs-70">
+        <h2 className="font-lg font-sans text-left medium fs-70 counter-num">
           {inView ? <CountUp end={474} duration={2.5} /> : "0"}
         </h2>
-        <h4 className="font-lg font-sans text-left medium">
+        <h4 className="font-lg font-sans text-left medium counter-title">
           Comprehensive solutions for investors & property owners
         </h4>
       </div>

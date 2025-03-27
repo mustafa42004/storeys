@@ -20,7 +20,7 @@ const Testimonial = () => {
       role: "Location",
       comment:
         "I recently had the pleasure of working with Storeys Real Estate for the purchase of my first home, and I couldn’t be happier with the experience. From the moment I contacted them, the team was incredibly responsive and professional. They took the time to understand my needs and provided valuable insights into the market. The process was seamless, and I felt well-supported at every step. Their attention to detail and commitment to ensuring everything went smoothly made all the difference. I highly recommend Storeys to anyone looking for reliable, top-notch real estate services",
-      image: "/assets/img/testimonial-1.svg",
+      image: "/assets/img/testimonial-1.png",
     },
     // Add more testimonials for testing
     {

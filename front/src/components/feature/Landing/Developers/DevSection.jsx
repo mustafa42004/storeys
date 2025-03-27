@@ -12,10 +12,12 @@ const DevSection = () => {
   return (
     <>
       <section className="dev-section pt-cs">
-        <Heading
-          title="Our Partners"
-          className={`${isMobile ? "fs-50 w-80 " : "auto"}`}
-        />
+        <div className="container">
+          <Heading
+            title="Our Partners"
+            className={`${isMobile ? "fs-50" : "auto"}`}
+          />
+        </div>
         <Slider />
       </section>
     </>

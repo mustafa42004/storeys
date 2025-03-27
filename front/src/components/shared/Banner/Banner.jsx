@@ -32,7 +32,9 @@ const Banner = ({
             description={description}
             descriptionClassName="light"
           />
-          {isFilter && <Filters />}
+          <div className="container">
+            {isFilter && <Filters />}
+          </div>
         </div>
       </section>
     </>

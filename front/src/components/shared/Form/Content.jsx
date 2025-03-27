@@ -55,7 +55,7 @@ const Content = ({ heading }) => {
     <>
       <div className="form-content">
         <h4 className="font-lg light text-left lh-36 fs-36">
-          {heading || "List Your Property with Storeys \nReal Estate"}
+          {heading || "List Your Property with Storeys"}
         </h4>
         <h6 className="font-sm light text-left lh-24 fs-16 medium">
           At Storeys, we believe in adding as much value as possible when you

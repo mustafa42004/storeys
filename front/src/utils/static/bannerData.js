@@ -2,7 +2,7 @@ export const homeBanner = {
     title: "Integrity. Expertise. Excellence",
     description: "Dubai’s fastest growing brokerage, while providing a new standard of service.",
     isFilter: true,
-    bg: '/assets/img/main-banner.svg',
+    bg: '/assets/img/main-banner.png',
     width: 100,
     height: 800
   }

@@ -84,7 +84,7 @@ const Filters = ({ theme }) => {
 
   return (
     <>
-      <div className={`filters ${classes.display} ${classes.theme}`}>
+      <div className={`filters container ${classes.display} ${classes.theme}`}>
         <div className="item divide">
           <h4 className={`font-sm medium ${classes.medium}`}>Location</h4>
           <SharedDropdown

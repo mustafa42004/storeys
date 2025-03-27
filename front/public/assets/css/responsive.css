@@ -1,4 +1,4 @@
-@media screen and (max-width: 780px) {
+@media screen and (max-width: 767px) {
   .font-header {
     font-size: 35px;
   }
@@ -25,16 +25,20 @@
       .team {
         align-items: start;
         flex-direction: column;
-        gap: 5px;
-        .images {
-          img {
-            width: 60px;
-            height: 60px;
-          }
-        }
+        gap: 15px;
       }
       .counter {
         gap: 25px;
+        .item {
+          gap: 20px;
+          grid-template-columns: 100px auto;
+          .counter-num {
+            font-size: 50px !important;
+          }
+          .counter-title {
+            font-size: 16px !important;
+          }
+        }
       }
     }
     .banner {
@@ -199,7 +203,6 @@
     margin-top: 17px;
     gap: 20px;
     position: static;
-    width: calc(100% - 40px);
   }
   .two-sided-section {
     .layout {
@@ -570,7 +573,7 @@
   } */
 }
 
-@media (min-width: 780px) and (max-width: 1199.98px) {
+@media (max-width: 991px) {
   .property-layout {
     width: 100%;
 
@@ -579,7 +582,6 @@
     }
     /* background-color: #000; */
   }
-
   .Listing {
     .filters {
       width: 90%;
@@ -600,8 +602,30 @@
       }
     }
   }
-  .counter-num {
-    font-size: 40px;
+  .about-section {
+    & .section1 {
+      & .team {        
+        .images {
+          img {
+            width: 60px;
+            height: 60px;
+          }
+        }
+      }
+      & .counter {
+        & .item {
+          grid-template-columns: 100px auto;
+          gap: 20px;
+          .counter-num {
+            font-size: 50px !important;
+          }
+          .counter-title {
+            font-size: 18px;
+            max-width: 331px;
+          }
+        }
+      }
+    }
   }
 }
 
