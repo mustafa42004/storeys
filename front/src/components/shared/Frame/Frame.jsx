@@ -5,7 +5,7 @@ const Frame = ({ frame, Component }) => {
 // console.log(imageHeight)
   return (
     <>
-        <section className="pt-cs mb-5">
+        <section className="pt-cs mb-lg-5 mb-md-4">
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">

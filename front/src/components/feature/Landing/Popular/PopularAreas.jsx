@@ -35,7 +35,7 @@ const PopularAreas = () => {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <p className="font-sm mb-4 fs-20 medium">Popular Areas</p>
+              <p className="font-sm mb-sm-4 mb-3 fs-20 medium">Popular Areas</p>
               <Heading title="Explore Dubai" className="fs-50" />
 
               <div className="layout">

@@ -50,8 +50,10 @@ const Testimonial = () => {
         <div className="content">
           <h2 className="font-lg text-left fs-30">{name}</h2>
           <h6 className="font-sm text-left fs-26 medium">{location}</h6>
-          <img className="w-20" src="/assets/img/rates.svg" alt="" />
-          <p className="font-sm fs-22 text-left">{message}</p>
+          <div>
+            <img className="rating-img" src="/assets/img/rates.svg" alt="" />
+            <p className="font-sm fs-22 text-left testimonial-text">{message}</p>
+          </div>
           <h4 className="font-lg font-signatie fs-26">{name}</h4>
         </div>
       </div>

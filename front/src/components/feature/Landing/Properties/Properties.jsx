@@ -24,7 +24,7 @@ const Properties = () => {
             <div className="col-md-12">
               <Heading
                 title="Featured Properties"
-                className={`${isMobile ? "fs-42 w-80" : "w-60"}`}
+                className={`${isMobile ? "fs-42" : ""}`}
                 description=" Explore our handpicked selection of exceptional properties, each designed to inspire and elevate your lifestyle"
                 descriptionClassName="medium fs-22"
               />

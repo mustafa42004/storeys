@@ -506,6 +506,9 @@ select.dropdown-select option:hover {
 }
 
 .about-section {
+  .row {
+    row-gap: 50px;
+  }
   .section1 {
     display: flex;
     align-items: start;
@@ -751,7 +754,7 @@ select.dropdown-select option:hover {
 .frame-1 {
   border-radius: 15px;
   position: relative;
-  width: 90%;
+  width: 100%;
   min-height: 650px;
   background: #232323;
   padding: 40px;
@@ -767,11 +770,12 @@ select.dropdown-select option:hover {
   }
   .image {
     width: 100%;
+    position: relative;
     .abs {
       position: absolute;
-      right: -10%;
-      bottom: -10%;
-      width: 585px;
+      right: -20%;
+      bottom: -100px;
+      width: 110%;
       height: 600px;
       object-fit: cover;
       border-radius: 15px;
@@ -855,8 +859,12 @@ select.dropdown-select option:hover {
     .content {
       display: flex;
       align-items: start;
-      justify-content: space-evenly;
       flex-direction: column;
+      gap: 30px;
+      .rating-img {
+        margin-bottom: 15px;
+        width: 155px;
+      }
     }
   }
 }
@@ -967,8 +975,7 @@ select.dropdown-select option:hover {
       .buttons {
         display: flex;
         align-items: center;
-        justify-content: end;
-        gap: 6px;
+        gap: 8px;
         width: 100%;
         .social-btn {
           display: flex;
@@ -1591,19 +1598,18 @@ select.dropdown-select option:hover {
     align-items: center;
     justify-content: start;
     flex-wrap: wrap;
-    gap: 25px;
+    gap: 25px 40px;
     .item {
       border-radius: 10px;
       background: #fff;
       box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.05);
-      padding: 20px;
+      padding: 20px 30px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 15px;
       .icon {
         width: 22px;
-        height: 22px;
         object-fit: cover;
       }
     }
@@ -2032,14 +2038,6 @@ select.dropdown-select option:hover {
 
 .hamburger.active div:nth-child(3) {
   transform: rotate(-45deg) translate(5px, -6px);
-}
-
-@media screen and (max-width: 767px) {
-  .header {
-    padding: 10px 0;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-  }
 }
 
 .newsInner {
