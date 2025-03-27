@@ -16,7 +16,7 @@ const TwoSidedSection = ({ header, description, image, className, height, Compon
                                 Component ? Component : (
                                     <div className="content">
                                         <Heading title={header} className={` text-left`}/>
-                                        <p className="font-sm medium text-left fs-22">
+                                        <p className="font-sm medium text-left fs-18">
                                             {description}
                                         </p>
                                     </div>

@@ -1,7 +1,7 @@
 const PointSection = ({ data }) => {
   return (
     <>
-      <div className="point-section">
+      <div className="point-section mt-3">
         {data?.map((item, index) => (
           <div className="item" key={index}>
             <h4 className="font-lg font-sans bold fs-70">

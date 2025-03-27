@@ -9,7 +9,7 @@ const Counter = () => {
 
   return (
     <>
-        <div className="counter" ref={ref}>
+        <div className="counter mt-5" ref={ref}>
             <div className="item ">
                 <h4 className="font-lg font-sans light  medium fs-70">
                     {inView ? (

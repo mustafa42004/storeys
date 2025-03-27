@@ -20,10 +20,12 @@ const FixedBgComp = () => {
   return (
     <>
         <div className="counter-fixed-layout">
-            <h6 className="font-lg font-sans light">Storeys in numbers</h6>
+            <div className="container">
+                <h6 className="font-lg font-sans light">Storeys in numbers</h6>
 
-            <h4 className={ `${isMobile ? "fs-36 light text-center w-80 " : "light font-lg w-80 fs-50"}`}>Storeys is the Brightest and Fastest growing Real Estate Brokerage Firm in Dubai.</h4>
-            <Counter />
+                <h4 className={ `${isMobile ? "fs-36 light text-center mt-lg-5 mt-4" : "light font-lg fs-50 mt-lg-5 mt-4"}`}>Storeys is the Brightest and Fastest growing Real Estate Brokerage Firm in Dubai.</h4>
+                <Counter />
+            </div>
         </div>
     </>
   )

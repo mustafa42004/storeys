@@ -1046,11 +1046,10 @@ select.dropdown-select option:hover {
   .counter {
     width: 100%;
     display: flex;
-    align-items: center;
     justify-content: space-evenly;
     gap: 30px;
     .item {
-      width: 20%;
+      width: 26.45%;
       display: flex;
       align-items: center;
       justify-content: start;
@@ -1816,7 +1815,7 @@ select.dropdown-select option:hover {
 .two-sided-section {
   .layout {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 3fr;
     gap: 100px;
     align-items: center;
     justify-content: center;
@@ -1854,7 +1853,7 @@ select.dropdown-select option:hover {
     background-position: center;
     background-repeat: no-repeat;
     width: 100%;
-    padding: 20px;
+    padding: 45px;
     height: 600px;
     border-radius: 15px;
     .content {
@@ -1877,9 +1876,9 @@ select.dropdown-select option:hover {
   gap: 30px;
   .item {
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 90px auto;
     align-items: center;
-    gap: 15px;
+    gap: 25px;
   }
 }
 
