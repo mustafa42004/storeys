@@ -42,7 +42,6 @@ const Heading = ({
             } ${isHome ? "home-lg-heading" : ""}`}
             ref={titleRef}
             style={{
-              opacity: 0,
               transform: "translateY(20px)",
               transition: "opacity 0.8s ease, transform 0.8s ease",
               ...(isVisible && {
@@ -80,7 +79,6 @@ const Heading = ({
                 isVisible ? "fade-in-up" : ""
               }`}
               style={{
-                opacity: 0,
                 transform: "translateY(20px)",
                 transition: "opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s",
                 ...(isVisible && {

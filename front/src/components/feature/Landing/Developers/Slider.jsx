@@ -47,7 +47,7 @@ const Slider = () => {
 
   return (
     <div
-      className="slider mt-5 overflow-hidden"
+      className="slider mt-lg-5 mt-3 overflow-hidden"
       style={{ padding: "10px 0px" }}
     >
       {renderRow("row1", row1Ref)}

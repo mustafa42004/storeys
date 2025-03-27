@@ -499,7 +499,7 @@ select.dropdown-select option:hover {
         img {
           width: 100%;
           height: 100%;
-          object-fit: fill;
+          object-fit: contain;
         }
       }
     }
@@ -1338,16 +1338,14 @@ select.dropdown-select option:hover {
 .property-inner-banner {
   display: grid;
   width: 100%;
-  height: 700px;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 50% 50%;
   .item {
     height: 100%;
     position: relative;
     width: 100%;
     img {
       width: 100%;
-      height: 100%;
+      aspect-ratio: 1.1;
       object-fit: cover;
     }
     .overlay {
