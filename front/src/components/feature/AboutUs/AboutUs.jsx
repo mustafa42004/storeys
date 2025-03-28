@@ -27,15 +27,15 @@ const AboutUs = () => {
     },
     {
       header: null,
-      description: " A 360° real estate service—from finding your dream home to financing, designing, and managing your property"
+      description: "A 360° real estate service—from finding your dream home to financing, designing, and managing your property"
     },
     {
       header: null,
-      description: " A team that puts your goals first, ensuring a seamless and rewarding property journey."
+      description: "A team that puts your goals first, ensuring a seamless and rewarding property journey."
     },
     {
       header: null,
-      description: "At Storeys Real Estate, we don’t just sell properties—we build success stories. Let us help you turn your real estate aspirations into reality."
+      description: "At Storeys Real Estate, we don't just sell properties—we build success stories. Let us help you turn your real estate aspirations into reality."
     }
   ]
 

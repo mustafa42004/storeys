@@ -57,7 +57,7 @@ const ServicesCards = () => {
               {rows.map((row, rowIndex) => (
                 <div
                   key={rowIndex}
-                  className="grid-cs gap-20 gtc-3 mb-4"
+                  className="grid-cs gap-20 gtc-3 mb-4 services-grid"
                   style={{
                     opacity: 0,
                     transform: "translateY(20px)",

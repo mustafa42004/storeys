@@ -295,11 +295,11 @@ body {
   border-radius: 12px;
   opacity: 0.94;
   background: #fff;
-  padding: 15px;
+  padding: 15px 15px 15px 40px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr max-content;
   position: absolute;
-  gap: 20px;
+  gap: 40px;
   bottom: 40px;
   left: 0;
   right: 0;
@@ -307,8 +307,7 @@ body {
   .item {
     display: flex;
     align-items: flex-start;
-    justify-content: center;
-    padding: 0 20px;
+    padding: 0 40px 0px 0px;
     gap: 5px;
     flex-direction: column;
     &.divide {
@@ -371,7 +370,7 @@ body {
 
 .dropdown-select {
   width: 100%;
-  padding: 8px 12px;
+  padding: 8px 0px;
   border: none;
   border-radius: 4px;
   background-color: white;
@@ -402,6 +401,12 @@ body {
       background-color: #232323 !important;
       color: rgba(255, 255, 255, 0.8) !important;
     }
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.8) !important;
+    }
+  }
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.8) !important;
   }
 }
 
@@ -450,8 +455,8 @@ select.dropdown-select option:hover {
 .price-input {
   flex: 1;
   padding: 8px 2px;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
+  border: 1px solid #6a6a6a;
+  border-radius: 24px;
   width: calc(100% - 2px);
 }
 
@@ -1760,7 +1765,6 @@ select.dropdown-select option:hover {
   border-radius: 15px;
   display: flex;
   align-items: start;
-  justify-content: center;
   gap: 10px;
   flex-direction: column;
   background: #fff;

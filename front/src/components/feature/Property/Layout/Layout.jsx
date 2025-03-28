@@ -127,9 +127,9 @@ const Layout = () => {
                     : "Available Properties"
                 }
                 className={"fs-50"}
-                width={60}
+                width={100}
               />
-              <div className="category flex-cs py-5 ">
+              <div className="category flex-cs pt-sm-5 pb-5 pt-4">
                 <button
                   className={`cs-btn ${
                     activeButton === "sell" ? "" : "outline hover"

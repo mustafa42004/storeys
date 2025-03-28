@@ -18,7 +18,7 @@ const Counter = () => {
                         "0+"
                     )}
                 </h4>
-                <h6 className="font-lg font-sans  medium light">Years of combined market experience</h6>
+                <h6 className="font-lg font-sans  medium light ab-count-num">Years of combined market experience</h6>
             </div>
 
             <div className="item">
@@ -29,7 +29,7 @@ const Counter = () => {
                         "0%"
                     )}
                 </h4>
-                <h6 className="font-lg font-sans  medium light">Unmatched expertise in Off-Plan investments</h6>
+                <h6 className="font-lg font-sans  medium light ab-count-num">Unmatched expertise in Off-Plan investments</h6>
             </div>
 
             <div className="item">
@@ -40,7 +40,7 @@ const Counter = () => {
                         "0"
                     )}
                 </h4>
-                <h6 className="font-lg font-sans  medium light">Comprehensive solutions for investors & property owners</h6>
+                <h6 className="font-lg font-sans  medium light ab-count-num">Comprehensive solutions for investors & property owners</h6>
             </div>
         </div>
     </>

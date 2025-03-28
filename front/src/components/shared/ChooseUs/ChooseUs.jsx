@@ -40,7 +40,7 @@ const ChooseUs = ({ header, description, data, showNumber }) => {
                           <div
                             className={`content ${getIndex ? "bottom" : ""}`}
                           >
-                            <p className="font-sm medium text-left fs-22">
+                            <p className="font-sm medium text-left fs-22 choose-text">
                               {value.header && value.header}{" "}
                               <span className="fw-600">
                                 {value.description}

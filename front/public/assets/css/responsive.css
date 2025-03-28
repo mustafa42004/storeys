@@ -26,6 +26,13 @@
     font-size: 45px !important;
     line-height: 45px !important;
   }
+  .filters {
+    padding: 15px 15px 15px 20px;
+    gap: 20px;
+    .item {
+      padding: 0 20px 0px 0px;
+    }
+  }
   .property-layout {
     width: 100%;
     .card-layout {
@@ -114,6 +121,46 @@
       }
     }
   }
+  .two-sided-section {
+    .layout {
+      grid-template-columns: 1fr;
+      gap: 55px;
+    }
+  }
+  .choose-us {
+    & .layout {
+      & .item {
+        .content {
+          padding: 10px;
+          .choose-text {
+            font-size: 18px !important;
+          }
+        }
+      }
+    }
+  }
+  .counter-fixed-layout {
+    & .counter {
+      .ab-count-head {
+        font-size: 40px !important;
+      }
+      .item {
+        width: 33%;
+        gap: 15px;
+        .ab-count-num {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+  .our-team {
+    .layout {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+  .services-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
   .footer {
     .layout {
       grid-template-columns: 1fr 1fr;
@@ -125,26 +172,12 @@
       }
     }
   }
-  .two-sided-section {
-    .layout {
-      grid-template-columns: 1fr;
-      gap: 55px;
-    }
-  }
-  .counter-fixed-layout {
-    & .counter {
-      .item {
-        width: 33%;
-        gap: 15px;
-      }
-    }
-  }
 }
 
 /* mobile */
 @media screen and (max-width: 767px) {
   .font-header {
-    font-size: 35px !important;
+    font-size: 32px !important;
   }
   .pt-cs {
     padding-top: 60px;
@@ -314,7 +347,7 @@
     grid-template-columns: 1fr;
   }
   .footer {
-    padding-top: 130px;
+    padding-top: 90px;
   }
   .footer {
     .layout {
@@ -322,7 +355,7 @@
       grid-template-columns: 1fr;
       align-items: center;
       justify-content: center;
-      gap: 20px;
+      gap: 35px;
     }
   }
   .pl-50 {
@@ -351,22 +384,23 @@
       }
     }
   }
-  .our-team {
-    .layout {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
   .two-sided-section {
     .layout {
       grid-template-columns: 1fr;
       gap: 45px;
     }
   }
+  .ab-coun-sub-head {
+    font-size: 20px;
+  }
   .gtc-3 {
     grid-template-columns: 1fr !important;
     &.mob {
       grid-template-columns: 1fr 1fr 1fr !important;
     }
+  }
+  .services-grid {
+    grid-template-columns: 1fr !important;
   }
   .property-layout {
     .card-layout {
@@ -476,17 +510,30 @@
 
   .choose-us {
     .layout {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr !important;
+      grid-template-rows: 1fr 1fr 1fr 1fr;
       gap: 0px;
       align-items: stretch;
       .item {
         width: 100%;
         height: auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        &:not(:last-child) {
+          border-bottom: 1.5px solid #000;
+        }
+        &:nth-child(even){
+          .content {
+            grid-area: 1/2;
+            border-left: 1.5px solid #000;
+            margin-left: -1px;
+          }
+        }
+        &:nth-child(odd){
+          .content {
+            border-right: 1.5px solid #000;
+          }
+        }
         .content {
           width: 100%;
           padding: 20px;
@@ -495,26 +542,15 @@
           align-items: center;
           text-align: center;
         }
-        &.bottom {
-          border-bottom: 1.5px solid #000;
-        }
-        &.right {
-          border-right: 1.5px solid #000;
-        }
-        &.left {
-          border-left: 1.5px solid #000;
-        }
-        &.revert {
-          flex-direction: column-reverse;
-        }
       }
     }
   }
 
   .our-team {
     & .layout {
+      grid-template-columns: 1fr 1fr;
+      padding-top: 40px;
       .card {
-        border-radius: 10px;
         height: 250px;
         .content {
           border-radius: 8px;
@@ -587,7 +623,7 @@
       padding-inline: 20px;
     }
     .font-header {
-      font-size: 36px !important;
+      font-size: 32px !important;
     }
     .section-title {
       font-size: 1.5rem;
