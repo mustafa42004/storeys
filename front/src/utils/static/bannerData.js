@@ -9,7 +9,7 @@ export const homeBanner = {
 
   export const aboutBanner = {
     title: "About Storeys",
-    bg: '/assets/img/about-main-banner.svg',
+    bg: '/assets/img/about-main-banner.png',
     width: 100,
     height: 280
   }

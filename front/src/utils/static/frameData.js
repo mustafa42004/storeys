@@ -17,7 +17,7 @@ export const aboutFrame = {
     "Thank you for being a part of Storeys Real Estate's journey. We look forward to shaping the future of real estate with you.",
   ],
   imageHeight: 800,
-  image: "/assets/img/frame-2.svg",
+  image: "/assets/img/frame-2.png",
   highlight: "Best Regards",
   signature: {
     sign: "Mohamed Ibrahim",

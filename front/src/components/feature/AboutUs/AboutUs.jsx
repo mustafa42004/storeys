@@ -55,7 +55,7 @@ const AboutUs = () => {
 
         <Frame frame={object} />
 
-        <TwoSidedSection header={"About Storeys"} description={"At Storeys Real Estate, we are more than just a real estate firm—we are a team of passionate professionals dedicated to shaping the future of property investment and homeownership in the UAE. We redefine the real estate experience by offering a seamless blend of expertise, innovation, and personalized service. With an annual Gross Transaction Value (GTV) of more than 2 Billion AED, we have built a reputation for delivering exceptional real estate solutions that go beyond buying and selling."} image={"/assets/img/storey-banner.svg"} className="" height={434} />
+        <TwoSidedSection header={"About Storeys"} description={"At Storeys Real Estate, we are more than just a real estate firm—we are a team of passionate professionals dedicated to shaping the future of property investment and homeownership in the UAE. We redefine the real estate experience by offering a seamless blend of expertise, innovation, and personalized service. With an annual Gross Transaction Value (GTV) of more than 2 Billion AED, we have built a reputation for delivering exceptional real estate solutions that go beyond buying and selling."} image={"/assets/img/storey-banner.png"} className="" height={434} />
 
         <WhoWeAre />
 
