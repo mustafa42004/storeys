@@ -2,7 +2,7 @@
 const Content = () => {
   return (
     <>
-        <h4 className="font-lg text-left fs-36">Spacious.Partitioned.Only DDA License</h4>
+        <h4 className="font-lg text-left fs-36 mb-4">Spacious.Partitioned.Only DDA License</h4>
         <p className="font-sm text-left">Rocky Real Estate is pleased to offer this fitted-unfurnished office in EIB 04 Building, Dubai Media City.</p>
 
         <ul>

@@ -14,8 +14,8 @@ const Amenities = ({ amenities }) => {
             <div className="col-md-12">
               <Heading
                 title="Features & Amenities"
-                width={70}
-                className={"fs-50"}
+                width={100}
+                className={"fs-42"}
               />
               <div className="layout">
                 {displayedAmenities?.map((amenity, index) => (

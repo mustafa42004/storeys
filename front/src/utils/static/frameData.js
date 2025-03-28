@@ -4,7 +4,7 @@ export const homeFrame = {
     "At the core of Storeys’ ethos lies a profound understanding of market trends, coupled with an acute awareness of the evolving needs of its clientele. Leveraging this insight, the company meticulously curates investment options that promise not just financial returns but also an unparalleled lifestyle experience.",
     "Moreover, Storeys holistic approach to real estate investment extends beyond mere property acquisition. Recognizing the importance of comprehensive asset management, the company offers a suite of value-added services aimed at optimizing the performance and maximizing the returns on investment properties.",
   ],
-  image: "/assets/img/frame-1.svg",
+  image: "../../assets/img/frame-1.png",
   highlight: "Your ideal property journey starts here!",
 };
 

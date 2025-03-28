@@ -52,7 +52,7 @@ const Testimonial = () => {
           <h6 className="font-sm text-left fs-26 medium">{location}</h6>
           <div>
             <img className="rating-img" src="/assets/img/rates.svg" alt="" />
-            <p className="font-sm fs-22 text-left testimonial-text">{message}</p>
+            <p className="font-sm fs-20 text-left testimonial-text">{message}</p>
           </div>
           <h4 className="font-lg font-signatie fs-26">{name}</h4>
         </div>
@@ -65,7 +65,7 @@ const Testimonial = () => {
       <div className="container">
         <div className="row">
           <div className="col-md-12">
-            <Heading title="What Our Clients Are Saying" className="fs-50" />
+            <Heading title="What Our Clients Are Saying" className="fs-42" />
             {!isLoading ? (
               <div className="testimonial-slider">
                 <Slider ref={slider} {...settings}>

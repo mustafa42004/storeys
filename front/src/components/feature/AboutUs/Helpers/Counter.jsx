@@ -11,7 +11,7 @@ const Counter = () => {
     <>
         <div className="counter mt-5" ref={ref}>
             <div className="item ">
-                <h4 className="font-lg font-sans light  medium fs-70">
+                <h4 className="font-lg font-sans light  medium fs-60">
                     {inView ? (
                         <CountUp end={20} duration={2.5} suffix="+" />
                     ) : (
@@ -22,7 +22,7 @@ const Counter = () => {
             </div>
 
             <div className="item">
-                <h4 className="font-lg font-sans light  medium fs-70">
+                <h4 className="font-lg font-sans light  medium fs-60">
                     {inView ? (
                         <CountUp end={93} duration={2.5} suffix="%" />
                     ) : (
@@ -33,7 +33,7 @@ const Counter = () => {
             </div>
 
             <div className="item">
-                <h4 className="font-lg font-sans light  medium fs-70">
+                <h4 className="font-lg font-sans light  medium fs-60">
                     {inView ? (
                         <CountUp end={23} duration={2.5} />
                     ) : (

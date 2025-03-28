@@ -102,7 +102,7 @@ const LatestNews = () => {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <Heading title={"Latest News"} className={"fs-50"} />
+              <Heading title={"Latest News"} className={"fs-42"} />
 
               {isLoading && <p className="text-center fs-4 mt-5">Loading...</p>}
               {isError && (

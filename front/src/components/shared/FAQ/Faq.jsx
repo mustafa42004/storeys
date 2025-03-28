@@ -8,7 +8,7 @@ const Faq = ({Component}) => {
             <div className="container">
                 <div className="row align-items-start">
                     <div className="col-md-12 pb-5">
-                        <Heading title="Career FAQs" className="fs-50" />
+                        <Heading title="Career FAQs" className="fs-42" />
                     </div>
                     <div className="col-md-6">
                         <Component />

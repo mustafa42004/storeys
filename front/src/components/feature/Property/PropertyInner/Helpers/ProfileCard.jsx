@@ -22,9 +22,9 @@ const ProfileCard = () => {
                     <button className="cs-btn fs-14 colored card-btn"><i className="fa-solid fa-lg fa-phone"></i> Responsive Broker</button>
                 </div>
                 <div className="grid-cs gtc-3 mob w-100">
-                    <button className="contact-btn"><i className="fa-solid fa-lg fa-envelope"></i> Email</button>
-                    <button className="contact-btn"><i className="fa-solid fa-lg fa-phone"></i> Call</button>
-                    <button className={ `${isMobile ? "py-4" : 'auto'} contact-btn`}><i className="fa-brands fa-xl fa-whatsapp"></i></button>
+                    <a className="contact-btn"><img src="../../assets/img/email-icon.svg" />Email</a>
+                    <a className="contact-btn"><img src="../../assets/img/call-icon.svg" />Call</a>
+                    <a className={ `${isMobile ? "py-4" : 'auto'} contact-btn`}><img src="../../assets/img/whatsapp-icon.svg" /></a>
                 </div>
             </div>
             {/* <div className="cs-footer">

@@ -15,7 +15,7 @@ const DevSection = () => {
         <div className="container">
           <Heading
             title="Our Partners"
-            className={`${isMobile ? "fs-50" : "auto"}`}
+            className={`${isMobile ? "fs-42" : "auto"}`}
           />
         </div>
         <Slider />

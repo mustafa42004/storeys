@@ -70,7 +70,7 @@ const Testimonial = () => {
         <div className="row">
           <div className="col-md-12">
             <p className="font-sm mb-4 fs-20 medium">Our Team</p>
-            <Heading title="You're in safe hands" className="fs-50" />
+            <Heading title="You're in safe hands" className="fs-42" />
             <div className="testimonial-slider cs">
               <Slider ref={slider} {...settings}>
                 {testimonials.map((testimonial) => (

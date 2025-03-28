@@ -26,7 +26,7 @@ const Properties = () => {
                 title="Featured Properties"
                 className={`${isMobile ? "fs-42" : ""}`}
                 description=" Explore our handpicked selection of exceptional properties, each designed to inspire and elevate your lifestyle"
-                descriptionClassName="medium fs-22"
+                descriptionClassName="medium fs-20"
               />
 
               {isLoading ? (

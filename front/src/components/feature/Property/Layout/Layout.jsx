@@ -126,7 +126,7 @@ const Layout = () => {
                     ? `Residence in ${formData?.location}`
                     : "Available Properties"
                 }
-                className={"fs-50"}
+                className={"fs-42"}
                 width={100}
               />
               <div className="category flex-cs pt-sm-5 pb-5 pt-4">

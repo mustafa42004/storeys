@@ -18,7 +18,7 @@ const FixedBgComp = () => {
       }, []);
   return (
     <>
-        <Heading title="List your property" className={ `${isMobile ? "fs-36 light w-80 " : "light fs-60"}`} description="Take your property ‘Exclusive’ with Storeys and enjoy all the exclusive benefits." descriptionClassName="light" />
+        <Heading title="List your property" className={ `${isMobile ? "fs-36 light w-80 " : "light fs-42"}`} description="Take your property ‘Exclusive’ with Storeys and enjoy all the exclusive benefits." descriptionClassName="light" />
 
         <Link  to = '/contact' className="cs-btn light">Book a Valuation <i className="fa-regular fa-arrow-right"></i></Link>
     </>

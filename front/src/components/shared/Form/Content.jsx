@@ -54,7 +54,7 @@ const Content = ({ heading }) => {
   return (
     <>
       <div className="form-content">
-        <h4 className="font-lg light text-left lh-36 fs-36">
+        <h4 className="font-lg light text-left fs-30">
           {heading || "List Your Property with Storeys"}
         </h4>
         <h6 className="font-sm light text-left lh-24 fs-16 medium">
@@ -69,7 +69,7 @@ const Content = ({ heading }) => {
         >
           {({ errors, touched }) => (
             <Form >
-              <div className="grid-cs gap-30 w-80">
+              <div className="grid-cs gap-30">
                 <div>
                   <label htmlFor="firstName" className="font-sm mb-2 light">
                     First Name
@@ -110,7 +110,7 @@ const Content = ({ heading }) => {
                 </div>
               </div>
 
-              <div className="grid-cs gap-30 w-80 my-4">
+              <div className="grid-cs gap-30 my-4">
                 <div>
                   <label htmlFor="email" className="font-sm mb-2 light">
                     Email Address

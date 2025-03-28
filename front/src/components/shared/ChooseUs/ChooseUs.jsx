@@ -40,7 +40,7 @@ const ChooseUs = ({ header, description, data, showNumber }) => {
                           <div
                             className={`content ${getIndex ? "bottom" : ""}`}
                           >
-                            <p className="font-sm medium text-left fs-22 choose-text">
+                            <p className="font-sm medium text-left fs-20 choose-text">
                               {value.header && value.header}{" "}
                               <span className="fw-600">
                                 {value.description}
@@ -52,7 +52,7 @@ const ChooseUs = ({ header, description, data, showNumber }) => {
                             className={`content ${getIndex ? "" : "bottom"}`}
                           >
                             {showNumber && (
-                              <h2 className="font-lg font-sans fs-70 bold">
+                              <h2 className="font-lg font-sans fs-60 bold">
                                 {index + 1}
                               </h2>
                             )}
@@ -60,7 +60,7 @@ const ChooseUs = ({ header, description, data, showNumber }) => {
 
                           {/* {showNumber && (
                                                 <div className={`content ${getIndex ? "" : "bottom"}`}>
-                                                    <h2 className="font-lg font-sans fs-70 bold">
+                                                    <h2 className="font-lg font-sans fs-60 bold">
                                                         {index + 1}
                                                     </h2>
                                                 </div>
@@ -74,7 +74,7 @@ const ChooseUs = ({ header, description, data, showNumber }) => {
                       return (
                         <div className={`item ${obj[index]} `} key={index}>
                           <div className={`content `}>
-                            <p className="font-sm medium text-left fs-22">
+                            <p className="font-sm medium text-left fs-20">
                               {value.header && value.header}{" "}
                               <span className="fw-600">
                                 {value.description}

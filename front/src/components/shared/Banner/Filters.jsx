@@ -140,9 +140,9 @@ const Filters = ({ theme }) => {
             />
           </div>
         </div>
-        <div className="item p-0 ">
+        <div className="item p-0 align-self-lg-center align-self-end">
           <button
-            className={`cs-btn align-self-end ${classes.button}`}
+            className={`cs-btn ${classes.button}`}
             onClick={handleSearch}
           >
             Search

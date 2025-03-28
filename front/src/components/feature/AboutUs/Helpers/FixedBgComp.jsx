@@ -23,7 +23,7 @@ const FixedBgComp = () => {
             <div className="container">
                 <h6 className="font-lg font-sans light ab-coun-sub-head">Storeys in numbers</h6>
 
-                <h4 className={ `${isMobile ? "fs-36 light text-center mt-lg-5 mt-4 ab-count-head" : "light font-lg fs-50 mt-lg-5 mt-4 ab-count-head"}`}>Storeys is the Brightest and Fastest growing Real Estate Brokerage Firm in Dubai.</h4>
+                <h4 className={ `${isMobile ? "fs-36 light text-center mt-lg-5 mt-4 ab-count-head" : "light font-lg fs-42 mt-lg-5 mt-4 ab-count-head"}`}>Storeys is the Brightest and Fastest growing Real Estate Brokerage Firm in Dubai.</h4>
                 <Counter />
             </div>
         </div>

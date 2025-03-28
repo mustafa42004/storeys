@@ -12,12 +12,12 @@ const DetailCard = ({ data }) => {
       <div className="container pt-cs">
         <div className="row">
           <div className="col-md-12">
-            <div className="property-inner-card ">
+            <div className="property-inner-card">
               <div className="head divide">
                 <div className="item ">
                   <h4
                     className={`${
-                      isMobile ? "fs-26 text-left" : "font-sm fs-50"
+                      isMobile ? "fs-26 text-left" : "fs-40"
                     }`}
                   >
                     {data?.name}
@@ -32,7 +32,7 @@ const DetailCard = ({ data }) => {
                 </div>
                 <h4
                   className={`${
-                    isMobile ? "font-lg medium fs-30" : "font-lg medium fs-50"
+                    isMobile ? "font-lg medium fs-30" : "font-lg medium fs-42"
                   }`}
                 >
                   {new Intl.NumberFormat("en-AE", {
@@ -52,7 +52,7 @@ const DetailCard = ({ data }) => {
                     className={`${
                       isMobile
                         ? "font-sm text-left fs-20 dark"
-                        : "font-sm text-left fs-22 dark"
+                        : "font-sm text-left fs-20 dark"
                     }`}
                   >
                     {data?.type}

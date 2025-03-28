@@ -7,25 +7,25 @@ const PopularAreas = () => {
       title: "Palm Jumeirah",
       description:
         "Ideal island backed with beautiful beaches overlooking stunning views of Skyline.",
-      image: "/assets/img/area-1.svg",
+      image: "/assets/img/area-1.png",
     },
     {
       title: "Dubai Marina",
       description:
         "The city’s hub, Dubai Marina is a meticulously planned community of Dubai.",
-      image: "/assets/img/area-2.svg",
+      image: "/assets/img/area-2.png",
     },
     {
       title: "Dubai Hills Estates",
       description:
         "A lush 2700 acers suburban lifestyle with lush greenery. & cutting-edge features.",
-      image: "/assets/img/area-3.svg",
+      image: "/assets/img/area-3.png",
     },
     {
       title: "Town Square",
       description:
         "Town square is divided into 13 sub-projects spread among 1.6 million square feet of land.",
-      image: "/assets/img/area-4.svg",
+      image: "/assets/img/area-4.png",
     },
   ];
 
@@ -36,7 +36,7 @@ const PopularAreas = () => {
           <div className="row">
             <div className="col-md-12">
               <p className="font-sm mb-sm-4 mb-3 fs-20 medium">Popular Areas</p>
-              <Heading title="Explore Dubai" className="fs-50" />
+              <Heading title="Explore Dubai" className="fs-42" />
 
               <div className="layout">
                 {cards?.map((card, index) => (
