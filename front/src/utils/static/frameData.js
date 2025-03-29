@@ -31,7 +31,7 @@ export const careersFrame = {
   paragraphs: [
     "At Storeys Real Estate, we don’t just offer a job – we offer a rewarding career that empowers you to grow, innovate, and thrive. Join our team, and you'll become part of a forward-thinking, collaborative culture where your success is celebrated, and your professional development is a top priority. We believe in nurturing talent, offering continuous training and mentorship, and providing you with the tools and support needed to reach your full potential. Here, your ideas matter, and every contribution counts. Beyond the work, we know how to make the journey enjoyable, with team events, friendly competition, and a dynamic, fun atmosphere that fosters creativity and connection. If you're looking for a place to challenge yourself, grow in your career, and have a great time doing it, Storeys is where you'll find it all.",
   ],
-  image: "/assets/img/frame-3.svg",
+  image: "/assets/img/frame-3.jpg",
   buttons: [
     {
       title: "APPLY NOW",
@@ -39,7 +39,7 @@ export const careersFrame = {
     },
     {
       title: "CONTACT US",
-      link: "/careers",
+      link: "/contact",
     },
   ],
 };

@@ -9,7 +9,7 @@ const Cards = ({ id, name, desc, img }) => {
         <img src={img} alt={name} />
       </div>
       <div className="content">
-        <h4 className="font-sm font-atyp medium text-left">{name}</h4>
+        <h4 className="fs-20 font-atyp medium text-left ser-head">{name}</h4>
         <p className="font-sm fs-16 text-left">{desc}</p>
       </div>
     </NavLink>

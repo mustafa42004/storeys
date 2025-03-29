@@ -8,24 +8,28 @@ const PopularAreas = () => {
       description:
         "Ideal island backed with beautiful beaches overlooking stunning views of Skyline.",
       image: "/assets/img/area-1.png",
+      postLink: "#",
     },
     {
       title: "Dubai Marina",
       description:
         "The city’s hub, Dubai Marina is a meticulously planned community of Dubai.",
       image: "/assets/img/area-2.png",
+      postLink: "#",
     },
     {
       title: "Dubai Hills Estates",
       description:
         "A lush 2700 acers suburban lifestyle with lush greenery. & cutting-edge features.",
       image: "/assets/img/area-3.png",
+      postLink: "#",
     },
     {
       title: "Town Square",
       description:
         "Town square is divided into 13 sub-projects spread among 1.6 million square feet of land.",
       image: "/assets/img/area-4.png",
+      postLink: "#",
     },
   ];
 
@@ -45,7 +49,7 @@ const PopularAreas = () => {
                     title={card.title}
                     description={card.description}
                     image={card.image}
-                  />
+                    postLink={card.postLink}postL                  />
                 ))}
               </div>
             </div>

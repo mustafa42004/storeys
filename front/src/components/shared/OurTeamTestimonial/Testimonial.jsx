@@ -9,24 +9,24 @@ const Testimonial = () => {
 
   const testimonials = [
     {
-      image: "/assets/img/our-team-1.svg",
+      image: "/assets/img/our-team-1.png",
       name: "Mohamed Ibrahim",
       designation: "Founder & CEO",
     },
     // Add more testimonials for testing
     {
-      image: "/assets/img/our-team-2.svg",
+      image: "/assets/img/our-team-2.png",
       name: "Vinayak K",
       designation: "Co-Founder",
     },
     {
-      image: "/assets/img/our-team-3.svg",
+      image: "/assets/img/our-team-3.png",
       name: "Mohamed Sheleek",
       designation: "Co-Founder",
     },
     // Add more testimonials for testing
     {
-      image: "/assets/img/our-team-4.svg",
+      image: "/assets/img/our-team-4.png",
       name: "Arun K",
       designation: "Co-Founder",
     },
@@ -36,13 +36,29 @@ const Testimonial = () => {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 5,
+    slidesToShow: 4,
     slidesToScroll: 1,
     arrows: false,
     className: "testimonial-slides",
     responsive: [
       {
-        breakpoint: 768,
+        breakpoint: 991,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 767,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 600,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
@@ -57,8 +73,8 @@ const Testimonial = () => {
       <div className="our-team card">
         <img src={image} alt="" />
         <div className="content">
-          <h4 className="fs-16 text-left font-atyp dark medium">{name}</h4>
-          <p className="fs-12 text-left">{designation}</p>
+          <h4 className="fs-16 text-left font-atyp dark medium mb-0">{name}</h4>
+          <p className="fs-12 text-left mb-0">{designation}</p>
         </div>
       </div>
     );

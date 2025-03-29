@@ -32,7 +32,7 @@ const Content = ({
               <NavLink
                 key={index}
                 to={button.link}
-                className="cs-btn cs-bg-dark br-0"
+                className="cs-btn light fs-14"
                 {...(button.link === "#modal"
                   ? {
                       "data-bs-toggle": "modal",

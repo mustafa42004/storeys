@@ -15,12 +15,12 @@ const ImageAbsolute = ({header, width, data}) => {
         <div className="container mb-5 pt-cs">
             <div className="row">
                 <div className="col-md-12">
-                    <Heading title={header} width={isMob ? 85 : width} className={"fs-42"} />
+                    <Heading title={header} width={isMob ? 100 : width} className={"fs-42"} />
 
                 </div>
             </div>
         </div>
-        <section className="image-absolute ">
+        <section className="image-absolute">
             {
                 !isMob && (
                     <img className="abs-img" src="/assets/img/imaged-banner.svg" alt="imaged-banner" />
@@ -30,7 +30,7 @@ const ImageAbsolute = ({header, width, data}) => {
                 <div className="row">
                     <div className="col-md-12">
 
-                        <div className="grid-cs gap 30">
+                        <div className="grid-cs gap-40">
                             <div className="content">
                                 {
                                     data?.map((value, index) => (

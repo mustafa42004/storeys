@@ -215,7 +215,8 @@
 /* mobile */
 @media screen and (max-width: 767px) {
   .font-header {
-    font-size: 32px !important;
+    font-size: 30px !important;
+    line-height: 1.25em !important;
   }
   .fs-18 {
     font-size: 14px !important;
@@ -227,7 +228,7 @@
     font-size: 24px !important;
   }
   .fs-42 {
-    font-size: 32px !important;
+    font-size: 30px !important;
   }
   .fs-60 {
     font-size: 45px !important;
@@ -385,9 +386,6 @@
   .form-section {
     grid-template-columns: 1fr;
   }
-  .gap-30 {
-    gap: 20px !important;
-  }
   .grid-cs {
     grid-template-columns: 1fr;
   }
@@ -402,10 +400,6 @@
     margin-top: 17px;
     gap: 20px;
     position: static;
-  }
-  .fs-42 {
-    font-size: 32px !important;
-    line-height: 1.4em !important;
   }
   .who-we-are {
     .banner {
@@ -441,7 +435,7 @@
   }
   #faqAccordion {
     .accordion-button {
-      padding: 12px;
+      padding: 12px 12px 12px 0px;
     }
   }
   .communities {

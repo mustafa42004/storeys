@@ -16,21 +16,21 @@ export const homeBanner = {
 
   export const propertyBanner = {
     title: "Property Listing",
-    bg: '/assets/img/property-banner.svg',
+    bg: '/assets/img/property-banner.png',
     width: 100,
     height: 280
   }
 
   export const teamBanner = {
     title: "Our Team",
-    bg: '/assets/img/team-banner.svg',
+    bg: '/assets/img/team-banner.png',
     width: 100,
     height: 280
   }
  
   export const contactBanner = {
     title: "Contact Us",
-    bg: '/assets/img/contact-banner.svg',
+    bg: '/assets/img/contact-banner.png',
     width: 100,
     height: 280
   }
@@ -44,7 +44,7 @@ export const homeBanner = {
 
   export const careersBanner = {
     title: "Careers At Storeys",
-    bg: '/assets/img/careers-banner.svg',
+    bg: '/assets/img/careers-banner.png',
     width: 100,
     height: 280
   }
@@ -71,7 +71,7 @@ export const homeBanner = {
 
   export const ourServicesBanner = {
     title: "Our Services",
-    bg: '/assets/img/services-banner.svg',
+    bg: '/assets/img/services-banner.png',
     width: 100,
     height: 280
   }

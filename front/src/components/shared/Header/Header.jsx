@@ -51,7 +51,7 @@ const Header = ({ height }) => {
           <div className="col-md-12">
             <div className="layout">
               <div className="logo">
-                <Logo width={isMobile ? 70 : 100} height="100" />
+                <a href="/"><Logo width={isMobile ? 70 : 100} height="100" /></a>
               </div>
               <div className="nav-items">
                 {!isMobile ? (

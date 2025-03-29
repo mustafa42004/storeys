@@ -55,6 +55,11 @@ const CareerModel = () => {
       <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div className="modal-content">
           <div className="modal-body">
+            <span id="model-close-icon" className="model-close-icon">
+              <button type="button" className="btn" data-bs-dismiss="modal">
+                <i className="fa-solid fa-close"></i>
+              </button>
+            </span>
             <Formik
               initialValues={{
                 firstName: "",
@@ -129,15 +134,13 @@ const CareerModel = () => {
                       className="text-danger"
                     />
                   </div>
-                  <div className="modal-footer">
-                    <button
-                      type="submit"
-                      className="cs-btn"
-                      disabled={isLoading}
-                    >
-                      {isLoading ? "Submitting..." : "Submit"}
-                    </button>
-                  </div>
+                  <button
+                    type="submit"
+                    className="cs-btn mt-2"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? "Submitting..." : "Submit"}
+                  </button>
                 </Form>
               )}
             </Formik>

@@ -14,7 +14,7 @@ const OurServices = () => {
     const data = {
         header: "Tailored Real Estate Solutions Just for You",
         description: "At Storeys Real Estate, we provide a full spectrum of real estate services tailored to meet the diverse needs of our clients. Whether you're looking to buy, sell, rent, or invest, our expert team ensures a seamless and rewarding experience.",
-        image: "/assets/img/custom-banner.svg"
+        image: "/assets/img/custom-banner.png"
       }
 
       const fixedBgData = {

@@ -10,6 +10,8 @@ const Faq = ({Component}) => {
                     <div className="col-md-12 pb-5">
                         <Heading title="Career FAQs" className="fs-42" />
                     </div>
+                </div>
+                <div className="row align-items-start flex-md-row flex-column-reverse">
                     <div className="col-md-6">
                         <Component />
                     </div>
