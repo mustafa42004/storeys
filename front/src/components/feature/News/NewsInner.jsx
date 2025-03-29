@@ -51,7 +51,7 @@ const NewsInner = () => {
         title={data?.title}
         bg={data?.banner?.s3Url}
         width={width}
-        height={400}
+        height={300}
         marginTop={headerHeight}
         className="banner"
       />

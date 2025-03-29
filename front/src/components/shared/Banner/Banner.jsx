@@ -25,15 +25,17 @@ const Banner = ({
             height: `${height}px` || "280px",
           }}
         >
-          <Heading
-            isHome={isHome}
-            title={title}
-            className="light w-100 home-heading"
-            description={description}
-            descriptionClassName="light"
-          />
           <div className="container">
-            {isFilter && <Filters />}
+            <Heading
+              isHome={isHome}
+              title={title}
+              className="light w-100 home-heading"
+              description={description}
+              descriptionClassName="light"
+            />
+            <div className="container">
+              {isFilter && <Filters />}
+            </div>
           </div>
         </div>
       </section>
