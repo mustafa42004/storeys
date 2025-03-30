@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const mongoosePaginate = require("mongoose-paginate-v2");
 
-// Move designation order to the model since it's specific to team sorting
 const designationOrder = {
   "Founder & CEO": 1,
   CEO: 1, // alternate format
