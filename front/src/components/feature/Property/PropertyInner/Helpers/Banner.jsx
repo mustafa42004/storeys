@@ -63,7 +63,7 @@ const Banner = ({ banner, marginTop }) => {
           />
           <div className="d-flex justify-content-between mt-3">
             <button
-              className="btn btn-secondary"
+              className="cs-btn p-16-60 fs-14"
               onClick={() =>
                 setPhotoIndex(
                   (photoIndex + imageUrls?.length - 1) % imageUrls?.length
@@ -73,7 +73,7 @@ const Banner = ({ banner, marginTop }) => {
               Previous
             </button>
             <button
-              className="btn btn-secondary"
+              className="cs-btn p-16-60 fs-14"
               onClick={() =>
                 setPhotoIndex((photoIndex + 1) % imageUrls?.length)
               }
