@@ -22,7 +22,8 @@ const Gallery = (data) => {
               alt={`Property - ${item.description}`}
             />
 
-            <button
+            <a
+              href={`/property/${item._id}`}
               className="round-btn"
               aria-label="View details"
               style={{
@@ -31,7 +32,7 @@ const Gallery = (data) => {
               }}
             >
               <i className="fa-regular fa-arrow-up-right"></i>
-            </button>
+            </a>
             <div
               className="content"
               style={{ opacity: hoveredIndex === index ? 1 : 0 }}

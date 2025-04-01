@@ -11,7 +11,7 @@ const Counter = () => {
     <div className="counter" ref={ref}>
       <div className="item">
         <h2 className="font-lg font-sans text-left medium fs-50">
-          {inView ? <CountUp end={80} duration={2.5} suffix="+" /> : "0+"}
+          {inView ? <CountUp end={20} duration={2.5} suffix="+" /> : "0+"}
         </h2>
         <h4 className="font-lg font-sans text-left medium counter-title">
           years of combined experience

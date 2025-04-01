@@ -616,6 +616,8 @@ select.dropdown-select option:hover {
         font-size: 22px;
         align-items: center;
         justify-content: center;
+        text-decoration: none;
+        color: inherit;
       }
       .content {
         position: absolute;
