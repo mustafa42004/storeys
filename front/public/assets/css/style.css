@@ -1011,6 +1011,13 @@ select.dropdown-select option:hover {
     align-items: center;
     justify-content: space-between;
     gap: 10px;
+    .created-line {
+      a {
+        color: #45a3d4;
+        font-weight: 700;
+        text-decoration: none;
+      }
+    }
   }
 }
 

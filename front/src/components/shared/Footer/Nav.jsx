@@ -8,6 +8,7 @@ const Nav = () => {
     <div className="nav">
         <div className="left">
             <p className="font-sm fs-14">© {currentYear} Storeys Real Estate. All rights reserved.</p>
+            <p className="font-sm fs-14 created-line">Designed and developed by <a href="https://aerozefcreations.com/">Aerozef Creations</a></p>
         </div>
         <div className="flex-cs gap-20">
             <NavLink to="/" className="font-sm fs-14">Terms & Conditions</NavLink>
