@@ -108,7 +108,7 @@ export const footerLinks = [
     title: "Get in Touch",
     links: [
       {
-        name: "056 789 7077",
+        name: "+971 56 789 7077",
       },
       {
         name: "enquiries@storeys.ae",
