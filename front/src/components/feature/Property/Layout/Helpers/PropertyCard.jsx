@@ -56,6 +56,7 @@ const PropertyCard = ({ index, property }) => {
   const handleCallClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
+    window.open("https://wa.me/+971567897077")
     // Add your call functionality here
   };
 

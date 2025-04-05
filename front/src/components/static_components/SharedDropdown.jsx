@@ -122,7 +122,6 @@ const SharedDropdown = ({
   return (
     <div
       className="dropdown shared-dropdown position-relative "
-      style={{ zIndex: 9999 }}
       ref={dropdownRef}
     >
       <input

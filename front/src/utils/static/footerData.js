@@ -126,15 +126,15 @@ export const footerLinks = [
     buttons: [
       {
         icon: "/assets/img/instagram.svg",
-        link: "/instagram",
+        link: "http://instagram.com/storeys.ae",
       },
       {
         icon: "/assets/img/facebook.svg",
-        link: "/facebook",
+        link: "http://facebook.com/storeys.ae",
       },
       {
-        icon: "/assets/img/twitter.svg",
-        link: "/twitter",
+        icon: "/assets/img/whatsapp.svg",
+        link: "https://wa.me/+971567897077",
       },
     ],
   },

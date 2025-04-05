@@ -59,7 +59,7 @@ export const contactFrame = {
     },
     {
       title: "Phone",
-      value: "+971 0567897077",
+      value: "+971 567897077",
       icon: "/assets/img/contact-phone.svg",
     },
     {

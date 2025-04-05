@@ -290,6 +290,7 @@ body {
   left: 0;
   right: 0;
   margin: 0 auto;
+  z-index: 99;
   .item {
     display: flex;
     align-items: flex-start;
@@ -353,7 +354,9 @@ body {
   position: relative;
   width: 100%;
 }
-
+.dropdown-menu.show {
+  z-index: 99;
+}
 .dropdown-select {
   width: 100%;
   padding: 8px 0px;

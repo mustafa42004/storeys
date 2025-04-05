@@ -2,8 +2,8 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 export const startRowAnimation = (element, direction) => {
-    const startX = direction === 'left' ? '0%' : '-50%';
-    const endX = direction === 'left' ? '-50%' : '0%';
+    const startX = direction === 'left' ? '0%' : window.innerWidth >= 767 ? "-50%" : "-500%";
+    const endX = direction === 'left' ? window.innerWidth >= 767 ? "-50%" : "-500%" : '0%';
   
     return gsap.fromTo(element,
         { x: startX },
