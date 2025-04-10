@@ -15,7 +15,7 @@ export const homeBanner = {
   }
 
   export const propertyBanner = {
-    title: "Property Listing",
+    title: "Properties",
     bg: '/assets/img/property-banner.png',
     width: 100,
     height: 280
@@ -77,6 +77,18 @@ export const homeBanner = {
   }
 
   export const serviceInnerBanner = {
+    bg: '/assets/img/services-inner-banner.svg',
+    width: 100,
+    height: 280
+  }
+  export const PrivacyBanner = {
+    title: "Privacy Policy",
+    bg: '/assets/img/services-inner-banner.svg',
+    width: 100,
+    height: 280
+  }
+  export const TermsBanner = {
+    title: "Terms & Conditions",
     bg: '/assets/img/services-inner-banner.svg',
     width: 100,
     height: 280

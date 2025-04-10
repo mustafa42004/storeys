@@ -1321,6 +1321,8 @@ select.dropdown-select option:hover {
     align-items: center;
     justify-content: start;
     gap: 30px;
+    text-decoration: none;
+    cursor: pointer;
     .icon {
       width: 100%;
       flex-shrink: 0;
@@ -1763,10 +1765,14 @@ select.dropdown-select option:hover {
       outline: none;
     }
   }
+  .accordion-body {
+    padding: 22px 0px 30px;
+  }
   .accordion-item {
     margin-bottom: 25px;
     background: transparent !important;
     border: none;
+    border-radius: 0px !important;
   }
   .accordion-item {
     border-bottom: 1px solid #1e1e1e;

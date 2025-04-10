@@ -56,27 +56,32 @@ export const contactFrame = {
       title: "Landline",
       value: "+971 4 3243314",
       icon: "/assets/img/contact-landline.svg",
+      link: "tel:+97143243314",
     },
     {
       title: "Phone",
       value: "+971 567897077",
       icon: "/assets/img/contact-phone.svg",
+      link: "tel:+971567897077",
     },
     {
       title: "Email",
       value: "enquiries@storeys.ae",
       icon: "/assets/img/contact-email.svg",
+      link: "mailto:enquiries@storeys.ae",
     },
     {
       title: "WhatsApp",
       value: "Click to WhatsApp",
       icon: "/assets/img/contact-whatsapp.svg",
+      link: "https://wa.me/+971567897077",
     },
     {
       title: "Office Address",
       value:
         "Arenco Offices, Building 3 - G10 - Dubai Investments Park - Dubai",
       icon: "/assets/img/contact-address.svg",
+      link: "https://maps.app.goo.gl/hJ4eLxJQKKJ6PS6ZA",
     },
   ],
 };

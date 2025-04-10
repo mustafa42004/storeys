@@ -11,6 +11,8 @@ import News from "../../components/feature/News/News";
 import OurServices from "../../components/feature/OurServices/OurServices";
 import ServiceInner from "../../components/feature/OurServices/ServiceInner";
 import NewsInner from "../../components/feature/News/NewsInner";
+import PrivacyPolicy from "../../components/feature/PrivacyPolicy/PrivacyPolicy";
+import TermsAndConditions from "../../components/feature/TermsAndConditions/TermsAndConditions";
 
 const rootRoutes = [
   {
@@ -68,6 +70,14 @@ const rootRoutes = [
   {
     path: "/services/:id",
     element: <ServiceInner />,
+  },
+  {
+    path: "/privacy-policy",
+    element: <PrivacyPolicy />,
+  },
+  {
+    path: "/terms-and-conditions",
+    element: <TermsAndConditions />,
   },
 ];
 

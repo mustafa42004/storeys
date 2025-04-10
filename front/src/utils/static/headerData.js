@@ -16,7 +16,7 @@ export const headerLinks = [
         link: "/services"
     },
     {
-        name: "List a Property",
+        name: "Properties",
         link: "/property"
     },
     {
