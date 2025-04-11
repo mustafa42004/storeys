@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import SharedDropdown from "../../static_components/SharedDropdown";
-import dubaiAreas from "../../../constants/dubaiAreas";
-import { flatPropertyTypes } from "../../../constants/propertyTypes";
 import { toast } from "react-toastify";
+import { useQuery } from "@tanstack/react-query";
+import propertiesService from "../../../services/properties.service";
 
 const Filters = ({ theme }) => {
   const navigate = useNavigate();
+
+  const { data } = useQuery({
+    queryKey: ["cities-types"],
+    queryFn: propertiesService.getPropertyCitiesAndTypes,
+    select: (data) => data?.data,
+  });
+
   const [searchParams] = useSearchParams();
   const [classes, setClasses] = useState({
     sm: "",
@@ -92,7 +99,7 @@ const Filters = ({ theme }) => {
             onChange={handleInputChange}
             name="location"
             placeholder="Select Location"
-            options={dubaiAreas}
+            options={data?.cities || []}
             className={classes.select}
           />
         </div>
@@ -114,7 +121,7 @@ const Filters = ({ theme }) => {
             onChange={handleInputChange}
             name="type"
             placeholder="Select Type"
-            options={flatPropertyTypes}
+            options={data?.propertyTypes || []}
             className={classes.select}
           />
         </div>
@@ -141,10 +148,7 @@ const Filters = ({ theme }) => {
           </div>
         </div>
         <div className="item p-0 align-self-lg-center align-self-end">
-          <button
-            className={`cs-btn ${classes.button}`}
-            onClick={handleSearch}
-          >
+          <button className={`cs-btn ${classes.button}`} onClick={handleSearch}>
             Search
           </button>
         </div>

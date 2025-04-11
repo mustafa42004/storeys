@@ -21,6 +21,11 @@ class propertiesService {
     const response = await api.get(`/properties/${queryKey[1]}`);
     return response.data;
   }
+
+  static async getPropertyCitiesAndTypes() {
+    const response = await api.get(`/properties/data`);
+    return response.data;
+  }
 }
 
 export default propertiesService;
