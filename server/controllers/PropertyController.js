@@ -162,7 +162,6 @@ module.exports.getCities = catchAsync(async (req, res, next) => {
       $group: {
         _id: { $toLower: "$city" }, // Convert to lowercase for true uniqueness
         city: { $first: "$city" }, // Keep original casing
-        count: { $sum: 1 }, // Count properties in each city
       },
     },
     // Filter out null/empty cities
@@ -182,15 +181,45 @@ module.exports.getCities = catchAsync(async (req, res, next) => {
       $project: {
         _id: 0,
         city: 1,
-        count: 1,
+      },
+    },
+  ]);
+
+  const propertyTypes = await propertyModel.aggregate([
+    // Get unique cities
+    {
+      $group: {
+        _id: { $toLower: "$type" }, // Convert to lowercase for true uniqueness
+        type: { $first: "$type" }, // Keep original casing
+      },
+    },
+    // Filter out null/empty cities
+    {
+      $match: {
+        _id: { $ne: null, $ne: "" },
+      },
+    },
+    // Sort alphabetically
+    {
+      $sort: {
+        _id: 1,
+      },
+    },
+    // Reshape the output
+    {
+      $project: {
+        _id: 0,
+        type: 1,
       },
     },
   ]);
 
   res.status(200).json({
     status: "success",
-    results: cities.length,
-    data: cities,
+    data: {
+      cities: cities?.map((city) => city.city),
+      propertyTypes: propertyTypes?.map((type) => type.type),
+    },
   });
 });
 
