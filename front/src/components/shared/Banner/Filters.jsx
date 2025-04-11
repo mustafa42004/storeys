@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import SharedDropdown from "../../static_components/SharedDropdown";
-import { toast } from "react-toastify";
 import { useQuery } from "@tanstack/react-query";
 import propertiesService from "../../../services/properties.service";
 
@@ -74,10 +73,10 @@ const Filters = ({ theme }) => {
   };
 
   const handleSearch = () => {
-    if (!Object.values(formData).every((val) => !!val)) {
-      toast.error("All Values are required");
-      return;
-    }
+    // if (!Object.values(formData).every((val) => !!val)) {
+    //   toast.error("All Values are required");
+    //   return;
+    // }
 
     // Filter out empty values
     const params = new URLSearchParams();
