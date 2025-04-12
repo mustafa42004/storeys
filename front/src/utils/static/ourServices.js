@@ -526,3 +526,90 @@ export const rentproperty = {
     buttonText: "Contact Us Today",
   },
 };
+
+export const mortgage = {
+  bannerTitle: "Mortgages",
+  frameData: {
+    title: "Secure the Best Financing for Your Property",
+    paragraphs: [
+      "At Storeys Real Estate, we make home financing simple, transparent, and hassle-free. Whether you're a first-time buyer, investor, or homeowner looking to refinance, our expert mortgage advisors help you secure the best mortgage solutions tailored to your needs. With access to leading banks and financial institutions in the UAE, we ensure you get the most competitive interest rates, flexible terms, and a smooth approval process.",
+    ],
+    image: "/assets/img/inner-service-img.png",
+  },
+  boxData: {
+    header: "Why Choose a Mortgage with Storeys Real Estate?",
+    description: "",
+    data: [
+      {
+        header: "Exclusive Mortgage Rates",
+        description: "Access to the best home loan deals from top UAE lenders.",
+      },
+      {
+        header: "Fast & Hassle-Free Process",
+        description: " We handle the paperwork, negotiations, and approvals.",
+      },
+      {
+        header: "Personalized Solutions",
+        description:
+          "Tailored financing plans that match your financial goals.",
+      },
+    ],
+  },
+  imagedData: {
+    header: "Our Mortgage Services",
+    width: 100,
+    data: [
+      {
+        title: "Home Purchase Loans",
+        description:
+          "Whether you're buying your first home or upgrading, we guide you through the entire mortgage process, helping you secure the right loan with low interest rates and favorable repayment terms.",
+      },
+      {
+        title: "Investment Property Loans",
+        description:
+          "Maximize your real estate investment potential with a customized mortgage that ensures high returns with minimal financial strain.",
+      },
+      {
+        title: "Mortgage Refinancing",
+        description:
+          "Lower your monthly payments, adjust your loan terms, or unlock equity in your property by refinancing your mortgage at a better rate.",
+      },
+      {
+        title: "Equity Release (Cash-Out Refinancing)",
+        description:
+          "Need extra funds for a new investment, business, or personal expenses? We help you release cash from your property’s value through equity financing.",
+      },
+      {
+        title: "Mortgages for Non-Residents",
+        description:
+          "Looking to invest in Dubai’s real estate market but live abroad? We assist non-resident buyers in securing mortgages with favorable terms and minimal hassle.",
+      },
+    ],
+  },
+  pointData: {
+    header: "Why Partner with Storeys Real Estate?",
+    data: [
+      {
+        header: "Access to Multiple Lenders",
+        description:
+          " We compare the best mortgage deals from different banks.",
+      },
+      {
+        header: "End-to-End Support",
+        description:
+          "From pre-approval to final disbursement, we manage the entire process.",
+      },
+      {
+        header: "Expert Guidance",
+        description:
+          "Our advisors ensure you make informed financial decisions.",
+      },
+    ],
+  },
+  fixedBgData: {
+    title: "Get Pre-Approved Today!",
+    description:
+      "Let Storeys Real Estate help you find the right mortgage with the best terms—quickly and efficiently.",
+    buttonText: "Contact Us Today",
+  },
+};
