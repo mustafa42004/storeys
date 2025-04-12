@@ -1,7 +1,13 @@
 // File: src/components/ServiceInner.jsx (adjust path as per your structure)
 
 import { useParams } from "react-router-dom";
-import { buyproperty, holidayhome, commercial, sellproperty } from "../../../utils/static/ourServices"; // Adjust path if needed
+import {
+  buyproperty,
+  holidayhome,
+  commercial,
+  sellproperty,
+  rentproperty,
+} from "../../../utils/static/ourServices"; // Adjust path if needed
 import { serviceInnerBanner } from "../../../utils/static/bannerData";
 import Banner from "../../shared/Banner/Banner";
 import Header from "../../shared/Header/Header";
@@ -25,6 +31,7 @@ const ServiceInner = () => {
     holidayhome,
     commercial,
     sellproperty,
+    rentproperty,
   };
 
   // Normalize the id to match object keys (e.g., "holiday-homes" → "holidayhome", "buy-property" → "buyproperty")
@@ -39,7 +46,8 @@ const ServiceInner = () => {
   // Determine which data to use based on the normalized id
   const serviceData = services[normalizedId] || holidayhome; // Fallback to holidayhome if id doesn't match
 
-  const { frameData, boxData, imagedData, pointData, fixedBgData } = serviceData;
+  const { frameData, boxData, imagedData, pointData, fixedBgData } =
+    serviceData;
   const { bg, width, height } = serviceInnerBanner;
 
   useScrollToTop();

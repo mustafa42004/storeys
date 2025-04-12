@@ -433,3 +433,96 @@ export const commercial = {
     buttonText: "Contact Us Today",
   },
 };
+
+export const rentproperty = {
+  bannerTitle: "Rent Property",
+  frameData: {
+    title: "Looking to Rent a Property?",
+    paragraphs: [
+      `Dubai offers an incredible range of rental options — and we’re here to help you find the one that feels like home.
+ With access to hundreds of listings across Dubai, our team helps you cut through the clutter and rent with confidence.`,
+    ],
+    image: "/assets/img/inner-service-img.png",
+  },
+  boxData: {
+    header: "What Renters Get with Us:",
+    description: "",
+    data: [
+      {
+        header: "Curated Listings",
+        description:
+          " Verified properties across prime locations and communities",
+      },
+      {
+        header: "Flexible Budgets",
+        description:
+          "From affordable studios to luxury villas, we match your lifestyle",
+      },
+      {
+        header: "Local Insights",
+        description: "Neighborhood guides, school info, commute times & more",
+      },
+      {
+        header: "Fast Process ",
+        description:
+          "Quick viewings, negotiation support & hassle-free paperwork",
+      },
+    ],
+  },
+  imagedData: {
+    header: "Looking to Rent Out Your Property?",
+    width: 100,
+    data: [
+      {
+        title: "What Landlords Get with Us:",
+        description:
+          "We help landlords maximize rental returns with the least effort. Whether you own a single unit or a portfolio, we take care of everything from tenant sourcing to full property management.",
+        list: [
+          {
+            title: "Accurate Rental Valuation",
+            description:
+              "Know what your property can earn in the current market",
+          },
+          {
+            title: "Targeted Marketing",
+            description:
+              "We promote your property across top portals and social platforms.",
+          },
+          {
+            title: "Qualified Tenants",
+            description: "Background-checked, ready-to-move clients",
+          },
+          {
+            title: "End-to-End Management",
+            description:
+              "From tenancy contracts to move-in, DEWA setup, and renewals",
+          },
+          {
+            title: "Optional Property Management",
+            description:
+              "We handle maintenance, inspections, rent collection & more",
+          },
+        ],
+      },
+    ],
+  },
+  pointData: {
+    header: "Popular Rental Areas We Cover",
+    data: [
+      {
+        header: "Downtown Dubai, Dubai Marina, Business Bay,",
+        description: "",
+      },
+      {
+        header: "JVC, Palm Jumeirah, Dubai Hills Estate, and more.",
+        description: "",
+      },
+    ],
+  },
+  fixedBgData: {
+    title: "Let’s Get Started",
+    description:
+      "Looking to rent or lease a property in Dubai? Contact Storeys Real Estate today — and let’s make your next move the right one.",
+    buttonText: "Contact Us Today",
+  },
+};
