@@ -613,3 +613,94 @@ export const mortgage = {
     buttonText: "Contact Us Today",
   },
 };
+
+export const offplan = {
+  bannerTitle: "Off-Plan Investments",
+  frameData: {
+    title: "Smart Property Choices for Future Gains",
+    paragraphs: [
+      "Off-plan investment refers to purchasing a property before it is fully constructed – often during the planning or early development phase. This strategy has become increasingly popular in the UAE and other high-growth markets, offering investors a unique opportunity to secure premium properties at pre-launch prices.",
+    ],
+    image: "/assets/img/inner-service-img.png",
+  },
+  boxData: {
+    header: "Why Invest in Off-Plan Properties?",
+    description: "",
+    data: [
+      {
+        header: "Attractive Pricing & Payment Plans",
+        description:
+          "Off-plan properties are typically priced lower than completed units. Developers often offer flexible post-handover payment plans, making it easier to enter the market with lower upfront capital.",
+      },
+      {
+        header: "High Capital Appreciation",
+        description:
+          "As the development progresses, the value of off-plan properties usually increases. Investors often see significant returns by the time the property is completed.",
+      },
+      {
+        header: "Wide Selection of Units",
+        description:
+          "Early investors get first pick of layouts, views, and floor plans – ensuring access to the most desirable units within a development.",
+      },
+      {
+        header: "Modern Designs & Amenities",
+        description:
+          "Off-plan projects are designed with contemporary lifestyles in mind, featuring modern architecture, smart home technology, and top-tier amenities.",
+      },
+    ],
+  },
+  imagedData: {
+    header: "Risks to Consider – And How We Help",
+    width: 100,
+    data: [
+      {
+        title:
+          "At Storeys Real Estate, we guide you through the entire process:",
+        description:
+          "Like any investment, off-plan comes with risks such as project delays or market fluctuations. That’s why partnering with a trusted real estate advisor is key.",
+        list: [
+          {
+            title: "Vetting reliable developers with proven track records",
+            description: "",
+          },
+          {
+            title: "Comparing projects based on ROI potential",
+            description: "",
+          },
+          {
+            title: "Securing the best units and pricing",
+            description: "",
+          },
+          {
+            title: "Managing timelines and legalities",
+            description: "",
+          },
+        ],
+      },
+    ],
+  },
+  pointData: {
+    header: "Is Off-Plan Right for You?",
+    data: [
+      {
+        header: "Long-term investors looking for capital appreciation",
+        description: "",
+      },
+      {
+        header: "First-time buyers wanting affordability and flexibility",
+        description: "",
+      },
+      {
+        header:
+          "Investors building a rental portfolio with strong future returns",
+        description: "",
+      },
+    ],
+  },
+  fixedBgData: {
+    title: "Let’s Talk Investments",
+    description:
+      "Want to explore the most promising off-plan projects in Dubai and across the UAE? Reach out to our expert team today and we’ll help you make a move that makes sense.",
+    buttonText: "Contact Us Today",
+  },
+};

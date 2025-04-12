@@ -8,6 +8,7 @@ import {
   sellproperty,
   rentproperty,
   mortgage,
+  offplan,
 } from "../../../utils/static/ourServices"; // Adjust path if needed
 import { serviceInnerBanner } from "../../../utils/static/bannerData";
 import Banner from "../../shared/Banner/Banner";
@@ -34,6 +35,7 @@ const ServiceInner = () => {
     sellproperty,
     rentproperty,
     mortgage,
+    offplan,
   };
 
   // Normalize the id to match object keys (e.g., "holiday-homes" → "holidayhome", "buy-property" → "buyproperty")
