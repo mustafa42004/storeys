@@ -9,6 +9,7 @@ import {
   rentproperty,
   mortgage,
   offplan,
+  interiors,
 } from "../../../utils/static/ourServices"; // Adjust path if needed
 import { serviceInnerBanner } from "../../../utils/static/bannerData";
 import Banner from "../../shared/Banner/Banner";
@@ -36,6 +37,7 @@ const ServiceInner = () => {
     rentproperty,
     mortgage,
     offplan,
+    interiors,
   };
 
   // Normalize the id to match object keys (e.g., "holiday-homes" → "holidayhome", "buy-property" → "buyproperty")
@@ -82,10 +84,12 @@ const ServiceInner = () => {
         width={imagedData?.width}
         data={imagedData?.data}
       />
-      <TwoSidedSection
-        image={"/assets/img/service-point-img.svg"}
-        Component={<PointComp data={pointData?.data} />}
-      />
+      {pointData?.data && (
+        <TwoSidedSection
+          image={"/assets/img/service-point-img.svg"}
+          Component={<PointComp data={pointData?.data} />}
+        />
+      )}
       <FixedBg
         height={380}
         Component={

@@ -687,3 +687,82 @@ export const offplan = {
     buttonText: "Contact Us Today",
   },
 };
+
+export const interiors = {
+  bannerTitle: "Interiors ",
+  frameData: {
+    title: "Transform Your Space with Elegance & Functionality",
+    paragraphs: [
+      "At Storeys Real Estate, we believe that a well-designed space is more than just aesthetics—it’s about creating a home or workspace that reflects your style, enhances functionality, and maximizes comfort. Our bespoke interior design and fit-out services cater to homeowners, investors, and businesses looking to elevate their spaces with modern, sophisticated, and customized designs.",
+    ],
+    image: "/assets/img/inner-service-img.png",
+  },
+  boxData: {
+    header: "Why Invest in Interior Design?",
+    description: "A beautifully designed interior can:",
+    data: [
+      {
+        header: "Increase Property Value ",
+        description:
+          "A well-furnished space attracts higher sale and rental prices.",
+      },
+      {
+        header: "Enhance Comfort & Functionality",
+        description:
+          "Thoughtful layouts make spaces more enjoyable and efficient.",
+      },
+      {
+        header: "Create a Lasting Impression",
+        description:
+          "Whether for personal use or short-term rentals, interiors set the tone for an exceptional living experience.",
+      },
+    ],
+  },
+  imagedData: {
+    header: "Our Interior Design & Fit-Out Services",
+    width: 100,
+    data: [
+      {
+        title: "Bespoke Interior Design",
+        description:
+          "Our expert designers work with you to create stunning interiors that blend luxury, comfort, and practicality. Whether you prefer modern minimalism, classic elegance, or contemporary chic, we bring your vision to life.",
+      },
+      {
+        title: "Turnkey Furnishing Solutions",
+        description:
+          "Need a fully furnished home or rental unit? We offer complete turnkey furnishing packages, ensuring your property is move-in ready with high-quality furniture, decor, and accessories.",
+      },
+      {
+        title: "Space Planning & Optimization",
+        description:
+          "Maximizing space is key, especially in Dubai’s dynamic real estate market. Our team ensures smart layouts, efficient storage solutions, and seamless flow for optimal functionality.",
+      },
+      {
+        title: "Fit-Out & Renovation",
+        description:
+          "From minor upgrades to full-scale renovations, we handle:",
+        list: [
+          {
+            title: "Custom carpentry & cabinetry",
+            description: "or stylish and functional storage.",
+          },
+          {
+            title: "Lighting & ceiling designs",
+            description: "to enhance ambiance.",
+          },
+          {
+            title: "Flooring & wall treatments",
+            description: "for a premium finish.",
+          },
+        ],
+      },
+    ],
+  },
+  // pointData: {},
+  fixedBgData: {
+    title: "Ready to Buy? Let's Talk.",
+    description:
+      "Connect with our expert team today for a no-obligation consultation and start your journey to owning the perfect property in Dubai.",
+    buttonText: "Contact Us Today",
+  },
+};
