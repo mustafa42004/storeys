@@ -697,6 +697,9 @@ select.dropdown-select option:hover {
 .gtc-4 {
   grid-template-columns: 1fr 1fr 1fr 1fr !important;
 }
+.gtc-5 {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr !important;
+}
 
 .fixed-bg {
   width: 100%;

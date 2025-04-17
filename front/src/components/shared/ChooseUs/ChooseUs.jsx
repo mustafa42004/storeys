@@ -28,62 +28,60 @@ const ChooseUs = ({ header, description, data, showNumber }) => {
               <div className={`layout mt-5 gtc-${isMob ? 2 : getGrid}`}>
                 {!isMob
                   ? data?.map((value, index) => {
-                      let getIndex = index % 2 === 0;
-                      let isLastItem = index === data.length - 1;
-                      return (
-                        <div
-                          className={`item ${getIndex ? "" : "revert"} ${
-                            !isLastItem ? "right" : ""
+                    let getIndex = index % 2 === 0;
+                    let isLastItem = index === data.length - 1;
+                    return (
+                      <div
+                        className={`item ${getIndex ? "" : "revert"} ${!isLastItem ? "right" : ""
                           }`}
-                          key={index}
+                        key={index}
+                      >
+                        <div
+                          className={`content ${getIndex ? "bottom" : ""}`}
                         >
-                          <div
-                            className={`content ${getIndex ? "bottom" : ""}`}
-                          >
-                            <p className="font-sm medium text-left fs-20 choose-text">
-                              {value.header && value.header}{" "}
-                              <span className="fw-600">
-                                {value.description}
-                              </span>
-                            </p>
-                          </div>
+                          <p className="font-sm medium text-left fs-20 choose-text">
+                            <span className="fw-600">{value.header && value.header}{" "}
+                            </span><br/>
+                            {value.description}
+                          </p>
+                        </div>
 
-                          <div
-                            className={`content ${getIndex ? "" : "bottom"}`}
-                          >
-                            {showNumber && (
-                              <h2 className="font-lg font-sans fs-60 bold">
-                                {index + 1}
-                              </h2>
-                            )}
-                          </div>
+                        <div
+                          className={`content ${getIndex ? "" : "bottom"}`}
+                        >
+                          {showNumber && (
+                            <h2 className="font-lg font-sans fs-60 bold">
+                              {index + 1}
+                            </h2>
+                          )}
+                        </div>
 
-                          {/* {showNumber && (
+                        {/* {showNumber && (
                                                 <div className={`content ${getIndex ? "" : "bottom"}`}>
                                                     <h2 className="font-lg font-sans fs-60 bold">
                                                         {index + 1}
                                                     </h2>
                                                 </div>
                                             )} */}
-                        </div>
-                      );
-                    })
+                      </div>
+                    );
+                  })
                   : data?.map((value, index) => {
-                      let getIndex = index % 2 === 0;
-                      let isLastItem = index === data.length - 1;
-                      return (
-                        <div className={`item ${obj[index]} `} key={index}>
-                          <div className={`content `}>
-                            <p className="font-sm medium text-left fs-20">
-                              {value.header && value.header}{" "}
-                              <span className="fw-600">
-                                {value.description}
-                              </span>
-                            </p>
-                          </div>
+                    let getIndex = index % 2 === 0;
+                    let isLastItem = index === data.length - 1;
+                    return (
+                      <div className={`item ${obj[index]} `} key={index}>
+                        <div className={`content `}>
+                          <p className="font-sm medium text-left fs-20">
+                            {value.header && value.header}{" "}
+                            <span className="fw-600">
+                              {value.description}
+                            </span>
+                          </p>
                         </div>
-                      );
-                    })}
+                      </div>
+                    );
+                  })}
               </div>
             </div>
           </div>

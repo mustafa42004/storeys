@@ -405,7 +405,7 @@ export const commercial = {
       {
         header: "Tailored Solutions",
         description:
-          "2Customized strategies based on industry trends and client needs.",
+          "Customized strategies based on industry trends and client needs.",
       },
     ],
   },
@@ -422,8 +422,8 @@ export const rentproperty = {
   frameData: {
     title: "Looking to Rent a Property?",
     paragraphs: [
-      `Dubai offers an incredible range of rental options — and we're here to help you find the one that feels like home.
- With access to hundreds of listings across Dubai, our team helps you cut through the clutter and rent with confidence.`,
+      `Dubai offers an incredible range of rental options — and we’re here to help you find the one that feels like home.
+With access to hundreds of listings across Dubai, our team helps you cut through the clutter and rent with confidence.`,
     ],
     image: "/assets/img/inner-service-img.png",
   },
@@ -449,6 +449,109 @@ export const rentproperty = {
         header: "Fast Process ",
         description:
           "Quick viewings, negotiation support & hassle-free paperwork",
+      },
+      {
+        header: "After-Move Support ",
+        description:
+          "Need a handyman, cleaner, or help setting up DEWA? We’ve got you.",
+      },
+    ],
+  },
+  imagedData: {
+    header: "Looking to Rent Out Your Property?",
+    width: 100,
+    data: [
+      {
+        title: "What Landlords Get with Us:",
+        description:
+          "We help landlords maximize rental returns with the least effort. Whether you own a single unit or a portfolio, we take care of everything from tenant sourcing to full property management.",
+        list: [
+          {
+            title: "Accurate Rental Valuation",
+            description:
+              "Know what your property can earn in the current market",
+          },
+          {
+            title: "Targeted Marketing",
+            description:
+              "We promote your property across top portals and social platforms.",
+          },
+          {
+            title: "Qualified Tenants",
+            description: "Background-checked, ready-to-move clients",
+          },
+          {
+            title: "End-to-End Management",
+            description:
+              "From tenancy contracts to move-in, DEWA setup, and renewals",
+          },
+          {
+            title: "Optional Property Management",
+            description:
+              "We handle maintenance, inspections, rent collection & more",
+          },
+        ],
+      },
+    ],
+  },
+  pointData: {
+    header: "Popular Rental Areas We Cover",
+    data: [
+      {
+        header: "Downtown Dubai, Dubai Marina, Business Bay,",
+        description: "",
+      },
+      {
+        header: "JVC, Palm Jumeirah, Dubai Hills Estate, and more.",
+        description: "",
+      },
+    ],
+  },
+  fixedBgData: {
+    title: "Let's Get Started",
+    description:
+      "Looking to rent or lease a property in Dubai? Contact Storeys Real Estate today — and let's make your next move the right one.",
+    buttonText: "Contact Us Today",
+  },
+};
+
+export const propertymanagement = {
+  bannerTitle: "Property Management",
+  frameData: {
+    title: "Looking to Rent a Property?",
+    paragraphs: [
+      `Dubai offers an incredible range of rental options — and we’re here to help you find the one that feels like home.
+With access to hundreds of listings across Dubai, our team helps you cut through the clutter and rent with confidence.`,
+    ],
+    image: "/assets/img/inner-service-img.png",
+  },
+  boxData: {
+    header: "What Renters Get with Us:",
+    description: "",
+    data: [
+      {
+        header: "Curated Listings",
+        description:
+          " Verified properties across prime locations and communities",
+      },
+      {
+        header: "Flexible Budgets",
+        description:
+          "From affordable studios to luxury villas, we match your lifestyle",
+      },
+      {
+        header: "Local Insights",
+        description: "Neighborhood guides, school info, commute times & more",
+      },
+      {
+        header: "Fast Process ",
+        description:
+          "Quick viewings, negotiation support & hassle-free paperwork",
+      },
+      {
+        header: "After-Move Support ",
+        description:
+          "Need a handyman, cleaner, or help setting up DEWA? We’ve got you.",
       },
     ],
   },
@@ -666,17 +769,17 @@ export const offplan = {
     header: "Is Off-Plan Right for You?",
     data: [
       {
-        header: "Long-term investors looking for capital appreciation",
-        description: "",
+        header: "",
+        description: "Long-term investors looking for capital appreciation",
       },
       {
-        header: "First-time buyers wanting affordability and flexibility",
-        description: "",
+        header: "",
+        description: "First-time buyers wanting affordability and flexibility",
       },
       {
         header:
-          "Investors building a rental portfolio with strong future returns",
-        description: "",
+          "",
+        description: "Investors building a rental portfolio with strong future returns",
       },
     ],
   },
@@ -743,16 +846,16 @@ export const interiors = {
           "From minor upgrades to full-scale renovations, we handle:",
         list: [
           {
-            title: "Custom carpentry & cabinetry",
-            description: "or stylish and functional storage.",
+            title: "",
+            description: "Custom carpentry & cabinetry for stylish and functional storage.",
           },
           {
-            title: "Lighting & ceiling designs",
-            description: "to enhance ambiance.",
+            title: "",
+            description: "Lighting & ceiling designs to enhance ambiance.",
           },
           {
-            title: "Flooring & wall treatments",
-            description: "for a premium finish.",
+            title: "",
+            description: "Flooring & wall treatments for a premium finish.",
           },
         ],
       },

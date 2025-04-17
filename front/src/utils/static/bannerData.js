@@ -77,19 +77,19 @@ export const homeBanner = {
   }
 
   export const serviceInnerBanner = {
-    bg: '/assets/img/services-inner-banner.svg',
+    bg: '/assets/img/services-inner-banner.png',
     width: 100,
     height: 280
   }
   export const PrivacyBanner = {
     title: "Privacy Policy",
-    bg: '/assets/img/services-inner-banner.svg',
+    bg: '/assets/img/services-inner-banner.png',
     width: 100,
     height: 280
   }
   export const TermsBanner = {
     title: "Terms & Conditions",
-    bg: '/assets/img/services-inner-banner.svg',
+    bg: '/assets/img/services-inner-banner.png',
     width: 100,
     height: 280
   }

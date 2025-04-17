@@ -10,7 +10,9 @@ const PointSection = ({ data }) => {
                 : Number(index) + 1}
             </h4>
             <p className="font-sm medium text-left fs-18">
-              <span className="fw-600">{item.header} -</span> {item.description}
+              <span className="fw-600">{item.header}</span>
+              {item.header && item.description ? " - " : ""}
+              {item.description}
             </p>
           </div>
         ))}
